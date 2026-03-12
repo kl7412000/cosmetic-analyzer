@@ -1,5 +1,6 @@
 import os
 import json
+from langsmith import traceable
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
@@ -60,7 +61,7 @@ def build_chain(api_key: str):
     chain = prompt | llm | JsonOutputParser()
     return chain
 
-
+@traceable(name="analyze_ingredient")
 def analyze(query: str) -> dict:
     """
     輪流嘗試三個 API key，額度用完自動換下一個
@@ -99,3 +100,48 @@ def analyze(query: str) -> dict:
             continue
 
     raise RuntimeError(f"所有 API key 都無法使用，最後錯誤：{last_error}")
+
+
+def parse_ingredients(text: str) -> list:
+    """
+    把用戶輸入的多成分文字拆成 list
+    支援逗號、換行、頓號分隔
+    input:  "Niacinamide, Hyaluronic Acid, Retinol"
+    output: ["Niacinamide", "Hyaluronic Acid", "Retinol"]
+    """
+    import re
+    # 支援逗號、換行、頓號、分號分隔
+    ingredients = re.split(r'[,，、;\n]+', text)
+    # 清除空白、過濾空字串
+    ingredients = [i.strip() for i in ingredients if i.strip()]
+    return ingredients
+
+
+@traceable(name="analyze_multiple_ingredients")
+def analyze_multiple(text: str) -> list:
+    """
+    分析多個成分，回傳每個成分的分析結果
+    input:  用戶輸入的成分文字（可多個）
+    output: 每個成分的分析結果 list
+    """
+    ingredients = parse_ingredients(text)
+
+    if not ingredients:
+        raise ValueError("請輸入至少一個成分名稱")
+
+    results = []
+    for ingredient in ingredients:
+        try:
+            result = analyze(ingredient)
+            results.append({
+                "status": "success",
+                "data": result
+            })
+        except Exception as e:
+            results.append({
+                "status": "error",
+                "ingredient": ingredient,
+                "message": str(e)
+            })
+
+    return results
