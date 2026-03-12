@@ -3,3 +3,7 @@ faiss-cpu==1.8.0
 groq==0.9.0
 gradio==4.44.0
 numpy==1.26.4
+langchain-core
+langchain-community
+langchain-groq
+langchain-huggingface
