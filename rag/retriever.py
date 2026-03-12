@@ -1,62 +1,35 @@
-import json
-import faiss
-import numpy as np
-from rag.embedder import embed_text, embed_batch
+import os
+from langchain_community.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
+from rag.ingestor import load_ingredients
 
-FAISS_INDEX_PATH = "faiss_index/index.faiss"
-METADATA_PATH = "faiss_index/metadata.json"
+FAISS_INDEX_PATH = "faiss_index"
+MODEL_NAME = "all-MiniLM-L6-v2"
 
-def build_index(ingredients: list) -> None:
+# 初始化 embedding model
+embeddings = HuggingFaceEmbeddings(model_name=MODEL_NAME)
+
+def build_index() -> None:
     """
-    把所有成分資料轉成向量，建立 FAISS 索引
-    input:  ingredients.json 讀進來的 list
-    output: 儲存 index.faiss 和 metadata.json 到 faiss_index/
+    建立 FAISS 索引，儲存至本地
     """
-    # 把每筆資料轉成一段文字，方便 embedding
-    texts = []
-    for item in ingredients:
-        text = f"""
-        ingredient: {item['ingredient']}
-        inci_name: {item['inci_name']}
-        functions: {', '.join(item['functions'])}
-        benefits: {', '.join(item['benefits'])}
-        eu_regulation: {item['eu_regulation']}
-        """.strip()
-        texts.append(text)
+    documents = load_ingredients()
+    vectorstore = FAISS.from_documents(documents, embeddings)
+    vectorstore.save_local(FAISS_INDEX_PATH)
+    print(f"索引建立完成，共 {len(documents)} 筆資料")
 
-    # 轉成向量
-    vectors = np.array(embed_batch(texts)).astype("float32")
-
-    # 建立 FAISS 索引
-    dimension = vectors.shape[1]  # 384（all-MiniLM-L6-v2 的向量維度）
-    index = faiss.IndexFlatL2(dimension)
-    index.add(vectors)
-
-    # 儲存索引和原始資料
-    faiss.write_index(index, FAISS_INDEX_PATH)
-    with open(METADATA_PATH, "w", encoding="utf-8") as f:
-        json.dump(ingredients, f, ensure_ascii=False, indent=2)
-
-    print(f"索引建立完成，共 {len(ingredients)} 筆資料")
-
-
-def search(query: str, k: int = 3) -> list:
+def load_retriever(k: int = 3):
     """
-    用問題搜尋最相關的 k 筆資料
-    input:  query（用戶輸入的成分名稱）、k（回傳幾筆）
-    output: 最相關的 k 筆成分資料
+    載入已建立的 FAISS 索引，回傳 LangChain Retriever
+    input:  k（回傳幾筆相關資料）
+    output: LangChain Retriever 物件
     """
-    # 載入索引和 metadata
-    index = faiss.read_index(FAISS_INDEX_PATH)
-    with open(METADATA_PATH, "r", encoding="utf-8") as f:
-        metadata = json.load(f)
+    if not os.path.exists(FAISS_INDEX_PATH):
+        raise FileNotFoundError("找不到 FAISS 索引，請先執行 build_index.py")
 
-    # 把問題轉成向量
-    query_vector = np.array([embed_text(query)]).astype("float32")
-
-    # 搜尋最相近的 k 筆
-    _, indices = index.search(query_vector, k)
-
-    # 回傳對應的原始資料
-    results = [metadata[i] for i in indices[0] if i < len(metadata)]
-    return results
+    vectorstore = FAISS.load_local(
+        FAISS_INDEX_PATH,
+        embeddings,
+        allow_dangerous_deserialization=True
+    )
+    return vectorstore.as_retriever(search_kwargs={"k": k})
