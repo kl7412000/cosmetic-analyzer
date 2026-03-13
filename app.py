@@ -100,11 +100,7 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
                     text_btn = gr.Button("分析", variant="primary")
 
                 with gr.Column():
-                    text_output = gr.Code(
-                        label="分析結果",
-                        language="json",
-                        lines=25
-                    )
+                    text_output = gr.Textbox(label="分析結果", lines=25)
 
             gr.Examples(
                 examples=[
