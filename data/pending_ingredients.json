@@ -1,0 +1,79 @@
+[
+  {
+    "ingredient": "Bakuchiol",
+    "inci_name": "BAKUCHIOL",
+    "cas_number": "10309-37-2",
+    "functions": [
+      "ANTIOXIDANT",
+      "SKIN CONDITIONING"
+    ],
+    "benefits": [
+      "減少細紋和皺紋，改善皮膚彈性",
+      "抗氧化，保護皮膚免受環境壓力的影響",
+      "舒緩和鎮靜皮膚，減少紅腫"
+    ],
+    "risks": [
+      "可能引起皮膚敏感或過敏反應，建議先進行皮膚測試"
+    ],
+    "skin_type": [
+      "所有膚質，尤其是敏感皮膚"
+    ],
+    "eu_regulation": "歐盟法規允許使用於化妝品中",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考專業來源自行查證"
+  },
+  {
+    "ingredient": "Resveratrol",
+    "inci_name": "RESVERATROL",
+    "cas_number": "501-36-0",
+    "functions": [
+      "ANTIOXIDANT"
+    ],
+    "benefits": [
+      "抗氧化，保護皮膚免受環境壓力的傷害",
+      "幫助減少細紋和皺紋，改善皮膚彈性",
+      "增強皮膚的自然屏障功能"
+    ],
+    "risks": [
+      "可能引起皮膚敏感或過敏反應"
+    ],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "在歐盟法規中，Resveratrol被允許用作化妝品成分",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考專業來源自行查證"
+  },
+  {
+    "ingredient": "Water",
+    "inci_name": "AQUA",
+    "cas_number": "7732-18-5",
+    "functions": [
+      "SOLVENT",
+      "HUMECTANT"
+    ],
+    "benefits": [
+      "幫助調節皮膚的水分平衡",
+      "使化妝品更容易涂抹和吸收",
+      "有助於保持皮膚的清新和舒適感"
+    ],
+    "risks": [
+      "可能導致皮膚過敏或刺激，尤其是對敏感皮膚"
+    ],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "歐盟法規允許使用於化妝品中",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考專業來源自行查證"
+  }
+]
