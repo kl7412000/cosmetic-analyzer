@@ -121,7 +121,7 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
                 with gr.Column():
                     image_input = gr.File(
                         label="上傳成分標籤圖片",
-                        file_types=["image"],
+                        file_types=[".png", ".jpg", ".jpeg", ".webp"],
                     )
                     image_btn = gr.Button("辨識並分析", variant="primary")
                 with gr.Column():
@@ -140,4 +140,4 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", share=True)
+    demo.launch(server_name="0.0.0.0")
