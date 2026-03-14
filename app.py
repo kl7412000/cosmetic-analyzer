@@ -142,4 +142,7 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer",
     )
 
 if __name__ == "__main__":
-    demo.queue().launch()
+    demo.launch(
+        share=True,
+        show_error=True
+    )
