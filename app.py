@@ -72,7 +72,9 @@ def analyze_image(file) -> str:
         return f"圖片處理失敗：{e}"
 
 
-with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
+with gr.Blocks(title="Cosmetic Ingredient Analyzer",
+    analytics_enabled=False
+) as demo:
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
     gr.Markdown(
         "輸入化妝品成分名稱或上傳成分標籤圖片，獲取功效、風險、歐盟法規資訊。\n\n"
@@ -140,4 +142,4 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch()
+    demo.queue().launch()
