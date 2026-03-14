@@ -4,6 +4,8 @@ import base64
 import gradio as gr
 from rag.graph import analyze_online
 
+os.environ["GRADIO_ANALYTICS_ENABLED"] = "False"
+
 if not os.path.exists("faiss_index/index.faiss"):
     raise FileNotFoundError("找不到 FAISS 索引，請先執行 build_index.py")
 
@@ -142,7 +144,4 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer",
     )
 
 if __name__ == "__main__":
-    demo.launch(
-        share=True,
-        show_error=True
-    )
+    demo.launch(share=True)
