@@ -1,5 +1,22 @@
 [
   {
+  "ingredient": "Water",
+  "inci_name": "Aqua",
+  "cas_number": "7732-18-5",
+  "functions": ["Solvent"],
+  "benefits": [
+    "作為產品基底溶劑", 
+    "幫助其他成分均勻分散", 
+    "維持產品質地"
+  ],
+  "risks": [
+    "整體安全性極高，幾乎無副作用"
+  ],
+  "skin_type": ["所有膚質"],
+  "eu_regulation": "無使用限制",
+  "source": ["CosIng"]
+  },
+  {
     "ingredient": "Niacinamide",
     "inci_name": "Niacinamide",
     "cas_number": "98-92-0",

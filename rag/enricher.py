@@ -95,6 +95,14 @@ def enrich(scraped: dict) -> dict:
 
     result = _call_groq(prompt)
 
+    # functions 去重（保留順序）
+    if "functions" in result and isinstance(result["functions"], list):
+        seen = set()
+        result["functions"] = [
+            f for f in result["functions"]
+            if f.upper() not in seen and not seen.add(f.upper())
+        ]
+    
     # 確保 source 是 list
     result["source"] = _normalize_source(result.get("source", source))
 
@@ -130,6 +138,14 @@ def enrich_from_name(ingredient_name: str, confidence: str = "medium") -> dict:
 如果你對這個成分不熟悉，請在 confidence 填 "low"。
 """
     result = _call_groq(prompt)
+    
+    # functions 去重（保留順序）
+    if "functions" in result and isinstance(result["functions"], list):
+        seen = set()
+        result["functions"] = [
+            f for f in result["functions"]
+            if f.upper() not in seen and not seen.add(f.upper())
+        ]
 
     # 確保必要欄位存在
     result["source"] = _normalize_source(result.get("source", ["LLM-generated"]))

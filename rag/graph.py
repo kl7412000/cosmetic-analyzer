@@ -30,16 +30,16 @@ def ocr_node(state: AnalysisState) -> AnalysisState:
     """
     if not state.get("input_image"):
         return state
-
     try:
         from rag.ocr import extract_from_base64
         result = extract_from_base64(state["input_image"])
+        print(f"=== OCR 結果 ===")
+        print(result)
         ocr_text = result.get("ingredients_text", "")
         if ocr_text:
             return {**state, "input_text": ocr_text}
     except Exception as e:
         return {**state, "error": f"OCR 失敗：{e}"}
-
     return state
 
 
@@ -50,11 +50,14 @@ def parser_node(state: AnalysisState) -> AnalysisState:
     支援逗號、換行、中文逗號、分號分隔。
     """
     text = state.get("input_text", "").strip()
-    if not text:
+    if not text and not state.get("input_image"):
         return {**state, "error": "請輸入成分名稱", "ingredients": []}
+    if not text:
+        # 有圖片但還沒 OCR 結果，等 OCR 節點處理
+        return {**state, "ingredients": []}
 
     # 分隔符：逗號、換行、中文逗號、分號
-    parts = re.split(r"[,\n，;；]+", text)
+    parts = re.split(r"[,\n，;；•]+", text)
     ingredients = [p.strip() for p in parts if p.strip()]
 
     if not ingredients:
