@@ -36,11 +36,15 @@ def analyze_text(ingredient_input: str) -> str:
 def analyze_image(file) -> str:
     if file is None:
         return "請上傳圖片"
+
     try:
-        with open(file, "rb") as f:
+        path = file.name
+
+        with open(path, "rb") as f:
             b64 = base64.b64encode(f.read()).decode("utf-8")
 
-        name_lower = file.lower()
+        name_lower = path.lower()
+
         if name_lower.endswith(".png"):
             media_type = "image/png"
         elif name_lower.endswith(".webp"):
@@ -49,16 +53,21 @@ def analyze_image(file) -> str:
             media_type = "image/jpeg"
 
         results = analyze_online("", image_b64=b64)
+
         if not results:
             return "圖片中未偵測到成分列表"
+
         if len(results) == 1:
             return format_result(results[0])
+
         output = []
         for r in results:
             name = r.get("ingredient") or r.get("inci_name", "unknown")
             output.append(f"// ── {name} ──")
             output.append(format_result(r))
+
         return "\n\n".join(output)
+
     except Exception as e:
         return f"圖片處理失敗：{e}"
 
@@ -131,4 +140,4 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
     )
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0")
+    demo.launch()
