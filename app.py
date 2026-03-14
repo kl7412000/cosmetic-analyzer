@@ -131,5 +131,4 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer") as demo:
     )
 
 if __name__ == "__main__":
-    is_hf = os.environ.get("SPACE_ID") is not None
-    demo.launch(server_name="0.0.0.0" ,share=not is_hf)
+    demo.launch(server_name="0.0.0.0")
