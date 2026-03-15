@@ -105,10 +105,12 @@ def analyze_text(ingredient_input: str) -> str:
         return f"### ❌ 發生錯誤\n`{str(e)}`"
 
 
-def analyze_image(file) -> str:
-    if file is None:
+def analyze_image(files) -> str:
+    if not files:
         return "### 💡 請上傳圖片檔案"
     try:
+        # 取第一張圖片分析
+        file = files[0]
         image = Image.open(file.name)
         buffered = io.BytesIO()
         image.save(buffered, format="JPEG")
@@ -154,7 +156,7 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
                     image_input = gr.File(
                         label="上傳成分表照片（JPG、PNG、WEBP）",
                         file_types=["image"],
-                        file_count="single",
+                        file_count="multiple",
                     )
                     image_btn = gr.Button("辨識並分析", variant="primary")
                 with gr.Column(scale=2):
@@ -172,5 +174,5 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
 if __name__ == "__main__":
     if not os.path.exists("faiss_index/index.faiss"):
         raise FileNotFoundError("找不到 FAISS 索引，請先執行 build_index.py")
-    
-    demo.launch()
+    is_hf = os.environ.get("SPACE_ID") is not None
+    demo.launch(server_name="0.0.0.0" if is_hf else "127.0.0.1")
