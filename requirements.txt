@@ -9,4 +9,4 @@ langchain-groq==0.2.4
 langchain-huggingface==0.1.2
 langgraph>=0.2.0
 Pillow
-gradio-client
+gradio-client==0.6.1
