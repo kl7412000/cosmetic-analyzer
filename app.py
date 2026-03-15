@@ -171,6 +171,8 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
     text_input.submit(fn=analyze_text, inputs=text_input, outputs=text_output)
     image_btn.click(fn=analyze_image, inputs=image_input, outputs=image_output)
 
+import gradio.blocks
+gradio.blocks.Blocks.get_api_info = lambda self: {"named_endpoints": {}, "unnamed_endpoints": {}}
 
 if __name__ == "__main__":
     if not os.path.exists("faiss_index/index.faiss"):
