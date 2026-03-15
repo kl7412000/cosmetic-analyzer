@@ -6,15 +6,24 @@ from rag.ingestor import load_ingredients
 FAISS_INDEX_PATH = "faiss_index"
 MODEL_NAME = "all-MiniLM-L6-v2"
 
-# 初始化 embedding model
-embeddings = HuggingFaceEmbeddings(model_name=MODEL_NAME)
+_embeddings: HuggingFaceEmbeddings | None = None
+
+
+def get_embeddings() -> HuggingFaceEmbeddings:
+    """
+    Lazily initialize the embedding model to avoid loading/downloading at import time.
+    """
+    global _embeddings
+    if _embeddings is None:
+        _embeddings = HuggingFaceEmbeddings(model_name=MODEL_NAME)
+    return _embeddings
 
 def build_index() -> None:
     """
     建立 FAISS 索引，儲存至本地
     """
     documents = load_ingredients()
-    vectorstore = FAISS.from_documents(documents, embeddings)
+    vectorstore = FAISS.from_documents(documents, get_embeddings())
     vectorstore.save_local(FAISS_INDEX_PATH)
     print(f"索引建立完成，共 {len(documents)} 筆資料")
 
@@ -29,7 +38,7 @@ def load_retriever(k: int = 3):
 
     vectorstore = FAISS.load_local(
         FAISS_INDEX_PATH,
-        embeddings,
+        get_embeddings(),
         allow_dangerous_deserialization=True
     )
     return vectorstore.as_retriever(search_kwargs={"k": k})

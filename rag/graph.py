@@ -57,7 +57,7 @@ def parser_node(state: AnalysisState) -> AnalysisState:
         return {**state, "ingredients": []}
 
     # 分隔符：逗號、換行、中文逗號、分號
-    parts = re.split(r"[,\n，;；•]+", text)
+    parts = re.split(r"[,\n，;；•、·｜|＆&]+", text)
     ingredients = [p.strip() for p in parts if p.strip()]
 
     if not ingredients:
@@ -179,13 +179,15 @@ def response_node(state: AnalysisState) -> AnalysisState:
     for name in ingredients:
         data = lookup.get(name.upper())
         if data:
-            results.append(data)
+            results.append({**data, "_original": name})
         else:
             results.append({
                 "ingredient": name,
                 "error": "查詢失敗",
                 "confidence": "error",
+                "_original": name,
             })
+
 
     return {**state, "results": results}
 
