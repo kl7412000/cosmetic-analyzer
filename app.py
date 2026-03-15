@@ -52,14 +52,12 @@ def format_card(item: dict) -> str:
 
     md = f"<div class='ingredient-card'>\n\n"
     md += f"### 🔍 {name} &nbsp; <span class='{tag_class}'>{tag_text}</span>\n\n"
-
     if inci:
         md += f"**INCI 名稱：** {inci}　"
     if cas:
         md += f"**CAS：** {cas}\n\n"
     else:
         md += "\n\n"
-
     if functions:
         md += f"**功能分類：** {', '.join(functions)}\n\n"
     if benefits:
@@ -78,7 +76,6 @@ def format_card(item: dict) -> str:
         md += f"**歐盟法規：** {eu_reg}\n\n"
     if warning:
         md += f"> ⚠️ {warning}\n\n"
-
     md += "</div>\n\n"
     return md
 
@@ -109,7 +106,6 @@ def analyze_image(files) -> str:
     if not files:
         return "### 💡 請上傳圖片檔案"
     try:
-        # 取第一張圖片分析
         file = files[0]
         image = Image.open(file.name)
         buffered = io.BytesIO()
@@ -163,13 +159,15 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
                     image_output = gr.Markdown(value="請上傳圖片以開始分析...")
 
     gr.Markdown(
+        "---\n"
         "**資料來源**：CosIng（歐盟官方）、INCI Decoder\n\n"
-        "💡**提示**：標記為 `AI 生成` 的資料由 LLM 即時生成，建議參考專業來源自行查證。"
-                )
+        "💡 **提示**：標記為 `AI 生成` 的資料由 LLM 即時生成，建議參考專業來源自行查證。"
+    )
 
     text_btn.click(fn=analyze_text, inputs=text_input, outputs=text_output)
     text_input.submit(fn=analyze_text, inputs=text_input, outputs=text_output)
     image_btn.click(fn=analyze_image, inputs=image_input, outputs=image_output)
+
 
 if __name__ == "__main__":
     if not os.path.exists("faiss_index/index.faiss"):
