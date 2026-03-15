@@ -122,41 +122,44 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
     gr.Markdown("整合 **CosIng 數據庫** 與 **RAG 技術**，提供專業的成分分析報告。")
 
-    with gr.Tabs():
-
-        with gr.Tab("📝 文字分析"):
-            with gr.Row():
-                with gr.Column(scale=1):
-                    text_input = gr.Textbox(
-                        label="請輸入成分（英文）",
-                        placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
-                        lines=4
-                    )
-                    text_btn = gr.Button("開始分析", variant="primary")
-                with gr.Column(scale=2):
-                    text_output = gr.Markdown(value="等待輸入...")
-
-            gr.Examples(
-                examples=[
-                    ["Salicylic Acid, Glycerin"],
-                    ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
-                    ["Retinol, Fragrance"],
-                    ["Bakuchiol"],
-                ],
-                inputs=text_input,
+    # ── 文字分析 ──────────────────────────────────────────────────────────────
+    gr.Markdown("## 📝 文字分析")
+    with gr.Row():
+        with gr.Column(scale=1):
+            text_input = gr.Textbox(
+                label="請輸入成分（英文）",
+                placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
+                lines=4
             )
+            text_btn = gr.Button("開始分析", variant="primary")
+        with gr.Column(scale=2):
+            text_output = gr.Markdown(value="等待輸入...")
 
-        with gr.Tab("📷 圖片辨識"):
-            with gr.Row():
-                with gr.Column(scale=1):
-                    image_input = gr.File(
-                        label="上傳成分表照片（JPG、PNG、WEBP）",
-                        file_types=["image"],
-                        file_count="multiple",
-                    )
-                    image_btn = gr.Button("辨識並分析", variant="primary")
-                with gr.Column(scale=2):
-                    image_output = gr.Markdown(value="請上傳圖片以開始分析...")
+    gr.Examples(
+        examples=[
+            ["Salicylic Acid, Glycerin"],
+            ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
+            ["Retinol, Fragrance"],
+            ["Bakuchiol"],
+        ],
+        inputs=text_input,
+    )
+
+    gr.Markdown("---")
+
+    # ── 圖片辨識 ──────────────────────────────────────────────────────────────
+    gr.Markdown("## 📷 圖片辨識")
+    gr.Markdown("> 上傳化妝品成分標籤圖片，系統會自動辨識成分列表並分析（支援 JPG、PNG、WEBP）")
+    with gr.Row():
+        with gr.Column(scale=1):
+            image_input = gr.File(
+                label="上傳成分表照片",
+                file_types=["image"],
+                file_count="multiple",
+            )
+            image_btn = gr.Button("辨識並分析", variant="primary")
+        with gr.Column(scale=2):
+            image_output = gr.Markdown(value="請上傳圖片以開始分析...")
 
     gr.Markdown(
         "---\n"
