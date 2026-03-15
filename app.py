@@ -52,12 +52,14 @@ def format_card(item: dict) -> str:
 
     md = f"<div class='ingredient-card'>\n\n"
     md += f"### 🔍 {name} &nbsp; <span class='{tag_class}'>{tag_text}</span>\n\n"
+
     if inci:
         md += f"**INCI 名稱：** {inci}　"
     if cas:
         md += f"**CAS：** {cas}\n\n"
     else:
         md += "\n\n"
+
     if functions:
         md += f"**功能分類：** {', '.join(functions)}\n\n"
     if benefits:
@@ -76,6 +78,7 @@ def format_card(item: dict) -> str:
         md += f"**歐盟法規：** {eu_reg}\n\n"
     if warning:
         md += f"> ⚠️ {warning}\n\n"
+
     md += "</div>\n\n"
     return md
 
@@ -102,11 +105,10 @@ def analyze_text(ingredient_input: str) -> str:
         return f"### ❌ 發生錯誤\n`{str(e)}`"
 
 
-def analyze_image(files) -> str:
-    if not files:
+def analyze_image(file) -> str:
+    if file is None:
         return "### 💡 請上傳圖片檔案"
     try:
-        file = files[0]
         image = Image.open(file.name)
         buffered = io.BytesIO()
         image.save(buffered, format="JPEG")
@@ -122,55 +124,50 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
     gr.Markdown("整合 **CosIng 數據庫** 與 **RAG 技術**，提供專業的成分分析報告。")
 
-    # ── 文字分析 ──────────────────────────────────────────────────────────────
-    gr.Markdown("## 📝 文字分析")
-    with gr.Row():
-        with gr.Column(scale=1):
-            text_input = gr.Textbox(
-                label="請輸入成分（英文）",
-                placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
-                lines=4
+    with gr.Tabs():
+
+        with gr.Tab("📝 文字分析"):
+            with gr.Row():
+                with gr.Column(scale=1):
+                    text_input = gr.Textbox(
+                        label="請輸入成分（英文）",
+                        placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
+                        lines=4
+                    )
+                    text_btn = gr.Button("開始分析", variant="primary")
+                with gr.Column(scale=2):
+                    text_output = gr.Markdown(value="等待輸入...")
+
+            gr.Examples(
+                examples=[
+                    ["Salicylic Acid, Glycerin"],
+                    ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
+                    ["Retinol, Fragrance"],
+                    ["Bakuchiol"],
+                ],
+                inputs=text_input,
             )
-            text_btn = gr.Button("開始分析", variant="primary")
-        with gr.Column(scale=2):
-            text_output = gr.Markdown(value="等待輸入...")
 
-    gr.Examples(
-        examples=[
-            ["Salicylic Acid, Glycerin"],
-            ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
-            ["Retinol, Fragrance"],
-            ["Bakuchiol"],
-        ],
-        inputs=text_input,
-    )
-
-    gr.Markdown("---")
-
-    # ── 圖片辨識 ──────────────────────────────────────────────────────────────
-    gr.Markdown("## 📷 圖片辨識")
-    gr.Markdown("> 上傳化妝品成分標籤圖片，系統會自動辨識成分列表並分析（支援 JPG、PNG、WEBP）")
-    with gr.Row():
-        with gr.Column(scale=1):
-            image_input = gr.File(
-                label="上傳成分表照片",
-                file_types=["image"],
-                file_count="multiple",
-            )
-            image_btn = gr.Button("辨識並分析", variant="primary")
-        with gr.Column(scale=2):
-            image_output = gr.Markdown(value="請上傳圖片以開始分析...")
+        with gr.Tab("📷 圖片辨識"):
+            with gr.Row():
+                with gr.Column(scale=1):
+                    image_input = gr.File(
+                        label="上傳成分表照片（JPG、PNG、WEBP）",
+                        file_types=["image"],
+                        file_count="single",
+                    )
+                    image_btn = gr.Button("辨識並分析", variant="primary")
+                with gr.Column(scale=2):
+                    image_output = gr.Markdown(value="請上傳圖片以開始分析...")
 
     gr.Markdown(
-        "---\n"
         "**資料來源**：CosIng（歐盟官方）、INCI Decoder\n\n"
-        "💡 **提示**：標記為 `AI 生成` 的資料由 LLM 即時生成，建議參考專業來源自行查證。"
-    )
+        "💡**提示**：標記為 `AI 生成` 的資料由 LLM 即時生成，建議參考專業來源自行查證。"
+                )
 
     text_btn.click(fn=analyze_text, inputs=text_input, outputs=text_output)
     text_input.submit(fn=analyze_text, inputs=text_input, outputs=text_output)
     image_btn.click(fn=analyze_image, inputs=image_input, outputs=image_output)
-
 
 if __name__ == "__main__":
     if not os.path.exists("faiss_index/index.faiss"):
