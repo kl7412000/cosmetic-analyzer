@@ -172,5 +172,5 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
 if __name__ == "__main__":
     if not os.path.exists("faiss_index/index.faiss"):
         raise FileNotFoundError("找不到 FAISS 索引，請先執行 build_index.py")
-    is_hf = os.environ.get("SPACE_ID") is not None
-    demo.launch(server_name="0.0.0.0" if is_hf else "127.0.0.1")
+    
+    demo.launch()
