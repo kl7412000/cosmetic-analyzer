@@ -1,9 +1,15 @@
 import os
+import json
 import base64
 import io
+import tempfile
 import gradio as gr
+import gradio.blocks
 from PIL import Image
 from rag.graph import analyze_online
+
+# Monkey-patch 繞過 gradio 4.44.0 的 schema bug
+gradio.blocks.Blocks.get_api_info = lambda self: {"named_endpoints": {}, "unnamed_endpoints": {}}
 
 custom_css = """
 body, .gradio-container { background-color: #1a1a2e !important; color: #e0e0e0 !important; }
@@ -33,6 +39,9 @@ body, .gradio-container { background-color: #1a1a2e !important; color: #e0e0e0 !
     border-radius: 4px;
 }
 """
+
+# 全域暫存（session 級別，重啟會清空）
+session_pending = []
 
 
 def format_card(item: dict) -> str:
@@ -92,17 +101,37 @@ def process_results(results: list) -> str:
     return output
 
 
-def analyze_text(ingredient_input: str) -> str:
+def analyze_text(ingredient_input: str):
     if not ingredient_input.strip():
-        return "### 💡 請輸入成分名稱"
+        return "### 💡 請輸入成分名稱", gr.DownloadButton(visible=False)
     try:
         results = analyze_online(ingredient_input.strip())
-        return process_results(results)
+
+        # 收集 AI 生成的成分寫入暫存
+        for r in results:
+            if r.get("confidence") == "medium" and r.get("source") == ["LLM-generated"]:
+                # 移除內部欄位再存入
+                clean = {k: v for k, v in r.items() if k not in ("_query", "_original", "is_substance")}
+                session_pending.append(clean)
+
+        # 有 pending 資料就產生下載檔
+        if session_pending:
+            tmp = tempfile.NamedTemporaryFile(
+                mode="w", suffix=".json", delete=False, encoding="utf-8"
+            )
+            json.dump(session_pending, tmp, ensure_ascii=False, indent=2)
+            tmp.close()
+            download_btn = gr.DownloadButton(visible=True, value=tmp.name)
+        else:
+            download_btn = gr.DownloadButton(visible=False)
+
+        return process_results(results), download_btn
+
     except Exception as e:
-        return f"### ❌ 發生錯誤\n`{str(e)}`"
+        return f"### ❌ 發生錯誤\n`{str(e)}`", gr.DownloadButton(visible=False)
 
 
-def analyze_image(files) -> str:
+def analyze_image(files):
     if not files:
         return "### 💡 請上傳圖片檔案"
     try:
@@ -122,44 +151,45 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
     gr.Markdown("整合 **CosIng 數據庫** 與 **RAG 技術**，提供專業的成分分析報告。")
 
-    # ── 文字分析 ──────────────────────────────────────────────────────────────
-    gr.Markdown("## 📝 文字分析")
-    with gr.Row():
-        with gr.Column(scale=1):
-            text_input = gr.Textbox(
-                label="請輸入成分（英文）",
-                placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
-                lines=4
+    with gr.Tabs():
+
+        with gr.Tab("📝 文字分析"):
+            with gr.Row():
+                with gr.Column(scale=1):
+                    text_input = gr.Textbox(
+                        label="請輸入成分（英文）",
+                        placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
+                        lines=4
+                    )
+                    text_btn = gr.Button("開始分析", variant="primary")
+                    download_btn = gr.DownloadButton(
+                        label="📥 下載 AI 生成成分資料（pending.json）",
+                        visible=False,
+                    )
+                with gr.Column(scale=2):
+                    text_output = gr.Markdown(value="等待輸入...")
+
+            gr.Examples(
+                examples=[
+                    ["Salicylic Acid, Glycerin"],
+                    ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
+                    ["Retinol, Fragrance"],
+                    ["Bakuchiol"],
+                ],
+                inputs=text_input,
             )
-            text_btn = gr.Button("開始分析", variant="primary")
-        with gr.Column(scale=2):
-            text_output = gr.Markdown(value="等待輸入...")
 
-    gr.Examples(
-        examples=[
-            ["Salicylic Acid, Glycerin"],
-            ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
-            ["Retinol, Fragrance"],
-            ["Bakuchiol"],
-        ],
-        inputs=text_input,
-    )
-
-    gr.Markdown("---")
-
-    # ── 圖片辨識 ──────────────────────────────────────────────────────────────
-    gr.Markdown("## 📷 圖片辨識")
-    gr.Markdown("> 上傳化妝品成分標籤圖片，系統會自動辨識成分列表並分析（支援 JPG、PNG、WEBP）")
-    with gr.Row():
-        with gr.Column(scale=1):
-            image_input = gr.File(
-                label="上傳成分表照片",
-                file_types=["image"],
-                file_count="multiple",
-            )
-            image_btn = gr.Button("辨識並分析", variant="primary")
-        with gr.Column(scale=2):
-            image_output = gr.Markdown(value="請上傳圖片以開始分析...")
+        with gr.Tab("📷 圖片辨識"):
+            with gr.Row():
+                with gr.Column(scale=1):
+                    image_input = gr.File(
+                        label="上傳成分表照片（JPG、PNG、WEBP）",
+                        file_types=["image"],
+                        file_count="multiple",
+                    )
+                    image_btn = gr.Button("辨識並分析", variant="primary")
+                with gr.Column(scale=2):
+                    image_output = gr.Markdown(value="請上傳圖片以開始分析...")
 
     gr.Markdown(
         "---\n"
@@ -167,12 +197,10 @@ with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
         "💡 **提示**：標記為 `AI 生成` 的資料由 LLM 即時生成，建議參考專業來源自行查證。"
     )
 
-    text_btn.click(fn=analyze_text, inputs=text_input, outputs=text_output)
-    text_input.submit(fn=analyze_text, inputs=text_input, outputs=text_output)
+    text_btn.click(fn=analyze_text, inputs=text_input, outputs=[text_output, download_btn])
+    text_input.submit(fn=analyze_text, inputs=text_input, outputs=[text_output, download_btn])
     image_btn.click(fn=analyze_image, inputs=image_input, outputs=image_output)
 
-import gradio.blocks
-gradio.blocks.Blocks.get_api_info = lambda self: {"named_endpoints": {}, "unnamed_endpoints": {}}
 
 if __name__ == "__main__":
     if not os.path.exists("faiss_index/index.faiss"):

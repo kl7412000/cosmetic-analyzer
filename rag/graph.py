@@ -132,7 +132,7 @@ def enrich_node(state: AnalysisState) -> AnalysisState:
             data = enrich_from_name(name, confidence="medium")
             enriched_data.append({**data, "_query": name})
 
-            # 背景寫入 pending（不阻塞主流程）
+            # 背景寫入 pending（不阻塞主流程，本地流程用，HF Spaces 為唯讀環境會自動跳過)
             try:
                 write_to_pending(data)
             except Exception:
