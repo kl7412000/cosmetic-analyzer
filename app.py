@@ -8,202 +8,385 @@ import gradio.blocks
 from PIL import Image
 from rag.graph import analyze_online
 
-# Monkey-patch 繞過 gradio 4.44.0 的 schema bug
+
+# 修復 gradio bug
 gradio.blocks.Blocks.get_api_info = lambda self: {"named_endpoints": {}, "unnamed_endpoints": {}}
 
+
+# ==============================
+# 文青風 CSS
+# ==============================
+
 custom_css = """
-body, .gradio-container { background-color: #1a1a2e !important; color: #e0e0e0 !important; }
-.ingredient-card {
-    background-color: #16213e !important;
-    color: #e0e0e0 !important;
-    border: 1px solid #0f3460;
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+
+body, .gradio-container{
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Noto Sans TC",sans-serif;
 }
-.ingredient-card h3 { color: #e2e8f0 !important; margin-bottom: 8px; }
-.ingredient-card p, .ingredient-card li { color: #c8c8c8 !important; }
-.tag-high {
-    color: #69f0ae !important;
-    font-weight: 700;
-    background: #1b3a2a;
-    padding: 2px 10px;
-    border-radius: 4px;
+
+/* LIGHT MODE */
+
+body{
+background:#f7f7f5;
+color:#2c2c2c;
 }
-.tag-medium {
-    color: #ffb74d !important;
-    font-weight: 700;
-    background: #3a2a10;
-    padding: 2px 10px;
-    border-radius: 4px;
+
+.ingredient-card{
+background:#ffffff;
+border:1px solid #e8e8e8;
+border-left:6px solid #a3a3a3;
+border-radius:12px;
+padding:20px;
+margin-bottom:16px;
+box-shadow:0 3px 8px rgba(0,0,0,0.05);
+transition:all 0.2s;
 }
+
+.ingredient-card:hover{
+transform:translateY(-2px);
+box-shadow:0 6px 14px rgba(0,0,0,0.08);
+}
+
+.card-high{
+border-left-color:#63b38b;
+}
+
+.card-medium{
+border-left-color:#e3a54a;
+}
+
+.card-error{
+border-left-color:#d9534f;
+}
+
+.card-title{
+font-size:18px;
+font-weight:600;
+margin-bottom:4px;
+}
+
+.card-sub{
+font-size:13px;
+opacity:0.7;
+margin-bottom:8px;
+}
+
+details summary{
+cursor:pointer;
+margin-top:8px;
+font-weight:500;
+}
+
+.tag-high{
+background:#e6f4ea;
+color:#2e7d32;
+padding:3px 8px;
+border-radius:6px;
+font-size:12px;
+margin-left:6px;
+}
+
+.tag-medium{
+background:#fff4e5;
+color:#b26a00;
+padding:3px 8px;
+border-radius:6px;
+font-size:12px;
+margin-left:6px;
+}
+
+
+/* DARK MODE */
+
+@media (prefers-color-scheme: dark){
+
+body{
+background:#1f2127;
+color:#e4e4e4;
+}
+
+.ingredient-card{
+background:#2a2d35;
+border:1px solid #3a3f47;
+}
+
+.tag-high{
+background:#1e3d2f;
+color:#7ee2a8;
+}
+
+.tag-medium{
+background:#3d2e17;
+color:#ffc76a;
+}
+
+}
+
 """
 
-# 全域暫存（session 級別，重啟會清空）
+
+# ==============================
+# session
+# ==============================
+
 session_pending = []
 
 
-def format_card(item: dict) -> str:
-    name = item.get("_original") or item.get("ingredient") or item.get("inci_name", "Unknown")
-    confidence = item.get("confidence", "medium").lower()
-    tag_class = "tag-high" if confidence == "high" else "tag-medium"
-    tag_text = "✅ 官方數據庫" if confidence == "high" else "🤖 AI 生成"
+# ==============================
+# 卡片顯示
+# ==============================
 
-    inci = item.get("inci_name", "")
-    cas = item.get("cas_number", "")
-    functions = item.get("functions", [])
-    benefits = item.get("benefits", [])
-    risks = item.get("risks", [])
-    eu_reg = item.get("eu_regulation", "")
-    skin = item.get("skin_type", [])
-    warning = item.get("warning", "")
+def format_card(item:dict):
 
-    md = f"<div class='ingredient-card'>\n\n"
-    md += f"### 🔍 {name} &nbsp; <span class='{tag_class}'>{tag_text}</span>\n\n"
-    if inci:
-        md += f"**INCI 名稱：** {inci}　"
-    if cas:
-        md += f"**CAS：** {cas}\n\n"
-    else:
-        md += "\n\n"
-    if functions:
-        md += f"**功能分類：** {', '.join(functions)}\n\n"
+    name = item.get("_original") or item.get("ingredient") or item.get("inci_name","Unknown")
+
+    confidence = item.get("confidence","medium").lower()
+
+    tag_class = "tag-high" if confidence=="high" else "tag-medium"
+
+    tag_text = "官方資料" if confidence=="high" else "AI 推論"
+
+    card_class=f"ingredient-card card-{confidence}"
+
+    inci=item.get("inci_name","")
+    cas=item.get("cas_number","")
+    functions=item.get("functions",[])
+    benefits=item.get("benefits",[])
+    risks=item.get("risks",[])
+    eu_reg=item.get("eu_regulation","")
+    skin=item.get("skin_type",[])
+    warning=item.get("warning","")
+
+    md=f"""
+<div class="{card_class}">
+
+<div class="card-title">
+{name}
+<span class="{tag_class}">{tag_text}</span>
+</div>
+
+<div class="card-sub">
+{inci if inci else ""} {(" | CAS "+cas) if cas else ""}
+</div>
+
+**功能：** {", ".join(functions) if functions else "—"}
+
+<details>
+<summary>查看詳細</summary>
+
+"""
+
     if benefits:
-        md += "**功效：**\n"
+        md+="\n**功效**\n"
         for b in benefits:
-            md += f"- {b}\n"
-        md += "\n"
+            md+=f"- {b}\n"
+
     if risks:
-        md += "**風險注意：**\n"
+        md+="\n**風險**\n"
         for r in risks:
-            md += f"- ⚠️ {r}\n"
-        md += "\n"
+            md+=f"- ⚠️ {r}\n"
+
     if skin:
-        md += f"**適合膚質：** {', '.join(skin)}\n\n"
+        md+=f"\n**適合膚質：** {', '.join(skin)}\n"
+
     if eu_reg:
-        md += f"**歐盟法規：** {eu_reg}\n\n"
+        md+=f"\n**EU 法規：** {eu_reg}\n"
+
     if warning:
-        md += f"> ⚠️ {warning}\n\n"
-    md += "</div>\n\n"
+        md+=f"\n> ⚠️ {warning}\n"
+
+    md+="</details></div>"
+
     return md
 
 
-def process_results(results: list) -> str:
+# ==============================
+# 結果整理
+# ==============================
+
+def process_results(results:list):
+
     if not results:
-        return "### ⚠️ 未找到任何成分資訊"
-    output = ""
+        return "### ⚠️ 未找到任何成分"
+
+    output=""
+
     for r in results:
-        if r.get("error") and r.get("confidence") == "error":
-            output += f"<div class='ingredient-card'>\n\n### ❌ {r.get('ingredient', 'unknown')}\n\n查詢失敗\n\n</div>\n\n"
+
+        if r.get("error") and r.get("confidence")=="error":
+
+            output+=f"""
+<div class="ingredient-card card-error">
+<div class="card-title">{r.get('ingredient','unknown')}</div>
+查詢失敗
+</div>
+"""
+
         else:
-            output += format_card(r)
+
+            output+=format_card(r)
+
     return output
 
 
-def analyze_text(ingredient_input: str):
-    if not ingredient_input.strip():
-        return "### 💡 請輸入成分名稱", gr.DownloadButton(visible=False)
-    try:
-        results = analyze_online(ingredient_input.strip())
+# ==============================
+# 文字分析
+# ==============================
 
-        # 收集 AI 生成的成分寫入暫存
+def analyze_text(ingredient_input:str):
+
+    if not ingredient_input.strip():
+        return "### 💡 請輸入成分名稱",gr.DownloadButton(visible=False)
+
+    try:
+
+        results=analyze_online(ingredient_input.strip())
+
         for r in results:
-            if r.get("confidence") == "medium" and r.get("source") == ["LLM-generated"]:
-                # 移除內部欄位再存入
-                clean = {k: v for k, v in r.items() if k not in ("_query", "_original", "is_substance")}
+
+            if r.get("confidence")=="medium" and r.get("source")==["LLM-generated"]:
+
+                clean={k:v for k,v in r.items() if k not in("_query","_original","is_substance")}
+
                 session_pending.append(clean)
 
-        # 有 pending 資料就產生下載檔
         if session_pending:
-            tmp = tempfile.NamedTemporaryFile(
-                mode="w", suffix=".json", delete=False, encoding="utf-8"
-            )
-            json.dump(session_pending, tmp, ensure_ascii=False, indent=2)
-            tmp.close()
-            download_btn = gr.DownloadButton(visible=True, value=tmp.name)
-        else:
-            download_btn = gr.DownloadButton(visible=False)
 
-        return process_results(results), download_btn
+            tmp=tempfile.NamedTemporaryFile(mode="w",suffix=".json",delete=False,encoding="utf-8")
+
+            json.dump(session_pending,tmp,ensure_ascii=False,indent=2)
+
+            tmp.close()
+
+            download_btn=gr.DownloadButton(visible=True,value=tmp.name)
+
+        else:
+
+            download_btn=gr.DownloadButton(visible=False)
+
+        return process_results(results),download_btn
 
     except Exception as e:
-        return f"### ❌ 發生錯誤\n`{str(e)}`", gr.DownloadButton(visible=False)
 
+        return f"### ❌ 發生錯誤\n`{str(e)}`",gr.DownloadButton(visible=False)
+
+
+# ==============================
+# 圖片分析
+# ==============================
 
 def analyze_image(files):
+
     if not files:
-        return "### 💡 請上傳圖片檔案"
+        return "### 💡 請上傳圖片"
+
     try:
-        file = files[0]
-        image = Image.open(file.name)
-        buffered = io.BytesIO()
-        image.save(buffered, format="JPEG")
-        b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
-        results = analyze_online("", image_b64=b64)
+
+        file=files[0]
+
+        image=Image.open(file.name)
+
+        buffered=io.BytesIO()
+
+        image.save(buffered,format="JPEG")
+
+        b64=base64.b64encode(buffered.getvalue()).decode()
+
+        results=analyze_online("",image_b64=b64)
+
         return process_results(results)
+
     except Exception as e:
+
         return f"### ❌ 圖片處理失敗\n`{str(e)}`"
 
 
-with gr.Blocks(title="Cosmetic Ingredient Analyzer", css=custom_css,
-               theme=gr.themes.Base()) as demo:
+# ==============================
+# UI
+# ==============================
+
+with gr.Blocks(
+title="Cosmetic Ingredient Analyzer",
+css=custom_css,
+theme=gr.themes.Soft()
+) as demo:
+
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
-    gr.Markdown("整合 **CosIng 數據庫** 與 **RAG 技術**，提供專業的成分分析報告。")
+
+    gr.Markdown("CosIng + RAG 成分分析系統")
 
     with gr.Tabs():
 
-        with gr.Tab("📝 文字分析"):
+        with gr.Tab("文字分析"):
+
             with gr.Row():
+
                 with gr.Column(scale=1):
-                    text_input = gr.Textbox(
-                        label="請輸入成分（英文）",
-                        placeholder="多個成分請用逗號分隔\n例如：Niacinamide, Retinol, Glycerin",
+
+                    text_input=gr.Textbox(
+                        label="輸入成分",
+                        placeholder="Niacinamide, Retinol, Glycerin",
                         lines=4
                     )
-                    text_btn = gr.Button("開始分析", variant="primary")
-                    download_btn = gr.DownloadButton(
-                        label="📥 下載 AI 生成成分資料（pending.json）",
-                        visible=False,
+
+                    text_btn=gr.Button("開始分析",variant="primary")
+
+                    download_btn=gr.DownloadButton(
+                        label="下載 AI 成分資料",
+                        visible=False
                     )
+
                 with gr.Column(scale=2):
-                    text_output = gr.Markdown(value="等待輸入...")
+
+                    text_output=gr.Markdown(value="等待輸入...")
 
             gr.Examples(
                 examples=[
                     ["Salicylic Acid, Glycerin"],
-                    ["Niacinamide, Hyaluronic Acid, Ceramide NP"],
-                    ["Retinol, Fragrance"],
+                    ["Niacinamide, Hyaluronic Acid"],
+                    ["Retinol"],
                     ["Bakuchiol"],
                 ],
-                inputs=text_input,
+                inputs=text_input
             )
 
-        with gr.Tab("📷 圖片辨識"):
+        with gr.Tab("圖片辨識"):
+
             with gr.Row():
+
                 with gr.Column(scale=1):
-                    image_input = gr.File(
-                        label="上傳成分表照片（JPG、PNG、WEBP）",
+
+                    image_input=gr.File(
+                        label="上傳成分表",
                         file_types=["image"],
-                        file_count="multiple",
+                        file_count="multiple"
                     )
-                    image_btn = gr.Button("辨識並分析", variant="primary")
+
+                    image_btn=gr.Button("辨識並分析",variant="primary")
+
                 with gr.Column(scale=2):
-                    image_output = gr.Markdown(value="請上傳圖片以開始分析...")
+
+                    image_output=gr.Markdown(value="請上傳圖片")
 
     gr.Markdown(
-        "---\n"
-        "**資料來源**：CosIng（歐盟官方）、INCI Decoder\n\n"
-        "💡 **提示**：標記為 `AI 生成` 的資料由 LLM 即時生成，建議參考專業來源自行查證。"
-    )
+"""
+---
+資料來源：CosIng / INCI Decoder  
+AI 生成資料僅供參考
+"""
+)
 
-    text_btn.click(fn=analyze_text, inputs=text_input, outputs=[text_output, download_btn])
-    text_input.submit(fn=analyze_text, inputs=text_input, outputs=[text_output, download_btn])
-    image_btn.click(fn=analyze_image, inputs=image_input, outputs=image_output)
+    text_btn.click(fn=analyze_text,inputs=text_input,outputs=[text_output,download_btn])
+    text_input.submit(fn=analyze_text,inputs=text_input,outputs=[text_output,download_btn])
+    image_btn.click(fn=analyze_image,inputs=image_input,outputs=image_output)
 
 
-if __name__ == "__main__":
+if __name__=="__main__":
+
     if not os.path.exists("faiss_index/index.faiss"):
-        raise FileNotFoundError("找不到 FAISS 索引，請先執行 build_index.py")
-    is_hf = os.environ.get("SPACE_ID") is not None
-    demo.launch(server_name="0.0.0.0" if is_hf else "127.0.0.1")
+        raise FileNotFoundError("找不到 FAISS 索引")
+
+    is_hf=os.environ.get("SPACE_ID") is not None
+
+    demo.launch(
+        server_name="0.0.0.0" if is_hf else "127.0.0.1"
+    )
