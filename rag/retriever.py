@@ -17,7 +17,7 @@ def get_embeddings() -> HuggingFaceEmbeddings:
     return _embeddings
 
 
-def _get_vectorstore() -> FAISS:
+def get_vectorstore() -> FAISS:
     global _vectorstore
     if _vectorstore is None:
         if not os.path.exists(FAISS_INDEX_PATH):
@@ -27,7 +27,7 @@ def _get_vectorstore() -> FAISS:
             get_embeddings(),
             allow_dangerous_deserialization=True
         )
-    return _vectorstore
+    return _get_vectorstore()
 
 
 def build_index() -> None:

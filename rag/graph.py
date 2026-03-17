@@ -3,9 +3,11 @@ import json
 from typing import Optional
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, END
+from langchain_community.vectorstores import FAISS as FAISSStore
+from rag.retriever import _get_vectorstore
 
 from rag.chain import parse_ingredients
-from rag.retriever import load_retriever
+from rag.retriever import get_vectorstore
 from rag.enricher import enrich_from_name
 from rag.updater import write_to_pending
 from rag.validator import validate_format
@@ -61,25 +63,21 @@ def query_node(state: AnalysisState) -> AnalysisState:
     相似度判斷：取 top-1 結果，若成分名稱字串相符則視為找到。
     找到的放入 found，找不到的放入 not_found。
     """
-    retriever = load_retriever(k=1)
     found = []
     not_found = []
+    vectorstore = _get_vectorstore()
 
     for name in state["ingredients"]:
-        docs = retriever.invoke(name)
-        if docs:
-            metadata = docs[0].metadata
-            db_names = [
-                metadata.get("ingredient", "").lower(),
-                metadata.get("inci_name", "").lower(),
-            ]
-            if name.lower() in db_names:
-                # 根據來源決定 confidence，而非一律 high
+        # 改用 similarity_search_with_score，取得相似度分數
+        results = vectorstore.similarity_search_with_score(name, k=1)
+
+        if results:
+            doc, score = results[0]
+            # L2 距離，分數越低越相似，0.8 以下視為找到
+            if score < 0.8:
+                metadata = doc.metadata
                 source = metadata.get("source", [])
-                if source == ["LLM-generated"]:
-                    confidence = "medium"
-                else:
-                    confidence = "high"
+                confidence = "medium" if source == ["LLM-generated"] else "high"
                 found.append({**metadata, "confidence": confidence})
             else:
                 not_found.append(name)
