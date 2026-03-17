@@ -16,6 +16,7 @@ from rag.ocr import extract_from_base64
 class AnalysisState(TypedDict):
     input_text: str
     input_image: Optional[str]   # base64 字串，無圖片時為 None
+    original_ingredients: list   # 新增：OCR 辨識的原始名稱
     ingredients: list        # parser_node 拆出的成分列表
     found: list              # query_node 找到的成分（來自 DB）
     not_found: list          # query_node 找不到的成分名稱
@@ -34,10 +35,14 @@ def ocr_node(state: AnalysisState) -> AnalysisState:
     """
     try:
         result = extract_from_base64(state["input_image"])
-        ocr_text = ", ".join(result.get("ingredients", []))
-        # 合併文字輸入與 OCR 結果
+        ocr_ingredients = result.get("ingredients", [])
+        ocr_text = ", ".join(ocr_ingredients)
         combined = ", ".join(filter(None, [state["input_text"], ocr_text]))
-        return {**state, "input_text": combined}
+        return {
+            **state,
+            "input_text": combined,
+            "original_ingredients": ocr_ingredients  # 保存原始名稱
+        }
     except Exception as e:
         return {**state, "error": f"OCR 失敗：{str(e)}"}
     
@@ -187,30 +192,34 @@ def response_node(state: AnalysisState) -> AnalysisState:
 
     enriched_map = {}
     for item in state["enriched_data"]:
-        # 用 _original（原始查詢名稱）作為主要 key
         if item.get("_original"):
             enriched_map[item["_original"].lower()] = item
-        # 同時用 ingredient 作為備用 key
         if item.get("ingredient"):
             enriched_map[item["ingredient"].lower()] = item
 
+    original_ingredients = state.get("original_ingredients", [])
+
     results = []
-    for name in state["ingredients"]:
+    for i, name in enumerate(state["ingredients"]):
         key = name.lower()
+        # 取得對應的原始名稱（若有圖片輸入）
+        original_name = original_ingredients[i] if i < len(original_ingredients) else name
+
         if key in found_map:
-            results.append(found_map[key])
+            item = {**found_map[key], "_display_name": original_name}
+            results.append(item)
         elif key in enriched_map:
-            results.append(enriched_map[key])
+            item = {**enriched_map[key], "_display_name": original_name}
+            results.append(item)
         else:
             results.append({
                 "ingredient": name,
+                "_display_name": original_name,
                 "confidence": "error",
                 "error": "查詢失敗，請稍後再試"
             })
 
     return {**state, "results": results}
-
-
 
 
 # ── Graph 建立 ────────────────────────────────────────────────────────
@@ -243,6 +252,7 @@ def analyze_online(text: str, image_b64: str = None) -> list:
     initial_state: AnalysisState = {
         "input_text": text,
         "input_image": image_b64,
+        "original_ingredients": [],  # 新增
         "ingredients": [],
         "found": [],
         "not_found": [],

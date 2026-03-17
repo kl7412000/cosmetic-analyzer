@@ -137,7 +137,7 @@ session_pending = []
 
 def format_card(item:dict):
 
-    name = item.get("_original") or item.get("ingredient") or item.get("inci_name","Unknown")
+    name = item.get("_display_name") or item.get("_original") or item.get("ingredient") or item.get("inci_name", "Unknown")
 
     confidence = item.get("confidence","medium").lower()
 
@@ -157,23 +157,23 @@ def format_card(item:dict):
     warning=item.get("warning","")
 
     md=f"""
-<div class="{card_class}">
+    <div class="{card_class}">
 
-<div class="card-title">
-{name}
-<span class="{tag_class}">{tag_text}</span>
-</div>
+    <div class="card-title">
+    {name}
+    <span class="{tag_class}">{tag_text}</span>
+    </div>
 
-<div class="card-sub">
-{inci if inci else ""} {(" | CAS "+cas) if cas else ""}
-</div>
+    <div class="card-sub">
+    {inci if inci else ""} {(" | CAS "+cas) if cas else ""}
+    </div>
 
-**功能：** {", ".join(functions) if functions else "—"}
+    **功能：** {", ".join(functions) if functions else "—"}
 
-<details>
-<summary>查看詳細</summary>
+    <details>
+    <summary>查看詳細</summary>
 
-"""
+    """
 
     if benefits:
         md+="\n**功效**\n"
