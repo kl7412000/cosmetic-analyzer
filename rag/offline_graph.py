@@ -1,170 +1,147 @@
+# rag/offline_graph.py
 import json
 from typing import Optional
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, END
+
 from rag.enricher import enrich
 from rag.validator import validate
 from rag.updater import write_to_db, rebuild_index
+from scraper.inci_decoder import scrape as scrape_inci
 
 
-# ─── State ───────────────────────────────────────────────────────────────────
-
+# ── State 定義 ────────────────────────────────────────────────────────
 class OfflineState(TypedDict):
     inci_name: str
     scraped: dict
     enriched: dict
     validation: dict
-    verdict: str
+    verdict: str        # "pass" / "unverified" / "fail" / "format_error"
     error: Optional[str]
     log: list
 
 
-# ─── Nodes ───────────────────────────────────────────────────────────────────
-
-def _normalize_source(source) -> list:
-    if isinstance(source, list):
-        return source
-    if isinstance(source, str):
-        return [source]
-    return []
-
-
+# ── Nodes ─────────────────────────────────────────────────────────────
 def scraper_node(state: OfflineState) -> OfflineState:
-    inci_name = state["inci_name"]
-    log = state.get("log", [])
-    scraped = {}
-
-    # INCI Decoder
+    """
+    從 INCI Decoder 爬取成分資料。
+    爬取失敗時不中止流程，而是回傳空 dict 讓後續節點用 LLM 補充。
+    """
+    log = state["log"] + []
     try:
-        from scraper.inci_decoder import scrape as inci_scrape
-        inci_result = inci_scrape(inci_name)
-        if inci_result:
-            scraped.update(inci_result)
-            log.append(f"INCI Decoder: 找到 {inci_name}")
+        scraped = scrape_inci(state["inci_name"])
+        if scraped:
+            log.append(f"INCI Decoder: 找到 {state['inci_name']}")
+            return {**state, "scraped": scraped, "log": log}
         else:
-            log.append(f"INCI Decoder: 找不到 {inci_name}")
+            log.append(f"INCI Decoder: 找不到 {state['inci_name']}，交由 LLM 補充")
+            return {**state, "scraped": {}, "log": log}
     except Exception as e:
-        log.append(f"INCI Decoder: 失敗 - {e}")
-
-    # CosIng
-    try:
-        from scraper.cosing import scrape as cosing_scrape
-        cosing_result = cosing_scrape(inci_name)
-        if cosing_result:
-            for key, val in cosing_result.items():
-                if key == "functions":
-                    existing = [f.upper() for f in scraped.get("functions", [])]
-                    for f in val:
-                        if f.upper() not in existing:
-                            scraped.setdefault("functions", []).append(f)
-                elif key == "source":
-                    existing_sources = _normalize_source(scraped.get("source", []))
-                    for s in _normalize_source(val):
-                        if s not in existing_sources:
-                            existing_sources.append(s)
-                    scraped["source"] = existing_sources
-                else:
-                    scraped[key] = val
-            log.append(f"CosIng: 找到 {inci_name}")
-        else:
-            log.append(f"CosIng: 找不到 {inci_name}")
-    except Exception as e:
-        log.append(f"CosIng: 失敗 - {e}")
-
-    # 確保 source 是 list
-    scraped["source"] = _normalize_source(scraped.get("source", []))
-
-    if not scraped or not scraped.get("source"):
-        return {**state, "error": f"所有爬蟲都找不到：{inci_name}", "log": log}
-
-    return {**state, "scraped": scraped, "log": log}
+        log.append(f"INCI Decoder 爬取失敗：{str(e)}，交由 LLM 補充")
+        return {**state, "scraped": {}, "log": log}
 
 
 def enrich_node(state: OfflineState) -> OfflineState:
-    if state.get("error"):
-        return state
-
-    log = state.get("log", [])
-    scraped = state.get("scraped", {})
+    """
+    用 LLM 補充缺少的欄位。
+    有爬蟲資料時用 enrich()（補充模式），
+    沒有爬蟲資料時用 enrich_from_name()（從零生成模式）。
+    """
+    from rag.enricher import enrich_from_name
+    log = state["log"] + []
 
     try:
-        enriched = enrich(scraped)
-        log.append("Enricher: 補充完成")
+        if state["scraped"]:
+            enriched = enrich(state["scraped"])
+            log.append("Enricher: 補充爬蟲資料完成")
+        else:
+            enriched = enrich_from_name(state["inci_name"])
+            log.append("Enricher: 從零生成完成")
+
         return {**state, "enriched": enriched, "log": log}
+
     except Exception as e:
-        log.append(f"Enricher: 失敗 - {e}")
-        return {**state, "error": f"LLM 補充失敗：{e}", "log": log}
+        log.append(f"Enricher 失敗：{str(e)}")
+        return {**state, "error": f"Enricher 失敗：{str(e)}", "log": log}
+
+
+def should_continue_after_enrich(state: OfflineState) -> str:
+    """enrich 失敗時直接結束，不進行後續驗證。"""
+    return "end" if state.get("error") else "validator"
 
 
 def validator_node(state: OfflineState) -> OfflineState:
-    if state.get("error"):
-        return state
-
-    log = state.get("log", [])
-    enriched = state.get("enriched", {})
+    """
+    執行完整驗證（格式驗證 + LLM-as-a-judge）。
+    離線流程一律執行 run_judge=True。
+    """
+    log = state["log"] + []
 
     try:
-        validation = validate(enriched, run_judge=True)
-        verdict = validation["verdict"]
-        score = validation.get("score", -1)
+        result = validate(state["enriched"], run_judge=True)
+        verdict = result["verdict"]
+        score = result.get("score", -1)
+
         log.append(f"Validator: score={score}, verdict={verdict}")
-        if validation.get("issues"):
-            log.append(f"Validator issues: {validation['issues']}")
-        return {**state, "validation": validation, "verdict": verdict, "log": log}
+        if result.get("issues"):
+            log.append(f"Validator issues: {result['issues']}")
+
+        return {**state, "validation": result, "verdict": verdict, "log": log}
+
     except Exception as e:
-        log.append(f"Validator: 失敗 - {e}")
-        return {**state, "error": f"驗證失敗：{e}", "log": log}
+        log.append(f"Validator 失敗：{str(e)}")
+        return {**state, "verdict": "format_error", "error": str(e), "log": log}
 
 
 def indexer_node(state: OfflineState) -> OfflineState:
-    if state.get("error"):
-        return state
-
-    log = state.get("log", [])
-    verdict = state.get("verdict", "fail")
-    enriched = state.get("enriched", {})
-    inci_name = state["inci_name"]
+    """
+    根據 verdict 決定是否寫入 DB。
+    pass / unverified → 寫入
+    fail / format_error → 丟棄
+    """
+    log = state["log"] + []
+    verdict = state["verdict"]
 
     if verdict in ("pass", "unverified"):
-        try:
-            result = write_to_db(enriched, verdict=verdict)
-            log.append(f"Indexer: {result['action']} → {inci_name}")
-        except Exception as e:
-            log.append(f"Indexer: 寫入失敗 - {e}")
-            return {**state, "error": f"寫入 DB 失敗：{e}", "log": log}
+        action = write_to_db(state["enriched"], verdict=verdict)
+        log.append(f"Indexer: {action['action']} → {action['ingredient']}")
     else:
-        log.append(f"Indexer: 丟棄 {inci_name}（verdict={verdict}）")
+        log.append(f"Indexer: 丟棄 {state['inci_name']} (verdict: {verdict})")
 
     return {**state, "log": log}
 
 
-# ─── 條件邊 ───────────────────────────────────────────────────────────────────
-
-def check_error(state: OfflineState) -> str:
-    return "end" if state.get("error") else "continue"
-
-
-# ─── 建立 Graph ───────────────────────────────────────────────────────────────
-
+# ── Graph 建立 ────────────────────────────────────────────────────────
 def build_offline_graph():
     graph = StateGraph(OfflineState)
+
     graph.add_node("scraper", scraper_node)
     graph.add_node("enrich", enrich_node)
     graph.add_node("validator", validator_node)
     graph.add_node("indexer", indexer_node)
+
     graph.set_entry_point("scraper")
-    graph.add_conditional_edges("scraper", check_error, {"continue": "enrich", "end": END})
-    graph.add_conditional_edges("enrich", check_error, {"continue": "validator", "end": END})
-    graph.add_conditional_edges("validator", check_error, {"continue": "indexer", "end": END})
+    graph.add_edge("scraper", "enrich")
+    graph.add_conditional_edges(
+        "enrich",
+        should_continue_after_enrich,
+        {"validator": "validator", "end": END}
+    )
+    graph.add_edge("validator", "indexer")
     graph.add_edge("indexer", END)
+
     return graph.compile()
 
 
 offline_graph = build_offline_graph()
 
 
-def process_ingredient(inci_name: str, rebuild: bool = False) -> dict:
-    """離線流程入口：處理單一成分"""
+# ── 對外介面 ──────────────────────────────────────────────────────────
+def process_ingredient(inci_name: str) -> dict:
+    """
+    處理單一成分的完整離線流程。
+    回傳處理結果，包含 verdict 和 log。
+    """
     initial_state: OfflineState = {
         "inci_name": inci_name,
         "scraped": {},
@@ -176,43 +153,57 @@ def process_ingredient(inci_name: str, rebuild: bool = False) -> dict:
     }
     final_state = offline_graph.invoke(initial_state)
 
-    if rebuild and final_state.get("verdict") in ("pass", "unverified"):
-        rebuild_index()
-
     return {
         "inci_name": inci_name,
-        "verdict": final_state.get("verdict", "error"),
+        "verdict": final_state["verdict"],
         "error": final_state.get("error"),
-        "log": final_state.get("log", []),
+        "log": final_state["log"],
     }
 
 
 def process_batch(inci_names: list) -> dict:
-    """離線流程入口：批次處理多個成分，最後統一重建索引"""
-    stats = {"pass": 0, "unverified": 0, "fail": 0, "error": 0}
+    """
+    批次處理多個成分，最後統一重建索引。
+    比逐一重建索引更有效率。
+
+    回傳處理摘要：{"added": int, "updated": int, "rejected": int, "results": list}
+    """
+    summary = {"added": 0, "updated": 0, "rejected": 0, "results": []}
 
     for name in inci_names:
-        print(f"\n{'='*50}")
-        print(f"處理：{name}")
-        result = process_ingredient(name, rebuild=False)
-        verdict = result.get("verdict", "error")
-        stats[verdict] = stats.get(verdict, 0) + 1
-        for log_line in result.get("log", []):
-            print(f"  {log_line}")
-        if result.get("error"):
-            print(f"  ❌ 錯誤：{result['error']}")
+        result = process_ingredient(name)
+        summary["results"].append(result)
 
-    if stats["pass"] + stats["unverified"] > 0:
-        print("\n重建 FAISS 索引...")
+        verdict = result["verdict"]
+        if verdict in ("pass", "unverified"):
+            # write_to_db 已在 indexer_node 內執行，這裡只計數
+            # 從 log 判斷是 added 還是 updated
+            log_str = " ".join(result["log"])
+            if "added" in log_str:
+                summary["added"] += 1
+            elif "updated" in log_str:
+                summary["updated"] += 1
+        else:
+            summary["rejected"] += 1
+
+        # 逐一列印進度
+        print(f"  [{verdict}] {name}")
+        for line in result["log"]:
+            print(f"    {line}")
+
+    # 有任何成功寫入才重建索引
+    if summary["added"] + summary["updated"] > 0:
         rebuild_index()
 
-    print(f"\n{'='*50}")
-    print(f"批次完成：pass={stats['pass']}, unverified={stats['unverified']}, "
-          f"fail={stats['fail']}, error={stats.get('error', 0)}")
-    return stats
+    return summary
 
 
+# ── 本地測試 ──────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    print("=== 測試離線流程（單一成分）===")
-    result = process_ingredient("Bakuchiol", rebuild=True)
+    print("=== 測試單一成分處理 ===")
+    result = process_ingredient("Bakuchiol")
     print(json.dumps(result, ensure_ascii=False, indent=2))
+
+    print("\n=== 測試批次處理 ===")
+    summary = process_batch(["Allantoin", "Adenosine"])
+    print(f"\n處理摘要：added={summary['added']}, updated={summary['updated']}, rejected={summary['rejected']}")

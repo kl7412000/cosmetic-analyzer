@@ -603,12 +603,14 @@
     "inci_name": "Bakuchiol",
     "cas_number": "10309-37-2",
     "functions": [
-      "抗老化",
-      "抗氧化"
+      "cell-communicating ingredient",
+      "antioxidant",
+      "antimicrobial/antibacterial"
     ],
     "benefits": [
-      "改善細紋",
-      "提亮膚色"
+      "促進細胞更新",
+      "抗氧化",
+      "抗菌"
     ],
     "risks": [],
     "skin_type": [
@@ -616,11 +618,52 @@
     ],
     "eu_regulation": "無明確限制資訊",
     "source": [
-      "LLM-generated"
+      "INCI Decoder"
     ],
-    "confidence": "medium",
-    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
-    "_pending_at": "2026-03-17",
+    "_verdict": "pass",
+    "_updated_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Allantoin",
+    "inci_name": "Allantoin",
+    "cas_number": "97-59-6",
+    "functions": [
+      "soothing"
+    ],
+    "benefits": [
+      "舒緩皮膚",
+      "促進傷口癒合",
+      "保濕"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Adenosine",
+    "inci_name": "Adenosine",
+    "cas_number": "58-61-7",
+    "functions": [
+      "cell-communicating ingredient"
+    ],
+    "benefits": [
+      "促進細胞間的通訊，改善皮膚老化問題，減少細紋和皺紋"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "INCI Decoder"
+    ],
     "_verdict": "pass",
     "_updated_at": "2026-03-17"
   }
