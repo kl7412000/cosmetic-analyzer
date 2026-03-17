@@ -337,7 +337,7 @@ theme=gr.themes.Soft()
 
                 with gr.Column(scale=2):
 
-                    text_output=gr.Markdown(value="等待輸入...")
+                    text_output = gr.HTML(value="<p>等待輸入...</p>")
 
             gr.Examples(
                 examples=[
@@ -365,7 +365,7 @@ theme=gr.themes.Soft()
 
                 with gr.Column(scale=2):
 
-                    image_output=gr.Markdown(value="請上傳圖片")
+                    image_output = gr.HTML(value="<p>請上傳圖片</p>")
 
     gr.Markdown(
 """
