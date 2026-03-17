@@ -4,7 +4,6 @@ from typing import Optional
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, END
 from langchain_community.vectorstores import FAISS as FAISSStore
-from rag.retriever import _get_vectorstore
 
 from rag.chain import parse_ingredients
 from rag.retriever import get_vectorstore
@@ -229,7 +228,8 @@ def build_graph():
         should_ocr,
         {"ocr": "ocr", "parser": "parser"}
     )
-    graph.add_edge("ocr", "parser")
+    graph.add_edge("ocr", "normalize")    # ocr → normalize
+    graph.add_edge("normalize", "parser") # normalize → parser
     graph.add_edge("parser", "query")
     graph.add_edge("query", "enrich")
     graph.add_edge("enrich", "response")
