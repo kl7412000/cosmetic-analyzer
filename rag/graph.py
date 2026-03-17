@@ -65,7 +65,7 @@ def query_node(state: AnalysisState) -> AnalysisState:
     """
     found = []
     not_found = []
-    vectorstore = _get_vectorstore()
+    vectorstore = get_vectorstore()
 
     for name in state["ingredients"]:
         # 改用 similarity_search_with_score，取得相似度分數
