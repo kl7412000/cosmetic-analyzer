@@ -47,13 +47,14 @@ def normalize_node(state: AnalysisState) -> AnalysisState:
     將 OCR 辨識出的非英文成分名稱統一轉換為 INCI 英文名稱。
     僅在有圖片輸入時執行，純文字輸入不需要此步驟。
     """
-    if not state.get("input_image"):
+    raw_text = state.get("input_text", "").strip()
+    
+    if not raw_text:
         return state
 
-    from rag.enricher import _call_groq
+    print(f"[NORMALIZE] 輸入：{raw_text[:100]}")
 
-    raw_text = state["input_text"]
-    print(f"[NORMALIZE] 輸入：{raw_text[:100]}")  # debug
+    from rag.enricher import _call_groq
 
     prompt = f"""
     以下是從化妝品成分標籤辨識出的成分列表，可能包含日文、韓文、中文或其他語言：
@@ -75,14 +76,14 @@ def normalize_node(state: AnalysisState) -> AnalysisState:
     try:
         result = _call_groq(prompt)
         normalized = result.get("normalized", [])
-        print(f"[NORMALIZE] 翻譯結果：{normalized}")  # debug
+        print(f"[NORMALIZE] 翻譯結果：{normalized}")
 
         if normalized:
             normalized_text = ", ".join(normalized)
-            print(f"[NORMALIZE] 輸出：{normalized_text[:100]}") # debug
             return {**state, "input_text": normalized_text}
-    except Exception:
-        pass  # 翻譯失敗時保留原始文字，不中斷流程
+
+    except Exception as e:
+        print(f"[NORMALIZE] 失敗：{e}")
 
     return state
 
