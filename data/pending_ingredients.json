@@ -1114,5 +1114,105 @@
     "confidence": "medium",
     "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
     "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "甘油",
+    "inci_name": "Glycerin",
+    "cas_number": "56-81-5",
+    "functions": [
+      "保濕劑",
+      "潤滑劑"
+    ],
+    "benefits": [
+      "幫助保持皮膚水分",
+      "改善皮膚柔軟度"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "グリセリン",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "水",
+    "inci_name": "Water",
+    "cas_number": "7732-18-5",
+    "functions": [
+      "溶劑",
+      "潤濕劑"
+    ],
+    "benefits": [
+      "幫助溶解其他成分",
+      "提供皮膚濕潤"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Water",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "尼克酸胺",
+    "inci_name": "Niacinamide",
+    "cas_number": "98-92-0",
+    "functions": [
+      "保濕",
+      "抗氧化",
+      "改善皮膚彈性"
+    ],
+    "benefits": [
+      "改善皮膚水分平衡",
+      "減少細紋和皺紋",
+      "改善皮膚亮度"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Niacinamide",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Bakuchiol",
+    "inci_name": "Bakuchiol",
+    "cas_number": "10309-37-2",
+    "functions": [
+      "抗老化",
+      "抗氧化"
+    ],
+    "benefits": [
+      "改善細紋",
+      "提亮膚色"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Bakuchiol",
+    "_pending_at": "2026-03-17"
   }
 ]

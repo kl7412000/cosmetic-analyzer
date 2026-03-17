@@ -41,6 +41,47 @@ def ocr_node(state: AnalysisState) -> AnalysisState:
         return {**state, "input_text": combined}
     except Exception as e:
         return {**state, "error": f"OCR 失敗：{str(e)}"}
+    
+def normalize_node(state: AnalysisState) -> AnalysisState:
+    """
+    將 OCR 辨識出的非英文成分名稱統一轉換為 INCI 英文名稱。
+    僅在有圖片輸入時執行，純文字輸入不需要此步驟。
+    """
+    if not state.get("input_image"):
+        return state
+
+    from rag.enricher import _call_groq
+
+    raw_text = state["input_text"]
+
+    prompt = f"""
+    以下是從化妝品成分標籤辨識出的成分列表，可能包含日文、韓文、中文或其他語言：
+
+    {raw_text}
+
+    請將每個成分名稱翻譯並對應到正確的 INCI 英文名稱。
+    請嚴格按照以下 JSON 格式輸出，不要加任何額外說明：
+    {{
+    "normalized": ["INCI名稱1", "INCI名稱2", "INCI名稱3"]
+    }}
+
+    注意：
+    - 若成分名稱已經是英文 INCI 名稱，直接保留原文
+    - 若無法對應到 INCI 名稱，保留原文
+    - 輸出順序必須與輸入順序一致
+    """
+
+    try:
+        result = _call_groq(prompt)
+        normalized = result.get("normalized", [])
+
+        if normalized:
+            normalized_text = ", ".join(normalized)
+            return {**state, "input_text": normalized_text}
+    except Exception:
+        pass  # 翻譯失敗時保留原始文字，不中斷流程
+
+    return state
 
 
 def should_ocr(state: AnalysisState) -> str:
@@ -73,8 +114,9 @@ def query_node(state: AnalysisState) -> AnalysisState:
 
         if results:
             doc, score = results[0]
+            print(f"[DEBUG] {name} → score: {score}, matched: {doc.metadata.get('ingredient')}")
             # L2 距離，分數越低越相似，0.8 以下視為找到
-            if score < 0.8:
+            if score < 0.85:
                 metadata = doc.metadata
                 source = metadata.get("source", [])
                 confidence = "medium" if source == ["LLM-generated"] else "high"
@@ -83,6 +125,7 @@ def query_node(state: AnalysisState) -> AnalysisState:
                 not_found.append(name)
         else:
             not_found.append(name)
+        
 
     return {**state, "found": found, "not_found": not_found}
 
@@ -165,11 +208,14 @@ def response_node(state: AnalysisState) -> AnalysisState:
     return {**state, "results": results}
 
 
+
+
 # ── Graph 建立 ────────────────────────────────────────────────────────
 def build_graph():
     graph = StateGraph(AnalysisState)
 
     graph.add_node("ocr", ocr_node)
+    graph.add_node("normalize", normalize_node)
     graph.add_node("parser", parser_node)
     graph.add_node("query", query_node)
     graph.add_node("enrich", enrich_node)
@@ -204,17 +250,11 @@ def analyze_online(text: str, image_b64: str = None) -> list:
     return final_state["results"]
 
 
+
+
 # ── 本地測試 ──────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    print("=== 測試 1：DB 裡有的成分（應為 confidence: high）===")
-    results = analyze_online("Niacinamide")
-    print(json.dumps(results, ensure_ascii=False, indent=2))
-
-    print("\n=== 測試 2：DB 裡沒有的成分（應為 confidence: medium）===")
-    results = analyze_online("Bakuchiol")
-    print(json.dumps(results, ensure_ascii=False, indent=2))
-
-    print("\n=== 測試 3：混合查詢 ===")
-    results = analyze_online("Niacinamide, Bakuchiol, Retinol")
+    print("=== 測試 score 數值 ===")
+    results = analyze_online("グリセリン, AQUA/WATER/EAU, Glycerin, Water, Niacinamide, Bakuchiol")
     for r in results:
-        print(f"{r.get('ingredient')} → confidence: {r.get('confidence')}")
+        print(f"{r.get('_original') or r.get('ingredient')} → confidence: {r.get('confidence')}")
