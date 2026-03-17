@@ -1,20 +1,26 @@
 [
   {
-  "ingredient": "Water",
-  "inci_name": "Aqua",
-  "cas_number": "7732-18-5",
-  "functions": ["Solvent"],
-  "benefits": [
-    "作為產品基底溶劑", 
-    "幫助其他成分均勻分散", 
-    "維持產品質地"
-  ],
-  "risks": [
-    "整體安全性極高，幾乎無副作用"
-  ],
-  "skin_type": ["所有膚質"],
-  "eu_regulation": "無使用限制",
-  "source": ["CosIng"]
+    "ingredient": "Water",
+    "inci_name": "Aqua",
+    "cas_number": "7732-18-5",
+    "functions": [
+      "Solvent"
+    ],
+    "benefits": [
+      "作為產品基底溶劑",
+      "幫助其他成分均勻分散",
+      "維持產品質地"
+    ],
+    "risks": [
+      "整體安全性極高，幾乎無副作用"
+    ],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無使用限制",
+    "source": [
+      "CosIng"
+    ]
   },
   {
     "ingredient": "Niacinamide",
@@ -594,33 +600,28 @@
   },
   {
     "ingredient": "Bakuchiol",
-    "inci_name": "BAKUCHIOL",
+    "inci_name": "Bakuchiol",
     "cas_number": "10309-37-2",
     "functions": [
-      "cell-communicating ingredient",
-      "antioxidant",
-      "antimicrobial/antibacterial",
-      "ANTIMICROBIAL",
-      "SKIN CONDITIONING - EMOLLIENT",
-      "SKIN CONDITIONING"
+      "抗老化",
+      "抗氧化"
     ],
     "benefits": [
-      "幫助改善細紋和皺紋，讓皮膚看起來更光滑",
-      "具有抗氧化作用，保護皮膚免受環境污染和紫外線的傷害",
-      "能夠舒緩和鎮靜皮膚，減少紅腫和刺激"
+      "改善細紋",
+      "提亮膚色"
     ],
-    "risks": [
-      "可能會引起皮膚敏感或過敏反應，建議在使用前進行皮膚測試"
-    ],
+    "risks": [],
     "skin_type": [
-      "乾性肌",
-      "敏感肌",
-      "熟齡肌"
+      "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "INCI Decoder",
-      "CosIng"
-    ]
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17",
+    "_verdict": "pass",
+    "_updated_at": "2026-03-17"
   }
 ]

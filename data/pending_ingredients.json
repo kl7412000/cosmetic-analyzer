@@ -1,0 +1,1118 @@
+[
+  {
+    "ingredient": "水",
+    "inci_name": "AQUA",
+    "cas_number": "7732-18-5",
+    "functions": [
+      "溶劑",
+      "潤濕劑"
+    ],
+    "benefits": [
+      "幫助溶解其他成分",
+      "提供保濕效果"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "二丙二醇",
+    "inci_name": "DIPROPYLENE GLYCOL",
+    "cas_number": "25265-71-8",
+    "functions": [
+      "溶劑",
+      "潤濕劑"
+    ],
+    "benefits": [
+      "幫助溶解其他成分",
+      "提供潤濕作用"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "丁二醇",
+    "inci_name": "BUTYLENE GLYCOL",
+    "cas_number": "107-88-0",
+    "functions": [
+      "溶劑",
+      "保濕劑",
+      "抗菌劑"
+    ],
+    "benefits": [
+      "幫助穩定化妝品的質地",
+      "增加化妝品的保濕效果"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "丙二醇",
+    "inci_name": "PROPYLENE GLYCOL",
+    "cas_number": "57-55-6",
+    "functions": [
+      "保濕劑",
+      "溶劑"
+    ],
+    "benefits": [
+      "幫助保持皮膚水分",
+      "增強化妝品的穩定性"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "乙醇",
+    "inci_name": "Alcohol",
+    "cas_number": "64-17-5",
+    "functions": [
+      "溶劑",
+      "防腐劑",
+      "抗菌劑"
+    ],
+    "benefits": [
+      "幫助溶解其他成分",
+      "延長產品保質期",
+      "殺菌"
+    ],
+    "risks": [
+      "可能引起皮膚刺激或乾燥"
+    ],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "異丙基月桂酰胺基酸鹽",
+    "inci_name": "ISOPROPYL LAUROYL SARCOSINATE",
+    "cas_number": "N/A",
+    "functions": [
+      "乳化劑",
+      "潔淨劑"
+    ],
+    "benefits": [
+      "清潔皮膚",
+      "穩定乳液"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "戊二醇",
+    "inci_name": "PENTYLENE GLYCOL",
+    "cas_number": "111-29-5",
+    "functions": [
+      "保濕劑",
+      "抗微生物劑"
+    ],
+    "benefits": [
+      "幫助保持皮膚水分",
+      "抑制微生物生長"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "二氧化鈦",
+    "inci_name": "CI 77891 / TITANIUM DIOXIDE",
+    "cas_number": "13463-67-7",
+    "functions": [
+      "色素",
+      "UV 抗氧化劑",
+      "遮瑕劑"
+    ],
+    "benefits": [
+      "提供白色色調",
+      "保護皮膚免受 UV 光的傷害",
+      "改善皮膚的外觀"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "鳥嘌呤",
+    "inci_name": "Guanosine",
+    "cas_number": "118-00-3",
+    "functions": [
+      "保濕",
+      "抗氧化"
+    ],
+    "benefits": [
+      "改善皮膚水分平衡",
+      "保護皮膚免受氧化損傷"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "雲母",
+    "inci_name": "Mica",
+    "cas_number": "N/A",
+    "functions": [
+      "色素",
+      "增稠劑"
+    ],
+    "benefits": [
+      "給肌膚帶來光澤",
+      "增強化妝品的顏色"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "維生素E乙酸酯",
+    "inci_name": "TOCOPHERYL ACETATE",
+    "cas_number": "58-95-7",
+    "functions": [
+      "抗氧化劑",
+      "保濕劑"
+    ],
+    "benefits": [
+      "保護皮膚免受氧化損害",
+      "幫助保持皮膚水分"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "亞麻籽萃取物",
+    "inci_name": "HYDROLYZED LINSEED EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "保濕",
+      "抗氧化"
+    ],
+    "benefits": [
+      "滋潤皮膚",
+      "保護皮膚免受氧化損傷"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "乙酰化透明質酸鈉",
+    "inci_name": "SODIUM ACETYLATED HYALURONATE",
+    "cas_number": "N/A",
+    "functions": [
+      "保濕",
+      "皮膚保護"
+    ],
+    "benefits": [
+      "長效保濕",
+      "改善皮膚彈性"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "苯甲酸鈉",
+    "inci_name": "SODIUM BENZOATE",
+    "cas_number": "532-32-1",
+    "functions": [
+      "防腐劑"
+    ],
+    "benefits": [
+      "延長產品保質期",
+      "防止微生物生長"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "苯乙基間苯二酚",
+    "inci_name": "PHENYLETHYL RESORCINOL",
+    "cas_number": "85-27-8",
+    "functions": [
+      "抗氧化",
+      "皮膚保護"
+    ],
+    "benefits": [
+      "保護皮膚免受氧化損傷",
+      "幫助減少色素沉著"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "硬脂酸",
+    "inci_name": "STEARIC ACID",
+    "cas_number": "57-11-4",
+    "functions": [
+      "乳化劑",
+      "保濕劑",
+      "增稠劑"
+    ],
+    "benefits": [
+      "改善皮膚的保濕能力",
+      "穩定乳液的結構"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "腺苷",
+    "inci_name": "Adenosine",
+    "cas_number": "58-61-7",
+    "functions": [
+      "保濕",
+      "抗老化"
+    ],
+    "benefits": [
+      "改善細紋",
+      "增強皮膚彈性"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "咖啡因",
+    "inci_name": "CAFFEINE",
+    "cas_number": "58-08-2",
+    "functions": [
+      "抗氧化",
+      "提神"
+    ],
+    "benefits": [
+      "減少水腫",
+      "改善血液循環"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "PEG-100 Stearate",
+    "inci_name": "PEG-100 Stearate",
+    "cas_number": "N/A",
+    "functions": [
+      "乳化劑",
+      "潤滑劑"
+    ],
+    "benefits": [
+      "改善皮膚觸感",
+      "穩定乳液"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "聚丙烯酸交聯聚合物-6",
+    "inci_name": "POLYACRYLATE CROSSPOLYMER-6",
+    "cas_number": "N/A",
+    "functions": [
+      "增稠劑",
+      "乳化劑",
+      "膜形成劑"
+    ],
+    "benefits": [
+      "改善產品的稠度和穩定性",
+      "幫助保持皮膚水分"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "二氧化硅酯",
+    "inci_name": "Silica Silylate",
+    "cas_number": "N/A",
+    "functions": [
+      "吸濕劑",
+      "增稠劑"
+    ],
+    "benefits": [
+      "幫助控制皮膚油脂分泌",
+      "改善化妝品的質地"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "棕櫚酸",
+    "inci_name": "PALMITIC ACID",
+    "cas_number": "57-10-3",
+    "functions": [
+      "乳化劑",
+      "保濕劑",
+      "抗氧化劑"
+    ],
+    "benefits": [
+      "保濕",
+      "穩定乳液",
+      "抗氧化"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Polysorbate 20",
+    "inci_name": "Polysorbate 20",
+    "cas_number": "9005-64-5",
+    "functions": [
+      "乳化劑",
+      "溶劑"
+    ],
+    "benefits": [
+      "改善化妝品的穩定性和混合性",
+      "幫助溶解其他成分"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Polysorbate 80",
+    "inci_name": "Polysorbate 80",
+    "cas_number": "9005-65-6",
+    "functions": [
+      "乳化劑",
+      "溶劑"
+    ],
+    "benefits": [
+      "改善化妝品的穩定性",
+      "增強化妝品的潤滑性"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "AMMONIUM POLYACRYLOYLDIMETHYL TAURATE",
+    "inci_name": "AMMONIUM POLYACRYLOYLDIMETHYL TAURATE",
+    "cas_number": "N/A",
+    "functions": [
+      "保濕劑",
+      "乳化劑"
+    ],
+    "benefits": [
+      "幫助保持皮膚水分",
+      "改善皮膚的柔軟度"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "檸檬烯",
+    "inci_name": "LIMONENE",
+    "cas_number": "5989-27-5",
+    "functions": [
+      "香料",
+      "溶劑"
+    ],
+    "benefits": [
+      "提神醒腦",
+      "抗氧化"
+    ],
+    "risks": [
+      "可能引起皮膚過敏"
+    ],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "黄原胶",
+    "inci_name": "XANTHAN GUM",
+    "cas_number": "11138-66-2",
+    "functions": [
+      "增稠劑",
+      "乳化劑",
+      "穩定劑"
+    ],
+    "benefits": [
+      "改善產品的稠度和穩定性",
+      "幫助保持皮膚的水分平衡"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "二氧化錫",
+    "inci_name": "TIN OXIDE",
+    "cas_number": "N/A",
+    "functions": [
+      "色素",
+      "UV 抗氧化劑"
+    ],
+    "benefits": [
+      "提供白色色調",
+      "增強產品的抗氧化能力"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "苯甲醇",
+    "inci_name": "BENZYL ALCOHOL",
+    "cas_number": "100-51-6",
+    "functions": [
+      "防腐劑",
+      "香料"
+    ],
+    "benefits": [
+      "延長產品保質期",
+      "提供香氣"
+    ],
+    "risks": [
+      "可能引起皮膚刺激或過敏反應"
+    ],
+    "skin_type": [],
+    "eu_regulation": "根據歐盟化妝品法規，苯甲醇的使用濃度需控制在一定範圍內",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "異十六烷",
+    "inci_name": "ISOHEXADECANE",
+    "cas_number": "29635-49-8",
+    "functions": [
+      "溶劑",
+      "乳化劑"
+    ],
+    "benefits": [
+      "改善化妝品的質地和外觀",
+      "幫助穩定化妝品的配方"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "3-O-乙基抗壞血酸",
+    "inci_name": "3-O-ETHYL ASCORBIC ACID",
+    "cas_number": "N/A",
+    "functions": [
+      "抗氧化",
+      "美白"
+    ],
+    "benefits": [
+      "保護皮膚免受氧化損傷",
+      "幫助減少色素沉著"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Caprylyl Glycol",
+    "inci_name": "Caprylyl Glycol",
+    "cas_number": "1117-86-8",
+    "functions": [
+      "保濕劑",
+      "抗微生物劑"
+    ],
+    "benefits": [
+      "幫助保持皮膚濕潤",
+      "抑制微生物生長"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Capryloyl Salicylic Acid",
+    "inci_name": "Capryloyl Salicylic Acid",
+    "cas_number": "N/A",
+    "functions": [
+      "保濕",
+      "去角質"
+    ],
+    "benefits": [
+      "改善皮膚水潤度",
+      "幫助去除死皮"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "硼氮化物",
+    "inci_name": "Boron Nitride",
+    "cas_number": "10043-11-5",
+    "functions": [
+      "填充劑",
+      "潤滑劑"
+    ],
+    "benefits": [
+      "改善化妝品的觸感",
+      "增加化妝品的耐磨性"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "香豆酸",
+    "inci_name": "Ferulic Acid",
+    "cas_number": "1135-24-6",
+    "functions": [
+      "抗氧化劑"
+    ],
+    "benefits": [
+      "保護皮膚免受氧化損傷",
+      "減少細紋和皺紋"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "丙烯酰胺/二甲基氧丙基丙烯酸鈉共聚物",
+    "inci_name": "ACRYLAMIDE/SODIUM ACRYLOYLDIMETHYLAURATE COPOLYMER",
+    "cas_number": "N/A",
+    "functions": [
+      "增稠劑",
+      "乳化劑"
+    ],
+    "benefits": [
+      "改善產品的稠度和穩定性",
+      "幫助保持皮膚水分"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "山梨酯橄欖酸酯",
+    "inci_name": "SORBITAN OLEATE",
+    "cas_number": "1338-43-8",
+    "functions": [
+      "乳化劑",
+      "潤濕劑"
+    ],
+    "benefits": [
+      "改善皮膚的水潤度",
+      "穩定化妝品的質地"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "月桂酸",
+    "inci_name": "MYRISTIC ACID",
+    "cas_number": "544-63-8",
+    "functions": [
+      "乳化劑",
+      "保濕劑",
+      "抗菌劑"
+    ],
+    "benefits": [
+      "改善皮膚屏障功能",
+      "減少水分流失",
+      "抑制細菌生長"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "天竺葵醇",
+    "inci_name": "Geraniol",
+    "cas_number": "106-24-1",
+    "functions": [
+      "香料",
+      "抗氧化劑"
+    ],
+    "benefits": [
+      "抗氧化",
+      "抗菌"
+    ],
+    "risks": [
+      "可能引起皮膚過敏"
+    ],
+    "skin_type": [],
+    "eu_regulation": "歐盟法規限制使用濃度",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "OCTOCRYLENE",
+    "inci_name": "Octocrylene",
+    "cas_number": "6197-30-4",
+    "functions": [
+      "UV 抗氧化劑",
+      "防曬劑"
+    ],
+    "benefits": [
+      "保護皮膚免受 UVB 和部分 UVA 的傷害",
+      "防止皮膚因曬傷而引起的早期老化"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "允許使用，最高濃度限制為 10%",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "阿伏苯宗",
+    "inci_name": "BUTYL METHOXYDIBENZOYLMETHANE",
+    "cas_number": "70356-09-1",
+    "functions": [
+      "UV濾光劑",
+      "防曬劑"
+    ],
+    "benefits": [
+      "保護皮膚免受UV光的傷害",
+      "預防皮膚老化"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "允許使用，但有濃度限制",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "鉀酯磷酸酯",
+    "inci_name": "POTASSIUM CETYL PHOSPHATE",
+    "cas_number": "N/A",
+    "functions": [
+      "乳化劑",
+      "保濕劑"
+    ],
+    "benefits": [
+      "改善皮膚保濕能力",
+      "穩定乳化"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "OCTYLDODECANOL",
+    "inci_name": "Octyldodecanol",
+    "cas_number": "5333-42-6",
+    "functions": [
+      "潤濕劑",
+      "乳化劑"
+    ],
+    "benefits": [
+      "保濕",
+      "改善皮膚觸感"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "十六醇",
+    "inci_name": "CETYL ALCOHOL",
+    "cas_number": "36653-82-4",
+    "functions": [
+      "乳化劑",
+      "潤濕劑",
+      "增稠劑"
+    ],
+    "benefits": [
+      "改善皮膚觸感",
+      "穩定乳液",
+      "增加產品的稠度"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "OCTYLDODECYL XYLOSIDE",
+    "inci_name": "Octyldodecyl Xyloside",
+    "cas_number": "N/A",
+    "functions": [
+      "表面活性劑",
+      "乳化劑"
+    ],
+    "benefits": [
+      "改善皮膚觸感",
+      "穩定乳液"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "檸檬酸",
+    "inci_name": "CITRIC ACID",
+    "cas_number": "77-92-9",
+    "functions": [
+      "pH調整劑",
+      "抗氧化劑"
+    ],
+    "benefits": [
+      "幫助穩定產品的pH值",
+      "具有抗氧化作用"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "柠檬醇",
+    "inci_name": "CITRONELLOL",
+    "cas_number": "106-22-9",
+    "functions": [
+      "香料",
+      "抗氧化劑"
+    ],
+    "benefits": [
+      "給皮膚帶來清新感",
+      "具有抗氧化作用"
+    ],
+    "risks": [
+      "可能引起皮膚過敏"
+    ],
+    "skin_type": [],
+    "eu_regulation": "根據歐盟化妝品法規，CITRONELLOL被列為可能引起過敏的物質，需要在化妝品標籤上進行標示",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "甘油酯",
+    "inci_name": "GLYCERYL STEARATE",
+    "cas_number": "111-60-4",
+    "functions": [
+      "乳化劑",
+      "保濕劑"
+    ],
+    "benefits": [
+      "改善皮膚保濕度",
+      "穩定乳化"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "香料/香精",
+    "inci_name": "PARFUM/FRAGRANCE",
+    "cas_number": "N/A",
+    "functions": [
+      "香氣調製",
+      "氣味增強"
+    ],
+    "benefits": [
+      "提供香氣",
+      "增強產品吸引力"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_pending_at": "2026-03-17"
+  }
+]
