@@ -59,7 +59,7 @@ def normalize_node(state: AnalysisState) -> AnalysisState:
 
     print(f"[NORMALIZE] 輸入：{raw_text[:100]}")
 
-    from rag.enricher import _call_groq
+    from rag.groq_client import call_groq
 
     prompt = f"""
     以下是從化妝品成分標籤辨識出的成分列表，可能包含日文、韓文、中文或其他語言：
@@ -79,7 +79,7 @@ def normalize_node(state: AnalysisState) -> AnalysisState:
     """
 
     try:
-        result = _call_groq(prompt)
+        result = call_groq(prompt)
         normalized = result.get("normalized", [])
         print(f"[NORMALIZE] 翻譯結果：{normalized}")
 
