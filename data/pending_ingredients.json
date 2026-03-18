@@ -1442,5 +1442,118 @@
     "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
     "_original": "Sodium Sulfate",
     "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Cocamide",
+    "inci_name": "Cocamide",
+    "cas_number": "N/A",
+    "functions": [
+      "surfactant/cleansing",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "cleanses skin"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "oily skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Cocamide",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Protease",
+    "inci_name": "Protease",
+    "cas_number": "N/A",
+    "functions": [
+      "exfoliant",
+      "soothing"
+    ],
+    "benefits": [
+      "removes dead skin cells",
+      "improves skin texture",
+      "reduces inflammation"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Protease",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Polyacrylate",
+    "inci_name": "Sodium Polyacrylate",
+    "cas_number": "9003-04-7",
+    "functions": [
+      "humectant",
+      "thickening",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "improves texture",
+      "reduces dryness",
+      "smoothes skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Sodium Polyacrylate",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Sulfocinate",
+    "inci_name": "Sodium Sulfocinate",
+    "cas_number": "N/A",
+    "functions": [
+      "surfactant/cleansing"
+    ],
+    "benefits": [
+      "cleanses skin",
+      "removes dirt",
+      "hydrates skin"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Sodium Sulfocinate",
+    "_pending_at": "2026-03-18"
   }
 ]
