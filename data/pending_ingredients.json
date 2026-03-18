@@ -1555,5 +1555,1596 @@
     "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
     "_original": "Sodium Sulfocinate",
     "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Water",
+    "inci_name": "Water/Aqua/Eau",
+    "cas_number": "7732-18-5",
+    "functions": [
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "dissolves ingredients",
+      "cleanses skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "WATER/AQUA/EAU",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Isononyl Isononanoate",
+    "inci_name": "Isononyl Isononanoate",
+    "cas_number": "59219-71-5",
+    "functions": [
+      "emollient",
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture",
+      "non-greasy feel"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ISONONYL ISONONANOATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "C12-20 Acid PEG-8 Ester",
+    "inci_name": "C12-20 Acid PEG-8 Ester",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "surfactant/cleansing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture",
+      "reduces irritation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "C12-20 ACID PEG-8 ESTER",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Shea Butter",
+    "inci_name": "BUTYROSPERMUM PARKII (SHEA) BUTTER",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "humectant",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "reduces inflammation",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "BUTYROSPERMUM PARKII (SHEA) BUTTER",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Moringa Seed Extract",
+    "inci_name": "Moringa Oleifera Seed Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "emollient",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "reduces inflammation",
+      "protects skin",
+      "nourishes skin",
+      "soothes skin"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "MORINGA OLEIFERA SEED EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Hibiscus Flower Extract",
+    "inci_name": "Hibiscus Sabdariffa Flower Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "reduces inflammation",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "HIBISCUS SINENSIS FLOWER EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Acetyl Hexapeptide-8",
+    "inci_name": "Acetyl Hexapeptide-8",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "skin-identical ingredient",
+      "cell-communicating ingredient"
+    ],
+    "benefits": [
+      "reduces fine lines",
+      "improves skin elasticity",
+      "hydrates skin",
+      "smoothes skin texture"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ACETYL HEXAPEPTIDE-8",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Laminaria Digitata Extract",
+    "inci_name": "Laminaria Digitata Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "emollient",
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "protects skin",
+      "reduces inflammation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "LAMINARIA DIGITATA EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Whey Protein",
+    "inci_name": "Whey Protein/Lactis Protein/Proteine du Petit-Lait",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "humectant",
+      "skin-identical ingredient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves skin elasticity",
+      "reduces fine lines"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "WHEY PROTEIN/LACTIS PROTEIN/PROTEINE DU PETIT-LAIT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Prickly Pear Extract",
+    "inci_name": "Opuntia Tuna Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "emollient",
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "reduces inflammation",
+      "protects skin from damage"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "OPUNTIA TUNA EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "N-Acetylglucosamine",
+    "inci_name": "Acetyl Glucosamine",
+    "cas_number": "7512-17-6",
+    "functions": [
+      "humectant",
+      "skin-identical ingredient",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "plumps skin",
+      "fades scars"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ACETYL GLUCOSAMINE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Narcissus Tazetta Bulb Extract",
+    "inci_name": "Narcissus Tazetta Bulb Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "hydrates skin",
+      "calms skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "NARCISSUS TAZETTA BULB EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Algae Extract",
+    "inci_name": "Algae Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "emollient",
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "reduces inflammation",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ALGAE EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Apple Fruit Extract",
+    "inci_name": "PYRUS MALUS (APPLE) FRUIT EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "humectant",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "protects from damage",
+      "brightens skin tone"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "PYRUS MALUS (APPLE) FRUIT EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Cucumber Extract",
+    "inci_name": "CUCUMIS SATIVUS (CUCUMBER) FRUIT EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing",
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "calms redness",
+      "reduces puffiness"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "CUCUMIS SATIVUS (CUCUMBER) FRUIT EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Lentil Fruit Extract",
+    "inci_name": "Lens Esculenta (Lentil) Fruit Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "hydrates skin",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "LENS ESCULENTA (LENTIL) FRUIT EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Watermelon Fruit Extract",
+    "inci_name": "CITRULLUS LANATUS (WATERMELON) FRUIT EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "humectant",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "protects from damage",
+      "calms skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "CITRULLUS LANATUS (WATERMELON) FRUIT EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Laminaria Saccharina Extract",
+    "inci_name": "Laminaria Saccharina Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "humectant",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "protects skin",
+      "reduces inflammation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "LAMINARIA SACCHARINA EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Milk Thistle Extract",
+    "inci_name": "SILYBUM MARIANUM EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "protects skin",
+      "reduces inflammation",
+      "hydrates skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SILYBUM MARIANUM (LADY'S THISTLE) EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sunflower Seed Extract",
+    "inci_name": "HELIANTHUS ANNUUS (SUNFLOWER) SEED EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "protects skin",
+      "nourishes skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "HELIANTHUS ANNUUS (SUNFLOWER) SEED EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "St. Paul's Wort Extract",
+    "inci_name": "SIGESBECKIA ORIENTALIS (ST. PAUL'S WORT) EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SIGESBECKIA ORIENTALIS (ST. PAUL'S WORT) EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Barley Extract",
+    "inci_name": "HORDEUM VULGARE (BARLEY) EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "protects skin",
+      "reduces inflammation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "HORDEUM VULGARE (BARLEY) EXTRACT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Barley Extract",
+    "inci_name": "Hordeum Vulgare Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing",
+      "emollient"
+    ],
+    "benefits": [
+      "soothes skin",
+      "hydrates skin",
+      "protects skin",
+      "calms irritation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "EXTRAT D'ORGE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Lactate",
+    "inci_name": "SODIUM LACTATE",
+    "cas_number": "72-17-3",
+    "functions": [
+      "humectant",
+      "moisturizing",
+      "skin-identical ingredient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves skin elasticity",
+      "reduces dryness"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SODIUM LACTATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sorbitol",
+    "inci_name": "Sorbitol",
+    "cas_number": "50-70-4",
+    "functions": [
+      "humectant",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "smoothes skin",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SORBITOL",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Ethylhexylglycerin",
+    "inci_name": "Ethylhexylglycerin",
+    "cas_number": "N/A",
+    "functions": [
+      "humectant",
+      "preservative"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves skin elasticity"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ETHYLHEXYLGLYCERIN",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Propylene Glycol Dicaprate",
+    "inci_name": "Propylene Glycol Dicaprate",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "PROPYLENE GLYCOL DICAPRATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Glucose",
+    "inci_name": "Glucose",
+    "cas_number": "50-99-7",
+    "functions": [
+      "humectant",
+      "skin-identical ingredient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "plumps skin",
+      "smoothes skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "GLUCOSE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Glucose Oxidase",
+    "inci_name": "Glucose Oxidase",
+    "cas_number": "N/A",
+    "functions": [
+      "antimicrobial/antibacterial",
+      "antioxidant"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "fights acne",
+      "promotes wound healing"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "GLUCOSE OXIDASE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium PCA",
+    "inci_name": "Sodium PCA",
+    "cas_number": "N/A",
+    "functions": [
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SODIUM PCA",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sucrose",
+    "inci_name": "Sucrose",
+    "cas_number": "57-50-1",
+    "functions": [
+      "humectant",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "smoothes skin texture",
+      "helps retain moisture"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SUCROSE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Hydroxide",
+    "inci_name": "Sodium Hydroxide",
+    "cas_number": "1310-73-2",
+    "functions": [
+      "pH adjuster"
+    ],
+    "benefits": [
+      "balances skin pH",
+      "enhances stability",
+      "improves texture"
+    ],
+    "risks": [
+      "may cause irritation",
+      "can be corrosive"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions, but must be used with caution and in limited concentrations",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SODIUM HYDROXIDE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Carbomer",
+    "inci_name": "Carbomer",
+    "cas_number": "9007-20-9",
+    "functions": [
+      "emulsifying",
+      "thickening",
+      "stabilizing",
+      "suspending"
+    ],
+    "benefits": [
+      "improves texture",
+      "enhances stability",
+      "increases viscosity",
+      "supports skin feel",
+      "facilitates formulation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "CARBOMER",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Lactoperoxidase",
+    "inci_name": "Lactoperoxidase",
+    "cas_number": "N/A",
+    "functions": [
+      "antimicrobial/antibacterial",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "LACTOPEROXIDASE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Isoceteth-20",
+    "inci_name": "Isoceteth-20",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "surfactant/cleansing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ISOCETETH-20",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Dehydroacetate",
+    "inci_name": "Sodium Dehydroacetate",
+    "cas_number": "2682-20-4",
+    "functions": [
+      "preservative",
+      "antimicrobial/antibacterial"
+    ],
+    "benefits": [
+      "extends shelf life",
+      "prevents microbial growth",
+      "protects product integrity",
+      "enhances safety"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "Allowed as a preservative, no restrictions on concentration",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SODIUM DEHYDROACETATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Tetrahexyldecyl Ascorbate",
+    "inci_name": "TETRAHEXYLDECYL ASCORBATE",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "emollient"
+    ],
+    "benefits": [
+      "brightens skin tone",
+      "reduces fine lines",
+      "hydrates skin",
+      "fades age spots"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "TETRAHEXYLDECYL ASCORBATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Acrylates/C10-30 Alkyl Acrylate Crosspolymer",
+    "inci_name": "ACRYLATES/C10-30 ALKYL ACRYLATE CROSSPOLYMER",
+    "cas_number": "N/A",
+    "functions": [
+      "emulsifying",
+      "thickening",
+      "stabilizing"
+    ],
+    "benefits": [
+      "improves texture",
+      "enhances stability",
+      "increases viscosity",
+      "improves spreadability",
+      "reduces separation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "ACRYLATES/C10-30 ALKYL ACRYLATE CROSSPOLYMER",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Ammonium Acryloyldimethyltaurate/VP Copolymer",
+    "inci_name": "AMMONIUM ACRYLOYLDIMETHYLTAURATE/VP COPOLYMER",
+    "cas_number": "N/A",
+    "functions": [
+      "film former",
+      "hair fixative",
+      "emollient"
+    ],
+    "benefits": [
+      "improves hair texture",
+      "adds shine to hair",
+      "helps with styling",
+      "provides long-lasting hold",
+      "enhances hair manageability"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "AMMONIUM ACRYLOYLDIMETHYLTAURATE/VP COPOLYMER",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Potassium Phosphate",
+    "inci_name": "Potassium Phosphate",
+    "cas_number": "7778-53-2",
+    "functions": [
+      "buffering",
+      "pH adjuster"
+    ],
+    "benefits": [
+      "stabilizes pH",
+      "enhances skin feel",
+      "improves product stability"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "POTASSIUM PHOSPHATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Chloride",
+    "inci_name": "Sodium Chloride",
+    "cas_number": "7647-14-5",
+    "functions": [
+      "humectant",
+      "thickening",
+      "stabilizer"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "improves texture",
+      "reduces inflammation",
+      "soothes skin"
+    ],
+    "risks": [
+      "may cause irritation",
+      "not recommended for sensitive skin"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SODIUM CHLORIDE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "BHT",
+    "inci_name": "Butylated Hydroxytoluene",
+    "cas_number": "128-37-0",
+    "functions": [
+      "antioxidant",
+      "preservative"
+    ],
+    "benefits": [
+      "protects from oxidation",
+      "extends shelf life",
+      "stabilizes formulations",
+      "prevents rancidity"
+    ],
+    "risks": [
+      "may cause irritation",
+      "potential endocrine disruptor"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "Allowed as a cosmetic ingredient, but subject to certain restrictions and guidelines",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "BHT",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Potassium Sorbate",
+    "inci_name": "POTASSIUM SORBATE",
+    "cas_number": "590-00-1",
+    "functions": [
+      "preservative",
+      "antimicrobial/antibacterial"
+    ],
+    "benefits": [
+      "extends shelf life",
+      "prevents mold growth",
+      "protects against yeast",
+      "safeguards product quality",
+      "reduces contamination risk"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "Allowed as a preservative, no restrictions on concentration",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "POTASSIUM SORBATE",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Red 4",
+    "inci_name": "Red 4 (CI 14700)",
+    "cas_number": "N/A",
+    "functions": [
+      "colorant"
+    ],
+    "benefits": [
+      "colors hair",
+      "colors skin",
+      "enhances appearance",
+      "improves texture"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "RED 4 (CI 14700)",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Tranexamic Acid",
+    "inci_name": "Tranexamic Acid",
+    "cas_number": "1197-18-8",
+    "functions": [
+      "antioxidant",
+      "soothing",
+      "anti-inflammatory"
+    ],
+    "benefits": [
+      "reduces inflammation",
+      "improves skin texture",
+      "fades hyperpigmentation",
+      "minimizes pores"
+    ],
+    "risks": [
+      "may cause irritation",
+      "not recommended for sensitive skin"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Tranexamic Acid",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Alpha-Arbutin",
+    "inci_name": "Alpha-Arbutin",
+    "cas_number": "84380-01-8",
+    "functions": [
+      "antioxidant",
+      "skin-identical ingredient",
+      "soothing"
+    ],
+    "benefits": [
+      "brightens skin tone",
+      "reduces hyperpigmentation",
+      "hydrates skin",
+      "evens skin tone",
+      "fades age spots"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Alpha-Arbutin",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Glutathione",
+    "inci_name": "Glutathione",
+    "cas_number": "70-18-8",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "brightens skin tone",
+      "reduces fine lines",
+      "hydrates skin",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Glutathione",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Licorice Root Extract",
+    "inci_name": "Glycyrrhiza Glabra (Licorice) Root Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "soothing",
+      "antioxidant",
+      "anti-inflammatory"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "fades age spots",
+      "hydrates skin"
+    ],
+    "risks": [
+      "may cause skin irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Glycyrrhiza Glabra (Licorice) Root Extract",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Panthenol",
+    "inci_name": "Panthenol",
+    "cas_number": "81-13-0",
+    "functions": [
+      "humectant",
+      "emollient",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "improves skin elasticity",
+      "reduces inflammation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Panthenol",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Disodium EDTA",
+    "inci_name": "Disodium EDTA",
+    "cas_number": "139-33-3",
+    "functions": [
+      "preservative",
+      "chelating agent"
+    ],
+    "benefits": [
+      "stabilizes formulas",
+      "prevents oxidation",
+      "improves texture",
+      "enhances stability"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Disodium EDTA",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Caprylic/Capric Triglyceride",
+    "inci_name": "Caprylic/Capric Triglyceride",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture",
+      "non-greasy feel"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Caprylic/Capric Triglyceride",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Hydroxypropyl Tetrahydropyrantriol",
+    "inci_name": "Hydroxypropyl Tetrahydropyrantriol",
+    "cas_number": "N/A",
+    "functions": [
+      "humectant",
+      "emollient"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "softens skin",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Hydroxypropyl Tetrahydropyrantriol",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Palmitoyl Pentapeptide-4",
+    "inci_name": "Palmitoyl Pentapeptide-4",
+    "cas_number": "N/A",
+    "functions": [
+      "skin-identical ingredient",
+      "cell-communicating ingredient"
+    ],
+    "benefits": [
+      "reduces fine lines",
+      "improves skin elasticity",
+      "hydrates skin",
+      "smoothes skin texture"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Palmitoyl Pentapeptide-4",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Squalane",
+    "inci_name": "Squalane",
+    "cas_number": "111-01-3",
+    "functions": [
+      "emollient",
+      "moisturizer"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "protects skin",
+      "reduces fine lines"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Squalane",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Lecithin",
+    "inci_name": "Lecithin",
+    "cas_number": "8002-43-5",
+    "functions": [
+      "emollient",
+      "humectant",
+      "surfactant/cleansing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves skin elasticity",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Lecithin",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Chlorphenesin",
+    "inci_name": "Chlorphenesin",
+    "cas_number": "104-29-0",
+    "functions": [
+      "preservative",
+      "antimicrobial/antibacterial"
+    ],
+    "benefits": [
+      "extends shelf life",
+      "prevents microbial growth",
+      "protects product integrity",
+      "enhances safety"
+    ],
+    "risks": [
+      "may cause irritation",
+      "not recommended for sensitive skin"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "Maximum concentration 0.3% in leave-on products, 0.5% in rinse-off products",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Chlorphenesin",
+    "_pending_at": "2026-03-18"
   }
 ]
