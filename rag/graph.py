@@ -202,7 +202,6 @@ def response_node(state: AnalysisState) -> AnalysisState:
     results = []
     for i, name in enumerate(state["ingredients"]):
         key = name.lower()
-        # 取得對應的原始名稱（若有圖片輸入）
         original_name = original_ingredients[i] if i < len(original_ingredients) else name
 
         if key in found_map:
@@ -212,12 +211,20 @@ def response_node(state: AnalysisState) -> AnalysisState:
             item = {**enriched_map[key], "_display_name": original_name}
             results.append(item)
         else:
-            results.append({
-                "ingredient": name,
-                "_display_name": original_name,
-                "confidence": "error",
-                "error": "查詢失敗，請稍後再試"
-            })
+            # enriched_map 裡找不到時，嘗試用 ingredient 欄位直接比對
+            matched = next(
+                (v for v in state["enriched_data"] if v.get("_original", "").lower() == key),
+                None
+            )
+            if matched:
+                results.append({**matched, "_display_name": original_name})
+            else:
+                results.append({
+                    "ingredient": name,
+                    "_display_name": original_name,
+                    "confidence": "error",
+                    "error": "查詢失敗，請稍後再試"
+                })
     print(f"[RESPONSE] ingredients: {state['ingredients']}")
     print(f"[RESPONSE] original_ingredients: {state.get('original_ingredients', [])}")
     print(f"[RESPONSE] found_map keys: {list(found_map.keys())}")
