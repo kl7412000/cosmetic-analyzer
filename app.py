@@ -240,7 +240,7 @@ def analyze_text(ingredient_input:str):
         return "### 💡 請輸入成分名稱",gr.DownloadButton(visible=False)
 
     try:
-
+        print(f"[APP] 開始分析文字輸入：{ingredient_input[:100]}")
         results=analyze_online(ingredient_input.strip())
 
         for r in results:
@@ -265,10 +265,11 @@ def analyze_text(ingredient_input:str):
 
             download_btn=gr.DownloadButton(visible=False)
 
+        print(f"[APP] 文字分析完成，返回 {len(results)} 筆結果")
         return process_results(results),download_btn
 
     except Exception as e:
-
+        print(f"[APP] 分析失敗：{e}")
         return f"### ❌ 發生錯誤\n`{str(e)}`",gr.DownloadButton(visible=False)
 
 
@@ -282,11 +283,10 @@ def analyze_image(files):
         return "### 💡 請上傳圖片"
 
     try:
-
         file=files[0]
-
+        print(f"[APP] 處理上傳的圖片：{file.name}")
         image=Image.open(file.name)
-
+        print(f"[APP] 圖片尺寸：{image.size}")
         buffered=io.BytesIO()
 
         image.save(buffered,format="JPEG")
@@ -294,11 +294,14 @@ def analyze_image(files):
         b64=base64.b64encode(buffered.getvalue()).decode()
 
         results=analyze_online("",image_b64=b64)
-
+        print(f"[APP] 圖片分析完成，返回 {len(results)} 筆結果")
         return process_results(results)
 
+    except FileNotFoundError:
+        print("[APP] 圖片文件未找到")
+        return "### ❌ 圖片文件未找到"
     except Exception as e:
-
+        print(f"[APP] 圖片處理失敗：{e}")
         return f"### ❌ 圖片處理失敗\n`{str(e)}`"
 
 
