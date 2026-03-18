@@ -4,599 +4,363 @@
     "inci_name": "Aqua",
     "cas_number": "7732-18-5",
     "functions": [
-      "Solvent"
+      "solvent"
     ],
     "benefits": [
-      "作為產品基底溶劑",
-      "幫助其他成分均勻分散",
-      "維持產品質地"
+      "溶解其他成分",
+      "調整產品稠度"
     ],
-    "risks": [
-      "整體安全性極高，幾乎無副作用"
-    ],
-    "skin_type": [
-      "所有膚質"
-    ],
-    "eu_regulation": "無使用限制",
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Niacinamide",
     "inci_name": "Niacinamide",
     "cas_number": "98-92-0",
     "functions": [
-      "Skin conditioning",
-      "Sebum control",
-      "Smoothing"
+      "cell-communicating ingredient",
+      "skin brightening",
+      "anti-acne",
+      "moisturizer/humectant"
     ],
     "benefits": [
-      "提亮膚色",
-      "縮小毛孔",
-      "控油",
-      "抗發炎",
-      "強化肌膚屏障"
+      "改善膚色",
+      "減少痘痘",
+      "保濕",
+      "增強皮膚彈性"
     ],
-    "risks": [
-      "高濃度（超過 5%）可能造成輕微泛紅或刺激",
-      "極少數人對菸鹼醯胺過敏"
-    ],
+    "risks": [],
     "skin_type": [
-      "油性肌",
-      "混合肌",
-      "暗沉肌",
-      "痘痘肌"
+      "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Retinol",
     "inci_name": "Retinol",
-    "cas_number": "68-26-8",
+    "cas_number": "68-26-8 / 11103-57-4",
     "functions": [
-      "Skin conditioning",
-      "Antioxidant"
+      "cell-communicating ingredient"
     ],
     "benefits": [
       "促進細胞更新",
-      "淡化細紋",
-      "改善膚質",
-      "淡化色斑"
+      "改善細紋和皺紋",
+      "增強皮膚彈性"
     ],
     "risks": [
-      "初期使用可能造成乾燥、脫皮、泛紅",
-      "增加肌膚對紫外線的敏感度，需搭配防曬",
-      "孕婦禁用"
+      "可能引起皮膚刺激",
+      "敏感性皮膚應謹慎使用"
     ],
     "skin_type": [
-      "熟齡肌",
-      "暗沉肌",
-      "粗糙肌"
+      "成熟皮膚",
+      "乾燥皮膚",
+      "混合皮膚"
     ],
-    "eu_regulation": "一般產品最高濃度 0.3%，須標示警語",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Ascorbic Acid",
-    "inci_name": "Ascorbic Acid",
-    "cas_number": "50-81-7",
-    "functions": [
-      "Antioxidant",
-      "Skin conditioning"
+      "INCI Decoder"
     ],
-    "benefits": [
-      "抗氧化",
-      "提亮膚色",
-      "促進膠原蛋白生成",
-      "淡化色斑"
-    ],
-    "risks": [
-      "性質不穩定，容易氧化失效",
-      "高濃度可能刺激敏感肌",
-      "與某些成分（如 AHA）同時使用可能增加刺激性"
-    ],
-    "skin_type": [
-      "暗沉肌",
-      "熟齡肌",
-      "油性肌"
-    ],
-    "eu_regulation": "無使用限制",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Salicylic Acid",
-    "inci_name": "Salicylic Acid",
-    "cas_number": "69-72-7",
-    "functions": [
-      "Keratolytic",
-      "Skin conditioning",
-      "Antimicrobial"
-    ],
-    "benefits": [
-      "去角質",
-      "疏通毛孔",
-      "抗痘",
-      "控油"
-    ],
-    "risks": [
-      "過度使用可能造成乾燥或刺激",
-      "對阿斯匹靈過敏者需謹慎使用",
-      "孕婦應避免高濃度使用"
-    ],
-    "skin_type": [
-      "油性肌",
-      "痘痘肌",
-      "混合肌"
-    ],
-    "eu_regulation": "臉部產品最高濃度 2%，身體產品最高濃度 3%",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Glycolic Acid",
     "inci_name": "Glycolic Acid",
     "cas_number": "79-14-1",
     "functions": [
-      "Keratolytic",
-      "Skin conditioning",
-      "Exfoliant"
+      "exfoliant",
+      "buffering"
     ],
     "benefits": [
       "去角質",
-      "改善膚質",
-      "淡化色斑",
-      "促進細胞更新"
+      "改善皮膚質地",
+      "減少細紋"
     ],
     "risks": [
-      "增加肌膚對紫外線的敏感度，使用後需加強防曬",
-      "敏感肌使用可能造成刺激或灼熱感",
-      "不建議與 Retinol 同時使用"
+      "可能引起皮膚刺激或過敏反應"
     ],
     "skin_type": [
-      "暗沉肌",
-      "粗糙肌",
-      "油性肌"
+      "所有膚質，但敏感性皮膚需謹慎使用"
     ],
-    "eu_regulation": "淋洗產品最高濃度 10%，留置產品最高濃度 10%，須標示防曬警語",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Benzoyl Peroxide",
     "inci_name": "Benzoyl Peroxide",
     "cas_number": "94-36-0",
     "functions": [
-      "Antimicrobial",
-      "Oxidizing"
+      "anti-acne"
     ],
     "benefits": [
-      "殺菌",
-      "抗痘",
-      "減少痤瘡桿菌"
+      "殺菌、抗痘、去角質"
     ],
     "risks": [
-      "可能造成乾燥、脫皮、刺激",
-      "會漂白布料和毛巾",
-      "敏感肌需謹慎使用"
+      "可能引起皮膚刺激、乾燥、紅腫"
     ],
     "skin_type": [
-      "痘痘肌",
-      "油性肌"
+      "油性皮膚、痘痘皮膚"
     ],
-    "eu_regulation": "最高濃度 0.7%（僅限指甲產品）；臉部痘痘護理屬藥品管理範疇",
+    "eu_regulation": "歐盟法規允許使用，但需遵守濃度限制",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Centella Asiatica Extract",
     "inci_name": "Centella Asiatica Extract",
     "cas_number": "84696-21-9",
     "functions": [
-      "Skin conditioning",
-      "Soothing",
-      "Antioxidant"
+      "soothing",
+      "antioxidant",
+      "moisturizer/humectant"
     ],
     "benefits": [
-      "舒緩敏感",
-      "修復肌膚屏障",
-      "抗發炎",
-      "促進傷口癒合"
+      "舒緩和鎮靜皮膚",
+      "抗氧化和保護皮膚",
+      "保濕和鎖水"
     ],
-    "risks": [
-      "極少數人可能對積雪草成分過敏"
-    ],
+    "risks": [],
     "skin_type": [
-      "敏感肌",
-      "乾性肌",
-      "受損肌"
+      "所有膚質",
+      "敏感膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
-    "ingredient": "Peptides",
+    "ingredient": "Palmitoyl Tripeptide-1",
     "inci_name": "Palmitoyl Tripeptide-1",
     "cas_number": "147732-56-7",
     "functions": [
-      "Skin conditioning",
-      "Anti-aging"
+      "cell-communicating ingredient"
     ],
     "benefits": [
-      "促進膠原蛋白生成",
-      "淡化細紋",
-      "緊緻肌膚",
-      "修復受損肌膚"
+      "促進細胞間通信",
+      "改善細胞活性",
+      "增強膚膚彈性"
     ],
-    "risks": [
-      "整體耐受性高，副作用少",
-      "對特定胜肽成分過敏者需注意"
-    ],
+    "risks": [],
     "skin_type": [
-      "熟齡肌",
-      "乾性肌",
       "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
-    "ingredient": "Hyaluronic Acid",
+    "ingredient": "Sodium Hyaluronate",
     "inci_name": "Sodium Hyaluronate",
     "cas_number": "9067-32-7",
     "functions": [
-      "Humectant",
-      "Skin conditioning"
+      "skin-identical ingredient",
+      "moisturizer/humectant"
     ],
     "benefits": [
-      "深層保濕",
-      "鎖水",
-      "改善乾燥細紋",
-      "增加肌膚彈性"
-    ],
-    "risks": [
-      "乾燥環境下可能反而帶走肌膚水分",
-      "整體安全性高，副作用極少"
-    ],
-    "skin_type": [
-      "所有膚質",
-      "乾性肌",
-      "敏感肌"
-    ],
-    "eu_regulation": "無使用限制",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Ceramide",
-    "inci_name": "Ceramide NP",
-    "cas_number": "100403-19-8",
-    "functions": [
-      "Skin conditioning",
-      "Emollient"
-    ],
-    "benefits": [
-      "修復肌膚屏障",
       "保濕",
-      "防止水分流失",
-      "舒緩乾燥"
+      "改善皮膚彈性",
+      "舒緩皮膚"
     ],
-    "risks": [
-      "安全性高，幾乎無副作用",
-      "對神經醯胺過敏者極為罕見"
-    ],
+    "risks": [],
     "skin_type": [
-      "乾性肌",
-      "敏感肌",
-      "受損肌",
       "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Ceramide NP",
+    "inci_name": "Ceramide NP",
+    "cas_number": "72968-43-5",
+    "functions": [
+      "skin-identical ingredient"
+    ],
+    "benefits": [
+      "修復皮膚屏障功能",
+      "保濕",
+      "改善皮膚彈性"
+    ],
+    "risks": [],
+    "skin_type": [
+      "所有膚質"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Glycerin",
     "inci_name": "Glycerin",
     "cas_number": "56-81-5",
     "functions": [
-      "Humectant",
-      "Skin conditioning",
-      "Solvent"
+      "skin-identical ingredient",
+      "moisturizer/humectant"
     ],
     "benefits": [
       "保濕",
-      "吸附空氣中的水分",
-      "柔軟肌膚",
-      "維持肌膚水潤"
+      "舒緩皮膚",
+      "改善皮膚彈性"
     ],
-    "risks": [
-      "高濃度純甘油直接使用可能造成刺激",
-      "乾燥環境下需搭配封鎖型保濕成分"
-    ],
+    "risks": [],
     "skin_type": [
-      "所有膚質",
-      "乾性肌",
-      "敏感肌"
+      "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Dimethicone",
     "inci_name": "Dimethicone",
     "cas_number": "9006-65-9",
     "functions": [
-      "Emollient",
-      "Skin conditioning",
-      "Occlusive"
+      "emollient"
     ],
     "benefits": [
-      "在肌膚表面形成保護膜",
-      "鎖住水分",
-      "改善膚感",
-      "填平毛孔視覺效果"
+      "保濕",
+      "柔化皮膚",
+      "改善皮膚觸感"
     ],
-    "risks": [
-      "部分人認為矽靈會堵塞毛孔，但科學研究尚未證實",
-      "環境爭議：不易被生物分解"
-    ],
+    "risks": [],
     "skin_type": [
-      "乾性肌",
       "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Tocopherol",
     "inci_name": "Tocopherol",
-    "cas_number": "59-02-9",
+    "cas_number": "54-28-4 (gamma)/ 16698-35-4(beta) / 10191-41-0(DL) / 119-13-1 / 1406-18-4 / 1406-66-2 / 2074-53-5 (DL) / 59-02-9 (D)/7616-22-0",
     "functions": [
-      "Antioxidant",
-      "Skin conditioning"
+      "antioxidant"
     ],
     "benefits": [
       "抗氧化",
-      "保護肌膚免受自由基傷害",
-      "保濕",
-      "舒緩肌膚"
+      "保護皮膚免受環境壓力的影響",
+      "幫助減少細紋和皺紋"
     ],
-    "risks": [
-      "少數人對維生素 E 過敏，可能造成接觸性皮膚炎",
-      "高濃度使用可能堵塞毛孔"
-    ],
+    "risks": [],
     "skin_type": [
-      "乾性肌",
-      "熟齡肌",
       "所有膚質"
     ],
-    "eu_regulation": "無使用限制",
+    "eu_regulation": "無明確限制資訊",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Zinc Oxide",
-    "inci_name": "Zinc Oxide",
-    "cas_number": "1314-13-2",
-    "functions": [
-      "UV filter",
-      "Skin conditioning",
-      "Antimicrobial"
+      "INCI Decoder"
     ],
-    "benefits": [
-      "物理性防曬（UVA + UVB）",
-      "舒緩敏感肌",
-      "適合敏感肌使用"
-    ],
-    "risks": [
-      "可能留下白色殘留（白濁感）",
-      "奈米粒子形式的安全性仍在研究中"
-    ],
-    "skin_type": [
-      "敏感肌",
-      "所有膚質"
-    ],
-    "eu_regulation": "防曬產品最高濃度 25%",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Titanium Dioxide",
-    "inci_name": "Titanium Dioxide",
-    "cas_number": "13463-67-7",
-    "functions": [
-      "UV filter",
-      "Colorant",
-      "Opacifying"
-    ],
-    "benefits": [
-      "物理性防曬（UVB + 部分 UVA）",
-      "質地輕透",
-      "適合敏感肌使用"
-    ],
-    "risks": [
-      "可能留下白色殘留",
-      "吸入粉塵形式有潛在風險（僅限粉末產品）"
-    ],
-    "skin_type": [
-      "敏感肌",
-      "所有膚質"
-    ],
-    "eu_regulation": "防曬產品最高濃度 25%",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Fragrance",
-    "inci_name": "Parfum",
-    "cas_number": "N/A",
-    "functions": [
-      "Masking",
-      "Perfuming"
-    ],
-    "benefits": [
-      "改善產品氣味",
-      "提升使用體驗"
-    ],
-    "risks": [
-      "常見的過敏原之一",
-      "可能造成接觸性皮膚炎",
-      "敏感肌和異位性皮膚炎患者應避免使用",
-      "成分複雜，難以判斷具體致敏來源"
-    ],
-    "skin_type": [
-      "不建議敏感肌使用"
-    ],
-    "eu_regulation": "26 種已知致敏香料須強制標示；部分成分列於 Annex III 限制清單",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
-  },
-  {
-    "ingredient": "Alcohol Denat",
-    "inci_name": "Alcohol Denat.",
-    "cas_number": "64-17-5",
-    "functions": [
-      "Solvent",
-      "Antimicrobial",
-      "Astringent"
-    ],
-    "benefits": [
-      "幫助其他成分滲透",
-      "清爽不黏膩的膚感",
-      "抑菌"
-    ],
-    "risks": [
-      "長期使用可能破壞肌膚屏障",
-      "造成乾燥和刺激",
-      "不建議乾性肌或敏感肌使用"
-    ],
-    "skin_type": [
-      "油性肌"
-    ],
-    "eu_regulation": "須標示變性劑種類",
-    "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Sodium Lauryl Sulfate",
     "inci_name": "Sodium Lauryl Sulfate",
     "cas_number": "151-21-3",
     "functions": [
-      "Surfactant",
-      "Cleansing",
-      "Foaming"
+      "surfactant/cleansing",
+      "emulsifying"
     ],
     "benefits": [
-      "清潔力強",
-      "產生豐富泡沫"
+      "清潔皮膚",
+      "乳化劑"
     ],
     "risks": [
-      "刺激性較高，可能破壞肌膚屏障",
-      "長期使用可能造成乾燥和敏感",
-      "不建議用於留置型產品"
+      "可能引起皮膚刺激",
+      "可能導致皮膚乾燥"
     ],
     "skin_type": [
-      "不建議敏感肌、乾性肌使用"
+      "正常皮膚",
+      "油性皮膚"
     ],
-    "eu_regulation": "無使用限制，但建議留置產品避免使用",
+    "eu_regulation": "根據歐盟法規，Sodium Lauryl Sulfate被允許在化妝品中使用，但需要遵守相關限制和指南",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Methylparaben",
     "inci_name": "Methylparaben",
     "cas_number": "99-76-3",
     "functions": [
-      "Preservative"
+      "preservative"
     ],
     "benefits": [
-      "防止產品變質",
-      "延長產品保存期限",
-      "抑制細菌和黴菌生長"
+      "防腐，延長產品保質期"
     ],
     "risks": [
-      "具有微弱的雌激素活性，長期大量使用的安全性仍有爭議",
-      "少數人可能對 paraben 類成分過敏"
+      "可能引起皮膚過敏，內分泌干擾"
     ],
     "skin_type": [
-      "所有膚質"
+      "所有膚質，但敏感性皮膚需謹慎使用"
     ],
-    "eu_regulation": "最高濃度 0.4%（單獨使用）；與其他 paraben 混合使用最高濃度 0.8%",
+    "eu_regulation": "允許使用，但有濃度限制",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Phenoxyethanol",
     "inci_name": "Phenoxyethanol",
     "cas_number": "122-99-6",
     "functions": [
-      "Preservative"
+      "preservative"
     ],
     "benefits": [
-      "防止產品變質",
-      "廣效抑菌",
-      "常作為 paraben 的替代防腐劑"
+      "防腐、延長產品保質期"
     ],
     "risks": [
-      "高濃度可能造成皮膚刺激",
-      "嬰幼兒產品需謹慎使用",
-      "少數人可能過敏"
+      "可能引起皮膚刺激、過敏反應"
     ],
     "skin_type": [
-      "所有膚質"
+      "所有膚質，但敏感性皮膚需謹慎使用"
     ],
-    "eu_regulation": "最高濃度 1%",
+    "eu_regulation": "歐盟法規允許使用，但濃度不得超過1%",
     "source": [
-      "CosIng",
-      "Paula's Choice"
-    ]
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Bakuchiol",
@@ -666,5 +430,159 @@
     ],
     "_verdict": "pass",
     "_updated_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Parfum",
+    "inci_name": "Parfum",
+    "cas_number": "N/A",
+    "functions": [
+      "perfuming"
+    ],
+    "benefits": [
+      "提供香氣",
+      "增強產品吸引力"
+    ],
+    "risks": [
+      "可能引起皮膚過敏",
+      "可能引起呼吸系統問題"
+    ],
+    "skin_type": [],
+    "eu_regulation": "根據歐盟化妝品法規，香料必須符合特定的安全標準",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Ascorbic Acid",
+    "inci_name": "Ascorbic Acid",
+    "cas_number": "50-81-7 / 62624-30-0",
+    "functions": [
+      "antioxidant",
+      "skin brightening",
+      "buffering"
+    ],
+    "benefits": [
+      "reduces appearance of fine lines and wrinkles",
+      "brightens skin tone",
+      "protects skin from environmental stressors"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Salicylic Acid",
+    "inci_name": "Salicylic Acid",
+    "cas_number": "69-72-7",
+    "functions": [
+      "exfoliant",
+      "anti-acne",
+      "soothing",
+      "preservative"
+    ],
+    "benefits": [
+      "exfoliates the skin",
+      "reduces acne",
+      "soothes irritated skin"
+    ],
+    "risks": [
+      "skin irritation",
+      "dryness",
+      "redness"
+    ],
+    "skin_type": [
+      "normal",
+      "oily",
+      "acne-prone"
+    ],
+    "eu_regulation": "允許使用，但濃度不得超過 3%",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Zinc Oxide",
+    "inci_name": "Zinc Oxide",
+    "cas_number": "1314-13-2",
+    "functions": [
+      "Sunscreen"
+    ],
+    "benefits": [
+      "Protects against UV rays",
+      "Soothes and calms the skin",
+      "Has anti-inflammatory properties"
+    ],
+    "risks": [],
+    "skin_type": [
+      "All skin types"
+    ],
+    "eu_regulation": "允許使用於化妝品中，無明確限制",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Titanium Dioxide",
+    "inci_name": "Titanium Dioxide",
+    "cas_number": "13463-67-7",
+    "functions": [
+      "sunscreen",
+      "colorant"
+    ],
+    "benefits": [
+      "提供廣譜防曬保護",
+      "增強產品的白色度"
+    ],
+    "risks": [],
+    "skin_type": [],
+    "eu_regulation": "無明確限制資訊",
+    "source": [
+      "INCI Decoder"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Alcohol Denat.",
+    "inci_name": "Alcohol Denat.",
+    "cas_number": "64-17-5",
+    "functions": [
+      "Solvent",
+      "Antimicrobial",
+      "Astringent"
+    ],
+    "benefits": [
+      "Helps other ingredients penetrate skin",
+      "Lightweight non-sticky texture",
+      "Antimicrobial"
+    ],
+    "risks": [
+      "Long-term use may disrupt skin barrier",
+      "Can cause dryness and irritation",
+      "Not recommended for dry or sensitive skin"
+    ],
+    "skin_type": [
+      "Oily skin"
+    ],
+    "eu_regulation": "Must label denaturant type",
+    "source": [
+      "CosIng",
+      "Paula's Choice"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
   }
 ]

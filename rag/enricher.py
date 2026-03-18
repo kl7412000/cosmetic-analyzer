@@ -34,6 +34,12 @@ ENRICH_PROMPT = """
   "eu_regulation": "歐盟法規說明，不知道就填 無明確限制資訊",
   "source": ["來源1"]
 }}
+...
+注意：
+- ingredient 欄位必須使用英文名稱
+- inci_name 欄位必須使用 INCI 官方英文名稱
+- functions 欄位必須使用英文
+...
 """
 
 # 離線情境的 context 模板（有爬蟲資料可以參考）
