@@ -1,4 +1,6 @@
 # rag/graph.py
+from dotenv import load_dotenv
+load_dotenv()
 import json
 import time
 from typing import Optional
@@ -110,22 +112,37 @@ def parser_node(state: AnalysisState) -> AnalysisState:
 def query_node(state: AnalysisState) -> AnalysisState:
     """
     對每個成分查詢 FAISS 索引。
-    相似度判斷：取 top-1 結果，若成分名稱字串相符則視為找到。
-    找到的放入 found，找不到的放入 not_found。
+    判斷邏輯（依序）：
+      1. 名稱完全吻合（大小寫不分）→ 直接視為找到，不管 score
+      2. score < 1.0 且名稱部分吻合 → 視為找到
+      3. 其他 → not_found，交給 LLM enrich
     """
     found = []
     not_found = []
     vectorstore = get_vectorstore()
 
     for name in state["ingredients"]:
-        # 改用 similarity_search_with_score，取得相似度分數
         results = vectorstore.similarity_search_with_score(name, k=1)
 
         if results:
             doc, score = results[0]
-            print(f"[DEBUG] {name} → score: {score}, matched: {doc.metadata.get('ingredient')}")
-            # L2 距離，分數越低越相似，0.8 以下視為找到
-            if score < 0.85:
+            matched_ingredient = doc.metadata.get("ingredient", "")
+            matched_inci = doc.metadata.get("inci_name", "")
+            name_lower = name.lower()
+            matched_lower = matched_ingredient.lower()
+            inci_lower = matched_inci.lower()
+
+            print(f"[DEBUG] {name} → score: {score}, matched: {matched_ingredient}")
+
+            # 判斷是否名稱吻合（ingredient 或 inci_name 任一符合）
+            exact_match = (name_lower == matched_lower or name_lower == inci_lower)
+            partial_match = (
+                name_lower in matched_lower or matched_lower in name_lower or
+                name_lower in inci_lower or inci_lower in name_lower
+            )
+
+            if exact_match or (score < 1.0 and partial_match):
+                # 找到：名稱吻合優先，score 只是輔助
                 metadata = doc.metadata
                 source = metadata.get("source", [])
                 confidence = "medium" if source == ["LLM-generated"] else "high"
@@ -134,7 +151,6 @@ def query_node(state: AnalysisState) -> AnalysisState:
                 not_found.append(name)
         else:
             not_found.append(name)
-        
 
     return {**state, "found": found, "not_found": not_found}
 
