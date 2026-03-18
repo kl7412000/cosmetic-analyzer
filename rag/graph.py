@@ -109,40 +109,58 @@ def parser_node(state: AnalysisState) -> AnalysisState:
     return {**state, "ingredients": ingredients}
 
 
+# 常見同義詞對照（查詢名稱 → DB 中的 ingredient 或 inci_name）
+# key 全部小寫，value 是 DB 裡存的名稱
+SYNONYMS = {
+    "fragrance": "parfum",
+    "aqua": "water",
+    "eau": "water",
+    "aqua/water/eau": "water",
+    "vitamin c": "ascorbic acid",
+    "vitamin e": "tocopherol",
+    "vit. c": "ascorbic acid",
+    "vit. e": "tocopherol",
+}
+
+
 def query_node(state: AnalysisState) -> AnalysisState:
     """
     對每個成分查詢 FAISS 索引。
     判斷邏輯（依序）：
-      1. 名稱完全吻合（大小寫不分）→ 直接視為找到，不管 score
-      2. score < 1.0 且名稱部分吻合 → 視為找到
-      3. 其他 → not_found，交給 LLM enrich
+      1. 同義詞替換（Fragrance → Parfum 等）
+      2. 名稱完全吻合（大小寫不分）→ 直接視為找到，不管 score
+      3. score < 1.0 且名稱部分吻合 → 視為找到
+      4. 其他 → not_found，交給 LLM enrich
     """
     found = []
     not_found = []
     vectorstore = get_vectorstore()
 
     for name in state["ingredients"]:
-        results = vectorstore.similarity_search_with_score(name, k=1)
+        # Step 1：同義詞替換
+        lookup_name = SYNONYMS.get(name.lower(), name)
+
+        results = vectorstore.similarity_search_with_score(lookup_name, k=1)
 
         if results:
             doc, score = results[0]
             matched_ingredient = doc.metadata.get("ingredient", "")
             matched_inci = doc.metadata.get("inci_name", "")
-            name_lower = name.lower()
+            lookup_lower = lookup_name.lower()
             matched_lower = matched_ingredient.lower()
             inci_lower = matched_inci.lower()
 
             print(f"[DEBUG] {name} → score: {score}, matched: {matched_ingredient}")
 
-            # 判斷是否名稱吻合（ingredient 或 inci_name 任一符合）
-            exact_match = (name_lower == matched_lower or name_lower == inci_lower)
+            # Step 2：名稱完全吻合
+            exact_match = (lookup_lower == matched_lower or lookup_lower == inci_lower)
+            # Step 3：score < 1.0 且部分吻合
             partial_match = (
-                name_lower in matched_lower or matched_lower in name_lower or
-                name_lower in inci_lower or inci_lower in name_lower
+                lookup_lower in matched_lower or matched_lower in lookup_lower or
+                lookup_lower in inci_lower or inci_lower in lookup_lower
             )
 
             if exact_match or (score < 1.0 and partial_match):
-                # 找到：名稱吻合優先，score 只是輔助
                 metadata = doc.metadata
                 source = metadata.get("source", [])
                 confidence = "medium" if source == ["LLM-generated"] else "high"
@@ -153,7 +171,6 @@ def query_node(state: AnalysisState) -> AnalysisState:
             not_found.append(name)
 
     return {**state, "found": found, "not_found": not_found}
-
 
 def enrich_node(state: AnalysisState) -> AnalysisState:
     """
@@ -199,15 +216,81 @@ def enrich_node(state: AnalysisState) -> AnalysisState:
     return {**state, "enriched_data": enriched_data}
 
 
+# 常見同義詞對照（查詢名稱 → DB 中的 ingredient 或 inci_name）
+# key 全部小寫，value 是 DB 裡存的名稱
+SYNONYMS = {
+    "fragrance": "parfum",
+    "aqua": "water",
+    "eau": "water",
+    "aqua/water/eau": "water",
+    "vitamin c": "ascorbic acid",
+    "vitamin e": "tocopherol",
+    "vit. c": "ascorbic acid",
+    "vit. e": "tocopherol",
+}
+
+
+def query_node(state: AnalysisState) -> AnalysisState:
+    """
+    對每個成分查詢 FAISS 索引。
+    判斷邏輯（依序）：
+      1. 同義詞替換（Fragrance → Parfum 等）
+      2. 名稱完全吻合（大小寫不分）→ 直接視為找到，不管 score
+      3. score < 1.0 且名稱部分吻合 → 視為找到
+      4. 其他 → not_found，交給 LLM enrich
+    """
+    found = []
+    not_found = []
+    vectorstore = get_vectorstore()
+
+    for name in state["ingredients"]:
+        # Step 1：同義詞替換
+        lookup_name = SYNONYMS.get(name.lower(), name)
+
+        results = vectorstore.similarity_search_with_score(lookup_name, k=1)
+
+        if results:
+            doc, score = results[0]
+            matched_ingredient = doc.metadata.get("ingredient", "")
+            matched_inci = doc.metadata.get("inci_name", "")
+            lookup_lower = lookup_name.lower()
+            matched_lower = matched_ingredient.lower()
+            inci_lower = matched_inci.lower()
+
+            print(f"[DEBUG] {name} → score: {score}, matched: {matched_ingredient}")
+
+            # Step 2：名稱完全吻合
+            exact_match = (lookup_lower == matched_lower or lookup_lower == inci_lower)
+            # Step 3：score < 1.0 且部分吻合
+            partial_match = (
+                lookup_lower in matched_lower or matched_lower in lookup_lower or
+                lookup_lower in inci_lower or inci_lower in lookup_lower
+            )
+
+            if exact_match or (score < 1.0 and partial_match):
+                metadata = doc.metadata
+                source = metadata.get("source", [])
+                confidence = "medium" if source == ["LLM-generated"] else "high"
+                # _query_name 記錄原始查詢名稱，供 response_node 對應用
+                found.append({**metadata, "confidence": confidence, "_query_name": name})
+            else:
+                not_found.append(name)
+        else:
+            not_found.append(name)
+
+    return {**state, "found": found, "not_found": not_found}
+
+
 def response_node(state: AnalysisState) -> AnalysisState:
-    found_map = {
-        item.get("ingredient", "").lower(): item
-        for item in state["found"]
-    }
-    found_map.update({
-        item.get("inci_name", "").lower(): item
-        for item in state["found"]
-    })
+    # 建立 found_map：ingredient、inci_name、_query_name 都當 key
+    found_map = {}
+    for item in state["found"]:
+        if item.get("ingredient"):
+            found_map[item["ingredient"].lower()] = item
+        if item.get("inci_name"):
+            found_map[item["inci_name"].lower()] = item
+        if item.get("_query_name"):
+            found_map[item["_query_name"].lower()] = item
 
     enriched_map = {}
     for item in state["enriched_data"]:
@@ -230,7 +313,6 @@ def response_node(state: AnalysisState) -> AnalysisState:
             item = {**enriched_map[key], "_display_name": original_name}
             results.append(item)
         else:
-            # enriched_map 裡找不到時，嘗試用 ingredient 欄位直接比對
             matched = next(
                 (v for v in state["enriched_data"] if v.get("_original", "").lower() == key),
                 None
@@ -244,6 +326,7 @@ def response_node(state: AnalysisState) -> AnalysisState:
                     "confidence": "error",
                     "error": "查詢失敗，請稍後再試"
                 })
+
     print(f"[RESPONSE] ingredients: {state['ingredients']}")
     print(f"[RESPONSE] original_ingredients: {state.get('original_ingredients', [])}")
     print(f"[RESPONSE] found_map keys: {list(found_map.keys())}")
