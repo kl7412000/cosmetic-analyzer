@@ -1214,5 +1214,233 @@
     "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
     "_original": "Bakuchiol",
     "_pending_at": "2026-03-17"
+  },
+  {
+    "ingredient": "Potassium Hydroxide",
+    "inci_name": "Potassium Hydroxide",
+    "cas_number": "1310-58-3",
+    "functions": [
+      "pH adjuster"
+    ],
+    "benefits": [
+      "balances skin pH",
+      "enhances stability"
+    ],
+    "risks": [
+      "may cause irritation",
+      "can be corrosive"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions, but must be used with caution due to its corrosive properties",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Potassium Hydroxide",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Diglycerin",
+    "inci_name": "Diglycerin",
+    "cas_number": "N/A",
+    "functions": [
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "protects skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Diglycerin",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Laureic Acid",
+    "inci_name": "Laureic Acid",
+    "cas_number": "143-07-7",
+    "functions": [
+      "emollient",
+      "surfactant/cleansing",
+      "antimicrobial/antibacterial"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "reduces inflammation",
+      "improves skin texture"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "oily skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Laureic Acid",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Alginate",
+    "inci_name": "Sodium Alginate",
+    "cas_number": "9005-38-3",
+    "functions": [
+      "thickening",
+      "stabilizing",
+      "emollient",
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves texture",
+      "reduces irritation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Sodium Alginate",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Hydroxypropyl Methylcellulose",
+    "inci_name": "Hydroxypropyl Methylcellulose",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "humectant",
+      "thickening"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes skin",
+      "improves texture",
+      "reduces irritation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Hydroxypropyl Methylcellulose",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Polyquaternium-11",
+    "inci_name": "Polyquaternium-11",
+    "cas_number": "N/A",
+    "functions": [
+      "film former",
+      "hair fixative",
+      "antistatic"
+    ],
+    "benefits": [
+      "smooths hair",
+      "reduces frizz",
+      "adds shine",
+      "improves manageability",
+      "enhances softness"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Polyquaternium-11",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Aluminum Hydroxide",
+    "inci_name": "Aluminum Hydroxide",
+    "cas_number": "21645-51-2",
+    "functions": [
+      "uv filter",
+      "antimicrobial/antibacterial",
+      "soothing"
+    ],
+    "benefits": [
+      "protects skin from uv",
+      "reduces irritation",
+      "soothes skin",
+      "helps with wound healing"
+    ],
+    "risks": [
+      "may cause skin irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Aluminum Hydroxide",
+    "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Sodium Sulfate",
+    "inci_name": "Sodium Sulfate",
+    "cas_number": "7757-82-6",
+    "functions": [
+      "solvent"
+    ],
+    "benefits": [
+      "improves texture",
+      "enhances stability",
+      "increases shelf life"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Sodium Sulfate",
+    "_pending_at": "2026-03-18"
   }
 ]

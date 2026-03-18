@@ -129,7 +129,7 @@ def query_node(state: AnalysisState) -> AnalysisState:
     判斷邏輯（依序）：
       1. 同義詞替換（Fragrance → Parfum 等）
       2. 名稱完全吻合（大小寫不分）→ 直接視為找到，不管 score
-      3. score < 1.0 且名稱部分吻合 → 視為找到
+      3. score < 1.2 且名稱部分吻合 → 視為找到（考慮同義詞查詢可能距離較遠）
       4. 其他 → not_found，交給 LLM enrich
     """
     found = []
@@ -139,6 +139,7 @@ def query_node(state: AnalysisState) -> AnalysisState:
     for name in state["ingredients"]:
         # Step 1：同義詞替換
         lookup_name = SYNONYMS.get(name.lower(), name)
+        is_synonym_query = (lookup_name.lower() != name.lower())
 
         results = vectorstore.similarity_search_with_score(lookup_name, k=1)
 
@@ -150,21 +151,24 @@ def query_node(state: AnalysisState) -> AnalysisState:
             matched_lower = matched_ingredient.lower()
             inci_lower = matched_inci.lower()
 
-            print(f"[DEBUG] {name} → score: {score}, matched: {matched_ingredient}")
+            print(f"[DEBUG] {name} → lookup: {lookup_name}, score: {score}, matched: {matched_ingredient}")
 
             # Step 2：名稱完全吻合
             exact_match = (lookup_lower == matched_lower or lookup_lower == inci_lower)
-            # Step 3：score < 1.0 且部分吻合
+            # Step 3：score 閾值（同義詞查詢允許更高的 score，因為語義距離可能較遠）
+            score_threshold = 1.2 if is_synonym_query else 1.0
+            # Step 4：名稱部分吻合
             partial_match = (
                 lookup_lower in matched_lower or matched_lower in lookup_lower or
                 lookup_lower in inci_lower or inci_lower in lookup_lower
             )
 
-            if exact_match or (score < 1.0 and partial_match):
+            if exact_match or (score < score_threshold and partial_match):
                 metadata = doc.metadata
                 source = metadata.get("source", [])
                 confidence = "medium" if source == ["LLM-generated"] else "high"
-                found.append({**metadata, "confidence": confidence})
+                # _query_name 記錄原始查詢名稱（未替換的），供 response_node 對應用
+                found.append({**metadata, "confidence": confidence, "_query_name": name})
             else:
                 not_found.append(name)
         else:
