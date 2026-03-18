@@ -10,7 +10,7 @@ langchain-huggingface==1.2.1
 langgraph==1.1.2
 Pillow>=10.0.0
 python-dotenv==1.0.0
-gradio==6.9.0
+gradio
 
 # Development dependencies
 pytest>=7.0.0
