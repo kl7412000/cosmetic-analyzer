@@ -2,8 +2,10 @@
 import json
 import sys
 import os
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from dotenv import load_dotenv
+load_dotenv()  # ← 移到最前面，在其他 rag 模組 import 之前
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from rag.offline_graph import process_ingredient, process_batch
 from rag.updater import _load_db, _save_db, rebuild_index, write_to_db
 
@@ -118,15 +120,19 @@ if __name__ == "__main__":
     elif args.action == "fix-llm":
         fix_llm_generated()
     elif args.action == "add-manual":
-        alcohol_denat = {
-            "ingredient": "Alcohol Denat.",
-            "inci_name": "Alcohol Denat.",
-            "cas_number": "64-17-5",
-            "functions": ["Solvent", "Antimicrobial", "Astringent"],
-            "benefits": ["Helps other ingredients penetrate skin", "Lightweight non-sticky texture", "Antimicrobial"],
-            "risks": ["Long-term use may disrupt skin barrier", "Can cause dryness and irritation", "Not recommended for dry or sensitive skin"],
-            "skin_type": ["Oily skin"],
-            "eu_regulation": "Must label denaturant type",
+        water = {
+            "ingredient": "Water",
+            "inci_name": "Aqua",
+            "cas_number": "7732-18-5",
+            "functions": ["Solvent", "Diluent", "Humectant"],
+            "benefits": [
+                "Dissolves and delivers other ingredients",
+                "Adjusts product consistency",
+                "Hydrates skin surface"
+            ],
+            "risks": [],
+            "skin_type": ["All skin types"],
+            "eu_regulation": "No restrictions",
             "source": ["CosIng", "Paula's Choice"]
         }
-        add_manual(alcohol_denat)
+        add_manual(water)

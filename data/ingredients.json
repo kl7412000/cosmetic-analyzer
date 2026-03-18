@@ -1,25 +1,5 @@
 [
   {
-    "ingredient": "Water",
-    "inci_name": "Aqua",
-    "cas_number": "7732-18-5",
-    "functions": [
-      "solvent"
-    ],
-    "benefits": [
-      "溶解其他成分",
-      "調整產品稠度"
-    ],
-    "risks": [],
-    "skin_type": [],
-    "eu_regulation": "無明確限制資訊",
-    "source": [
-      "INCI Decoder"
-    ],
-    "_verdict": "pass",
-    "_updated_at": "2026-03-18"
-  },
-  {
     "ingredient": "Niacinamide",
     "inci_name": "Niacinamide",
     "cas_number": "98-92-0",
@@ -30,16 +10,17 @@
       "moisturizer/humectant"
     ],
     "benefits": [
-      "改善膚色",
-      "減少痘痘",
-      "保濕",
-      "增強皮膚彈性"
+      "brightens skin tone",
+      "reduces acne",
+      "improves skin elasticity",
+      "hydrates skin"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "acne-prone skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -54,20 +35,20 @@
       "cell-communicating ingredient"
     ],
     "benefits": [
-      "促進細胞更新",
-      "改善細紋和皺紋",
-      "增強皮膚彈性"
+      "reduces fine lines",
+      "improves skin texture",
+      "fades age spots",
+      "brightens skin tone"
     ],
     "risks": [
-      "可能引起皮膚刺激",
-      "敏感性皮膚應謹慎使用"
+      "may cause irritation",
+      "not recommended for sensitive skin"
     ],
     "skin_type": [
-      "成熟皮膚",
-      "乾燥皮膚",
-      "混合皮膚"
+      "all skin types",
+      "mature skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -83,17 +64,20 @@
       "buffering"
     ],
     "benefits": [
-      "去角質",
-      "改善皮膚質地",
-      "減少細紋"
+      "brightens skin tone",
+      "reduces fine lines",
+      "hydrates skin",
+      "improves skin texture"
     ],
     "risks": [
-      "可能引起皮膚刺激或過敏反應"
+      "may cause irritation",
+      "not recommended for sensitive skin"
     ],
     "skin_type": [
-      "所有膚質，但敏感性皮膚需謹慎使用"
+      "all skin types",
+      "acne-prone skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -105,18 +89,25 @@
     "inci_name": "Benzoyl Peroxide",
     "cas_number": "94-36-0",
     "functions": [
-      "anti-acne"
+      "anti-acne",
+      "antimicrobial/antibacterial"
     ],
     "benefits": [
-      "殺菌、抗痘、去角質"
+      "reduces acne",
+      "kills bacteria",
+      "unclogs pores",
+      "fades acne scars"
     ],
     "risks": [
-      "可能引起皮膚刺激、乾燥、紅腫"
+      "may cause irritation",
+      "dryness",
+      "redness"
     ],
     "skin_type": [
-      "油性皮膚、痘痘皮膚"
+      "acne-prone skin",
+      "oily skin"
     ],
-    "eu_regulation": "歐盟法規允許使用，但需遵守濃度限制",
+    "eu_regulation": "Maximum concentration 2.8% in face products, 5% in body products",
     "source": [
       "INCI Decoder"
     ],
@@ -133,16 +124,17 @@
       "moisturizer/humectant"
     ],
     "benefits": [
-      "舒緩和鎮靜皮膚",
-      "抗氧化和保護皮膚",
-      "保濕和鎖水"
+      "soothes skin",
+      "reduces inflammation",
+      "improves skin elasticity",
+      "hydrates skin"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質",
-      "敏感膚質"
+      "all skin types",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -157,15 +149,17 @@
       "cell-communicating ingredient"
     ],
     "benefits": [
-      "促進細胞間通信",
-      "改善細胞活性",
-      "增強膚膚彈性"
+      "reduces fine lines",
+      "improves skin elasticity",
+      "stimulates collagen production",
+      "enhances skin firmness"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "mature skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -181,15 +175,18 @@
       "moisturizer/humectant"
     ],
     "benefits": [
-      "保濕",
-      "改善皮膚彈性",
-      "舒緩皮膚"
+      "hydrates skin",
+      "locks in moisture",
+      "soothes skin",
+      "reduces wrinkles"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -204,15 +201,18 @@
       "skin-identical ingredient"
     ],
     "benefits": [
-      "修復皮膚屏障功能",
-      "保濕",
-      "改善皮膚彈性"
+      "hydrates skin",
+      "repairs skin barrier",
+      "soothes skin",
+      "improves skin elasticity"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -224,19 +224,23 @@
     "inci_name": "Glycerin",
     "cas_number": "56-81-5",
     "functions": [
-      "skin-identical ingredient",
-      "moisturizer/humectant"
+      "humectant",
+      "moisturizer",
+      "skin-identical ingredient"
     ],
     "benefits": [
-      "保濕",
-      "舒緩皮膚",
-      "改善皮膚彈性"
+      "hydrates skin",
+      "soothes skin",
+      "locks in moisture",
+      "protects skin"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -251,15 +255,20 @@
       "emollient"
     ],
     "benefits": [
-      "保濕",
-      "柔化皮膚",
-      "改善皮膚觸感"
+      "hydrates skin",
+      "soothes skin",
+      "protects skin",
+      "improves skin elasticity"
     ],
-    "risks": [],
+    "risks": [
+      "may cause skin irritation in rare cases"
+    ],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -267,22 +276,26 @@
     "_updated_at": "2026-03-18"
   },
   {
-    "ingredient": "Tocopherol",
+    "ingredient": "Vitamin E",
     "inci_name": "Tocopherol",
-    "cas_number": "54-28-4 (gamma)/ 16698-35-4(beta) / 10191-41-0(DL) / 119-13-1 / 1406-18-4 / 1406-66-2 / 2074-53-5 (DL) / 59-02-9 (D)/7616-22-0",
+    "cas_number": "54-28-4 / 16698-35-4 / 10191-41-0 / 119-13-1 / 1406-18-4 / 1406-66-2 / 2074-53-5 / 59-02-9 / 7616-22-0",
     "functions": [
       "antioxidant"
     ],
     "benefits": [
-      "抗氧化",
-      "保護皮膚免受環境壓力的影響",
-      "幫助減少細紋和皺紋"
+      "protects skin",
+      "reduces fine lines",
+      "hydrates skin",
+      "soothes skin",
+      "brightens skin tone"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -298,18 +311,20 @@
       "emulsifying"
     ],
     "benefits": [
-      "清潔皮膚",
-      "乳化劑"
+      "cleanses skin",
+      "creates rich lather",
+      "emulsifies oils",
+      "removes dirt"
     ],
     "risks": [
-      "可能引起皮膚刺激",
-      "可能導致皮膚乾燥"
+      "may cause irritation",
+      "not recommended for sensitive skin"
     ],
     "skin_type": [
-      "正常皮膚",
-      "油性皮膚"
+      "normal skin",
+      "oily skin"
     ],
-    "eu_regulation": "根據歐盟法規，Sodium Lauryl Sulfate被允許在化妝品中使用，但需要遵守相關限制和指南",
+    "eu_regulation": "No restrictions, but may be subject to labeling requirements",
     "source": [
       "INCI Decoder"
     ],
@@ -324,15 +339,20 @@
       "preservative"
     ],
     "benefits": [
-      "防腐，延長產品保質期"
+      "extends shelf life",
+      "prevents mold growth",
+      "protects against bacteria",
+      "enhances product stability",
+      "reduces spoilage"
     ],
     "risks": [
-      "可能引起皮膚過敏，內分泌干擾"
+      "may cause irritation",
+      "not recommended for sensitive skin"
     ],
     "skin_type": [
-      "所有膚質，但敏感性皮膚需謹慎使用"
+      "all skin types"
     ],
-    "eu_regulation": "允許使用，但有濃度限制",
+    "eu_regulation": "Maximum concentration 0.3% in face products, allowed as a preservative in cosmetics",
     "source": [
       "INCI Decoder"
     ],
@@ -347,15 +367,19 @@
       "preservative"
     ],
     "benefits": [
-      "防腐、延長產品保質期"
+      "extends shelf life",
+      "prevents microbial growth",
+      "enhances product stability",
+      "protects against contamination"
     ],
     "risks": [
-      "可能引起皮膚刺激、過敏反應"
+      "may cause irritation",
+      "not recommended for sensitive skin"
     ],
     "skin_type": [
-      "所有膚質，但敏感性皮膚需謹慎使用"
+      "all skin types"
     ],
-    "eu_regulation": "歐盟法規允許使用，但濃度不得超過1%",
+    "eu_regulation": "Maximum concentration 1.0% in finished products",
     "source": [
       "INCI Decoder"
     ],
@@ -372,20 +396,25 @@
       "antimicrobial/antibacterial"
     ],
     "benefits": [
-      "促進細胞更新",
-      "抗氧化",
-      "抗菌"
+      "reduces fine lines",
+      "improves skin texture",
+      "fades age spots",
+      "soothes skin",
+      "hydrates skin"
     ],
-    "risks": [],
+    "risks": [
+      "may cause irritation"
+    ],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
     "_verdict": "pass",
-    "_updated_at": "2026-03-17"
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Allantoin",
@@ -395,20 +424,22 @@
       "soothing"
     ],
     "benefits": [
-      "舒緩皮膚",
-      "促進傷口癒合",
-      "保濕"
+      "soothes skin",
+      "hydrates skin",
+      "protects skin",
+      "calms irritation"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
     "_verdict": "pass",
-    "_updated_at": "2026-03-17"
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Adenosine",
@@ -418,18 +449,21 @@
       "cell-communicating ingredient"
     ],
     "benefits": [
-      "促進細胞間的通訊，改善皮膚老化問題，減少細紋和皺紋"
+      "improves skin elasticity",
+      "reduces fine lines",
+      "soothes skin",
+      "hydrates skin"
     ],
     "risks": [],
     "skin_type": [
-      "所有膚質"
+      "all skin types"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
     "_verdict": "pass",
-    "_updated_at": "2026-03-17"
+    "_updated_at": "2026-03-18"
   },
   {
     "ingredient": "Parfum",
@@ -455,7 +489,7 @@
     "_updated_at": "2026-03-18"
   },
   {
-    "ingredient": "Ascorbic Acid",
+    "ingredient": "Vitamin C",
     "inci_name": "Ascorbic Acid",
     "cas_number": "50-81-7 / 62624-30-0",
     "functions": [
@@ -464,15 +498,22 @@
       "buffering"
     ],
     "benefits": [
-      "reduces appearance of fine lines and wrinkles",
       "brightens skin tone",
-      "protects skin from environmental stressors"
+      "reduces fine lines",
+      "hydrates skin",
+      "fades age spots",
+      "improves skin elasticity"
     ],
-    "risks": [],
+    "risks": [
+      "may cause irritation",
+      "not recommended for sensitive skin"
+    ],
     "skin_type": [
-      "all skin types"
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
     ],
-    "eu_regulation": "無明確限制資訊",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -490,21 +531,20 @@
       "preservative"
     ],
     "benefits": [
-      "exfoliates the skin",
+      "exfoliates skin",
       "reduces acne",
-      "soothes irritated skin"
+      "soothes irritation",
+      "unclogs pores"
     ],
     "risks": [
-      "skin irritation",
-      "dryness",
-      "redness"
+      "may cause irritation",
+      "not recommended for sensitive skin"
     ],
     "skin_type": [
-      "normal",
-      "oily",
-      "acne-prone"
+      "acne-prone skin",
+      "oily skin"
     ],
-    "eu_regulation": "允許使用，但濃度不得超過 3%",
+    "eu_regulation": "Maximum concentration 3% in face products",
     "source": [
       "INCI Decoder"
     ],
@@ -516,18 +556,22 @@
     "inci_name": "Zinc Oxide",
     "cas_number": "1314-13-2",
     "functions": [
-      "Sunscreen"
+      "sunscreen"
     ],
     "benefits": [
-      "Protects against UV rays",
-      "Soothes and calms the skin",
-      "Has anti-inflammatory properties"
+      "protects skin from uv",
+      "soothes skin",
+      "reduces inflammation",
+      "helps with wound healing"
     ],
-    "risks": [],
+    "risks": [
+      "may cause irritation"
+    ],
     "skin_type": [
-      "All skin types"
+      "all skin types",
+      "sensitive skin"
     ],
-    "eu_regulation": "允許使用於化妝品中，無明確限制",
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -543,12 +587,18 @@
       "colorant"
     ],
     "benefits": [
-      "提供廣譜防曬保護",
-      "增強產品的白色度"
+      "protects skin from UV",
+      "gives skin a bright tone",
+      "reduces appearance of fine lines",
+      "helps to even skin tone"
     ],
-    "risks": [],
-    "skin_type": [],
-    "eu_regulation": "無明確限制資訊",
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
     "source": [
       "INCI Decoder"
     ],
@@ -581,6 +631,59 @@
     "source": [
       "CosIng",
       "Paula's Choice"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Water",
+    "inci_name": "Aqua",
+    "cas_number": "7732-18-5",
+    "functions": [
+      "Solvent",
+      "Diluent",
+      "Humectant"
+    ],
+    "benefits": [
+      "Dissolves and delivers other ingredients",
+      "Adjusts product consistency",
+      "Hydrates skin surface"
+    ],
+    "risks": [],
+    "skin_type": [
+      "All skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "CosIng",
+      "Paula's Choice"
+    ],
+    "_verdict": "pass",
+    "_updated_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Parfum",
+    "inci_name": "Parfum/​Fragrance",
+    "cas_number": "N/A",
+    "functions": [
+      "perfuming"
+    ],
+    "benefits": [
+      "pleasant scent",
+      "mood booster",
+      "masking odor",
+      "freshness"
+    ],
+    "risks": [
+      "may cause irritation",
+      "allergic reactions possible"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions, but must comply with IFRA guidelines",
+    "source": [
+      "INCI Decoder"
     ],
     "_verdict": "pass",
     "_updated_at": "2026-03-18"

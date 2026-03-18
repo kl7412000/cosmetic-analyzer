@@ -7,6 +7,8 @@ import gradio as gr
 import gradio.blocks
 from PIL import Image
 from rag.graph import analyze_online
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # 修復 gradio bug

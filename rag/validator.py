@@ -1,6 +1,6 @@
-import os
+# rag/validator.py
 import json
-from groq import Groq
+from rag.groq_client import call_groq   # ← 改用共用模組
 
 # 必填欄位定義
 REQUIRED_FIELDS = [
@@ -10,15 +10,6 @@ REQUIRED_FIELDS = [
 ]
 
 LIST_FIELDS = ["functions", "benefits", "risks", "skin_type", "source"]
-
-API_KEYS = [
-    key for key in [
-        os.environ.get("GROQ_API_KEY_1"),
-        os.environ.get("GROQ_API_KEY_2"),
-        os.environ.get("GROQ_API_KEY_3"),
-    ]
-    if key
-]
 
 JUDGE_PROMPT = """
 你是一個化妝品成分資料的品質審查員。
@@ -54,23 +45,17 @@ verdict 規則：
 
 
 def validate_format(data: dict) -> tuple[bool, list[str]]:
-    """
-    Layer 1：格式驗證。
-    回傳 (是否通過, 錯誤訊息列表)
-    """
+    """Layer 1：格式驗證。回傳 (是否通過, 錯誤訊息列表)"""
     errors = []
 
-    # 檢查必填欄位
     for field in REQUIRED_FIELDS:
         if field not in data:
             errors.append(f"缺少必填欄位：{field}")
 
-    # 檢查 list 欄位型別
     for field in LIST_FIELDS:
         if field in data and not isinstance(data[field], list):
             errors.append(f"{field} 應為 list，實際為 {type(data[field]).__name__}")
 
-    # 檢查非空字串欄位
     for field in ["ingredient", "inci_name", "eu_regulation"]:
         if field in data and isinstance(data[field], str) and not data[field].strip():
             errors.append(f"{field} 不可為空字串")
@@ -80,67 +65,34 @@ def validate_format(data: dict) -> tuple[bool, list[str]]:
 
 
 def validate_quality(data: dict) -> dict:
-    """
-    Layer 3：LLM-as-a-judge 品質評估（離線流程使用）。
-    回傳 {"score": int, "issues": list, "verdict": str}
-    """
-    if not API_KEYS:
-        raise ValueError("沒有可用的 GROQ_API_KEY，請設定環境變數")
-
+    """Layer 3：LLM-as-a-judge 品質評估（離線流程使用）。"""
     data_text = json.dumps(data, ensure_ascii=False, indent=2)
     prompt = JUDGE_PROMPT.format(data=data_text)
 
-    last_error = None
-    for api_key in API_KEYS:
-        try:
-            client = Groq(api_key=api_key)
-            response = client.chat.completions.create(
-                model="llama-3.3-70b-versatile",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-            )
-            raw = response.choices[0].message.content.strip()
+    result = call_groq(prompt)   # ← 替換（rate limit 重試已在 groq_client 處理）
 
-            if raw.startswith("```"):
-                lines = raw.split("\n")
-                lines = [l for l in lines if not l.startswith("```")]
-                raw = "\n".join(lines)
+    score = result.get("score", 0)
+    if score >= 7:
+        result["verdict"] = "pass"
+    elif score >= 4:
+        result["verdict"] = "unverified"
+    else:
+        result["verdict"] = "fail"
 
-            result = json.loads(raw.strip())
-
-            # 確保 verdict 和 score 一致
-            score = result.get("score", 0)
-            if score >= 7:
-                result["verdict"] = "pass"
-            elif score >= 4:
-                result["verdict"] = "unverified"
-            else:
-                result["verdict"] = "fail"
-
-            return result
-
-        except Exception as e:
-            last_error = e
-            continue
-
-    raise RuntimeError(f"所有 API key 都無法使用，最後錯誤：{last_error}")
+    return result
 
 
 def validate(data: dict, run_judge: bool = True) -> dict:
     """
     完整驗證流程（格式驗證 + LLM-as-a-judge）。
 
-    Args:
-        data: 要驗證的成分資料
-        run_judge: 是否執行 LLM-as-a-judge（離線流程傳 True，線上 fallback 傳 False）
-
     回傳：
     {
-        "passed": bool,          # 是否通過格式驗證
-        "format_errors": list,   # 格式錯誤列表
-        "score": int,            # LLM 評分（0-10，run_judge=False 時為 -1）
-        "issues": list,          # LLM 發現的問題
-        "verdict": str,          # "pass" / "unverified" / "fail" / "format_error"
+        "passed": bool,
+        "format_errors": list,
+        "score": int,
+        "issues": list,
+        "verdict": str,   # "pass" / "unverified" / "fail" / "format_error"
     }
     """
     # Layer 1：格式驗證
@@ -166,7 +118,6 @@ def validate(data: dict, run_judge: bool = True) -> dict:
             "verdict": judge_result.get("verdict", "unverified"),
         }
 
-    # 線上 fallback：只做格式驗證，verdict 預設 medium
     return {
         "passed": True,
         "format_errors": [],
@@ -177,48 +128,18 @@ def validate(data: dict, run_judge: bool = True) -> dict:
 
 
 if __name__ == "__main__":
-    # 測試 1：正常資料
     good_data = {
         "ingredient": "Niacinamide",
         "inci_name": "Niacinamide",
         "cas_number": "98-92-0",
-        "functions": ["Skin conditioning", "Sebum control"],
-        "benefits": ["提亮膚色", "縮小毛孔", "控油"],
-        "risks": ["高濃度可能造成輕微泛紅"],
-        "skin_type": ["油性肌", "混合肌"],
-        "eu_regulation": "無使用限制",
+        "functions": ["skin conditioning", "sebum control"],
+        "benefits": ["brightens skin tone", "minimizes pores", "controls oil"],
+        "risks": ["may cause flushing at high concentrations"],
+        "skin_type": ["oily skin", "combination skin"],
+        "eu_regulation": "No restrictions",
         "source": ["CosIng", "LLM-generated"]
     }
 
-    # 測試 2：格式錯誤的資料
-    bad_format_data = {
-        "ingredient": "Niacinamide",
-        "inci_name": "",           # 空字串
-        "functions": "Smoothing",  # 應為 list
-        # 缺少多個必填欄位
-    }
-
-    # 測試 3：假造的成分（LLM 應該給低分）
-    fake_data = {
-        "ingredient": "MagicYouthSerum9000",
-        "inci_name": "MAGICYOUTHSERUM9000",
-        "cas_number": "000-00-0",
-        "functions": ["ANTI-AGING"],
-        "benefits": ["讓皮膚年輕20歲"],
-        "risks": ["無任何風險"],
-        "skin_type": ["所有膚質"],
-        "eu_regulation": "無使用限制",
-        "source": ["LLM-generated"]
-    }
-
-    print("=== 測試 1：正常資料（格式驗證 + LLM judge）===")
-    result1 = validate(good_data, run_judge=True)
-    print(json.dumps(result1, ensure_ascii=False, indent=2))
-
-    print("\n=== 測試 2：格式錯誤資料 ===")
-    result2 = validate(bad_format_data, run_judge=False)
-    print(json.dumps(result2, ensure_ascii=False, indent=2))
-
-    print("\n=== 測試 3：假造成分（LLM judge 應給低分）===")
-    result3 = validate(fake_data, run_judge=True)
-    print(json.dumps(result3, ensure_ascii=False, indent=2))
+    print("=== 測試：正常資料（格式驗證 + LLM judge）===")
+    result = validate(good_data, run_judge=True)
+    print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -1,5 +1,6 @@
 # rag/graph.py
 import json
+import time
 from typing import Optional
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, END
@@ -146,12 +147,14 @@ def enrich_node(state: AnalysisState) -> AnalysisState:
     - 背景寫入 pending_ingredients.json
     """
     enriched_data = []
+    print(f"[ENRICH] not_found: {state['not_found']}")
 
     for name in state["not_found"]:
         try:
             data = enrich_from_name(name)
-
             passed, errors = validate_format(data)
+            print(f"[ENRICH] {name} → ingredient: {data.get('ingredient')}, passed: {passed}")
+
             if not passed:
                 enriched_data.append({
                     "ingredient": name,
@@ -160,17 +163,17 @@ def enrich_node(state: AnalysisState) -> AnalysisState:
                 })
                 continue
 
-            # 保留原始查詢名稱，供 response_node 比對用
             data["_original"] = name
-
             try:
                 write_to_pending(data)
             except Exception:
                 pass
 
             enriched_data.append(data)
+            time.sleep(1)  # 避免 rate limit
 
         except Exception as e:
+            print(f"[ENRICH] {name} → 失敗：{e}")
             enriched_data.append({
                 "ingredient": name,
                 "confidence": "error",
