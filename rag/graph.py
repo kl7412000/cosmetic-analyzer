@@ -218,6 +218,10 @@ def response_node(state: AnalysisState) -> AnalysisState:
                 "confidence": "error",
                 "error": "查詢失敗，請稍後再試"
             })
+    print(f"[RESPONSE] ingredients: {state['ingredients']}")
+    print(f"[RESPONSE] original_ingredients: {state.get('original_ingredients', [])}")
+    print(f"[RESPONSE] found_map keys: {list(found_map.keys())}")
+    print(f"[RESPONSE] enriched_map keys: {list(enriched_map.keys())}")
 
     return {**state, "results": results}
 
