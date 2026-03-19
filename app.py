@@ -359,6 +359,7 @@ def compare_products_from_images(files1, files2, progress=gr.Progress()):
 
 with gr.Blocks(
     title="Cosmetic Ingredient Analyzer",
+    theme=gr.themes.Soft()
 ) as demo:
 
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
@@ -547,6 +548,5 @@ if __name__ == "__main__":
 
     demo.queue()          # ← 串流更新必要
     demo.launch(
-        server_name="0.0.0.0" if is_hf else "127.0.0.1",
-        theme=gr.themes.Soft()
+        server_name="0.0.0.0" if is_hf else "127.0.0.1"
         )
