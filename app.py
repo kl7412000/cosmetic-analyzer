@@ -4,6 +4,8 @@ import base64
 import io
 import tempfile
 import time
+import queue
+import threading
 import gradio as gr
 import gradio.blocks
 from PIL import Image
@@ -11,9 +13,44 @@ from rag.graph import analyze_online
 from dotenv import load_dotenv
 load_dotenv()
 
-
 # 修復 gradio bug
 gradio.blocks.Blocks.get_api_info = lambda self: {"named_endpoints": {}, "unnamed_endpoints": {}}
+
+
+# ==============================
+# Agent 狀態列 → Markdown
+# ==============================
+
+AGENT_LABELS = {
+    "ocr":       "OCR 辨識",
+    "normalize": "名稱標準化",
+    "parser":    "成分解析",
+    "query":     "資料庫查詢",
+    "enrich":    "AI 增強",
+    "response":  "整合輸出",
+}
+
+STATUS_ICONS = {
+    "pending": "⬜",
+    "running": "⏳",
+    "done":    "✅",
+    "skip":    "—",
+}
+
+def format_agent_status(agent_status: dict) -> str:
+    parts = []
+    for node, status in agent_status.items():
+        if status == "skip":
+            continue
+        icon = STATUS_ICONS.get(status, "?")
+        label = AGENT_LABELS.get(node, node)
+        parts.append(f"{icon} {label}")
+
+    if not parts:
+        return ""
+
+    pipeline_str = " → ".join(parts)
+    return f"**Agent Pipeline**\n\n{pipeline_str}"
 
 
 # ==============================
@@ -21,8 +58,6 @@ gradio.blocks.Blocks.get_api_info = lambda self: {"named_endpoints": {}, "unname
 # ==============================
 
 def format_card_md(item: dict) -> str:
-    """將單一成分資料轉成 Markdown 字串（自動適配 dark/light mode）"""
-
     name = item.get("_display_name") or item.get("_original") or item.get("ingredient") or item.get("inci_name", "Unknown")
     confidence = item.get("confidence", "medium").lower()
 
@@ -31,14 +66,14 @@ def format_card_md(item: dict) -> str:
 
     badge = "🟢 官方資料" if confidence == "high" else "🟡 AI 推論"
 
-    inci        = item.get("inci_name", "")
-    cas         = item.get("cas_number", "")
-    functions   = item.get("functions", [])
-    benefits    = item.get("benefits", [])
-    risks       = item.get("risks", [])
-    eu_reg      = item.get("eu_regulation", "")
-    skin        = item.get("skin_type", [])
-    warning     = item.get("warning", "")
+    inci      = item.get("inci_name", "")
+    cas       = item.get("cas_number", "")
+    functions = item.get("functions", [])
+    benefits  = item.get("benefits", [])
+    risks     = item.get("risks", [])
+    eu_reg    = item.get("eu_regulation", "")
+    skin      = item.get("skin_type", [])
+    warning   = item.get("warning", "")
 
     lines = [f"### {name} &nbsp; {badge}"]
 
@@ -52,33 +87,24 @@ def format_card_md(item: dict) -> str:
 
     if functions:
         lines.append(f"**功能：** {', '.join(functions)}")
-
     if benefits:
         lines.append("\n**功效**")
         for b in benefits:
             lines.append(f"- {b}")
-
     if risks:
         lines.append("\n**風險**")
         for r in risks:
             lines.append(f"- ⚠️ {r}")
-
     if skin:
         lines.append(f"\n**適合膚質：** {', '.join(skin)}")
-
     if eu_reg:
         lines.append(f"\n**EU 法規：** {eu_reg}")
-
     if warning:
         lines.append(f"\n> ⚠️ {warning}")
 
     lines.append("\n---")
     return "\n".join(lines)
 
-
-# ==============================
-# 結果整理 → Markdown 字串
-# ==============================
 
 def process_results_md(results: list) -> str:
     if not results:
@@ -87,19 +113,10 @@ def process_results_md(results: list) -> str:
 
 
 # ==============================
-# 比較結果 → (summary_md, df_common, df_only1, df_only2)
+# 比較結果
 # ==============================
 
 def build_compare_outputs(results1, results2, source_label="文字輸入"):
-    """
-    回傳：
-      summary_md  - gr.Markdown
-      df_common   - gr.Dataframe  相同成分
-      df_only1    - gr.Dataframe  僅產品A
-      df_only2    - gr.Dataframe  僅產品B
-      advice_md   - gr.Markdown  建議
-    """
-
     def extract_names(results):
         return {
             (r.get("_display_name") or r.get("_original") or r.get("ingredient", "")).strip().lower()
@@ -113,11 +130,11 @@ def build_compare_outputs(results1, results2, source_label="文字輸入"):
     names1 = extract_names(results1)
     names2 = extract_names(results2)
 
-    common   = sorted(names1 & names2)
-    only1    = sorted(names1 - names2)
-    only2    = sorted(names2 - names1)
-    risk1    = risk_score(results1)
-    risk2    = risk_score(results2)
+    common = sorted(names1 & names2)
+    only1  = sorted(names1 - names2)
+    only2  = sorted(names2 - names1)
+    risk1  = risk_score(results1)
+    risk2  = risk_score(results2)
 
     summary_md = (
         f"## 📊 比較結果總覽（{source_label}）\n\n"
@@ -129,7 +146,6 @@ def build_compare_outputs(results1, results2, source_label="文字輸入"):
         f"| 獨有成分 | {len(only1)} 種 | {len(only2)} 種 |"
     )
 
-    # Dataframe 資料（空資料給佔位）
     df_common = [[i.title()] for i in common] if common else [["（無相同成分）"]]
     df_only1  = [[i.title()] for i in only1]  if only1  else [["（無獨有成分）"]]
     df_only2  = [[i.title()] for i in only2]  if only2  else [["（無獨有成分）"]]
@@ -148,90 +164,133 @@ def build_compare_outputs(results1, results2, source_label="文字輸入"):
         advice += "  \n_注意：此比較基於 OCR 辨識結果，準確度取決於圖片品質。_"
 
     advice_md = f"## 💡 建議\n\n{advice}"
-
     return summary_md, df_common, df_only1, df_only2, advice_md
 
 
 # ==============================
-# 文字分析
+# 文字分析（threading + queue 即時更新）
 # ==============================
 
-def analyze_text(ingredient_input: str, progress=gr.Progress()):
+def analyze_text(ingredient_input: str):
     if not ingredient_input.strip():
-        return "### 💡 請輸入成分名稱", gr.DownloadButton(visible=False)
+        yield "### 💡 請輸入成分名稱", "", gr.DownloadButton(visible=False)
+        return
 
-    try:
-        print(f"[APP] 開始分析文字輸入：{ingredient_input[:100]}")
+    status_queue = queue.Queue()
+    result_container = {}
 
-        progress(0.0, desc="初始化分析...")
-        time.sleep(0.2)
-        progress(0.2, desc="解析成分名稱...")
-        time.sleep(0.3)
-        progress(0.5, desc="查詢資料庫...")
-        time.sleep(0.4)
-        progress(0.8, desc="AI 增強分析...")
-        results = analyze_online(ingredient_input.strip())
-        progress(1.0, desc="整理結果...")
-        time.sleep(0.2)
+    def run():
+        def on_status(status):
+            status_queue.put(("status", status))
+            result_container["last_status"] = status
 
-        pending = []
-        for r in results:
-            if r.get("confidence") == "medium" and r.get("source") == ["LLM-generated"]:
-                clean = {k: v for k, v in r.items() if k not in ("_query", "_original", "is_substance")}
-                pending.append(clean)
+        try:
+            print(f"[APP] 開始分析文字輸入：{ingredient_input[:100]}")
+            results = analyze_online(ingredient_input.strip(), status_callback=on_status)
+            result_container["results"] = results
+        except Exception as e:
+            print(f"[APP] 分析失敗：{e}")
+            result_container["error"] = str(e)
+        finally:
+            status_queue.put(("done", None))
 
-        if pending:
-            tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8")
-            json.dump(pending, tmp, ensure_ascii=False, indent=2)
-            tmp.close()
-            download_btn = gr.DownloadButton(visible=True, value=tmp.name)
-        else:
-            download_btn = gr.DownloadButton(visible=False)
+    thread = threading.Thread(target=run)
+    thread.start()
 
-        print(f"[APP] 文字分析完成，返回 {len(results)} 筆結果")
-        return process_results_md(results), download_btn
+    # 即時 yield 每次狀態更新
+    while True:
+        msg_type, payload = status_queue.get()
+        if msg_type == "done":
+            break
+        if msg_type == "status":
+            yield "⏳ 分析中...", format_agent_status(payload), gr.DownloadButton(visible=False)
 
-    except Exception as e:
-        print(f"[APP] 分析失敗：{e}")
-        return f"### ❌ 發生錯誤\n\n`{str(e)}`", gr.DownloadButton(visible=False)
+    thread.join()
+
+    if "error" in result_container:
+        yield f"### ❌ 發生錯誤\n\n`{result_container['error']}`", "", gr.DownloadButton(visible=False)
+        return
+
+    results = result_container["results"]
+    last_status = result_container.get("last_status", {})
+
+    pending = []
+    for r in results:
+        if r.get("confidence") == "medium" and r.get("source") == ["LLM-generated"]:
+            clean = {k: v for k, v in r.items() if k not in ("_query", "_original", "is_substance")}
+            pending.append(clean)
+
+    if pending:
+        tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8")
+        json.dump(pending, tmp, ensure_ascii=False, indent=2)
+        tmp.close()
+        download_btn = gr.DownloadButton(visible=True, value=tmp.name)
+    else:
+        download_btn = gr.DownloadButton(visible=False)
+
+    final_status = {k: ("done" if v != "skip" else "skip") for k, v in last_status.items()}
+
+    print(f"[APP] 文字分析完成，返回 {len(results)} 筆結果")
+    yield process_results_md(results), format_agent_status(final_status), download_btn
 
 
 # ==============================
-# 圖片分析
+# 圖片分析（threading + queue 即時更新）
 # ==============================
 
-def analyze_image(files, progress=gr.Progress()):
+def analyze_image(files):
     if not files:
-        return "### 💡 請上傳圖片"
+        yield "### 💡 請上傳圖片", ""
+        return
 
-    try:
-        file = files[0]
-        print(f"[APP] 處理上傳的圖片：{file.name}")
+    status_queue = queue.Queue()
+    result_container = {}
 
-        progress(0.0, desc="載入圖片...")
-        image = Image.open(file.name)
-        print(f"[APP] 圖片尺寸：{image.size}")
+    def run():
+        def on_status(status):
+            status_queue.put(("status", status))
+            result_container["last_status"] = status
 
-        progress(0.3, desc="編碼圖片...")
-        buffered = io.BytesIO()
-        image.save(buffered, format="JPEG")
-        b64 = base64.b64encode(buffered.getvalue()).decode()
+        try:
+            file = files[0]
+            print(f"[APP] 處理上傳的圖片：{file.name}")
 
-        progress(0.6, desc="OCR 辨識...")
-        time.sleep(0.5)
+            image = Image.open(file.name)
+            buffered = io.BytesIO()
+            image.save(buffered, format="JPEG")
+            b64 = base64.b64encode(buffered.getvalue()).decode()
 
-        progress(0.8, desc="分析成分...")
-        results = analyze_online("", image_b64=b64)
+            results = analyze_online("", image_b64=b64, status_callback=on_status)
+            result_container["results"] = results
+        except FileNotFoundError:
+            result_container["error"] = "圖片文件未找到"
+        except Exception as e:
+            print(f"[APP] 圖片處理失敗：{e}")
+            result_container["error"] = str(e)
+        finally:
+            status_queue.put(("done", None))
 
-        progress(1.0, desc="完成分析")
-        print(f"[APP] 圖片分析完成，返回 {len(results)} 筆結果")
-        return process_results_md(results)
+    thread = threading.Thread(target=run)
+    thread.start()
 
-    except FileNotFoundError:
-        return "### ❌ 圖片文件未找到"
-    except Exception as e:
-        print(f"[APP] 圖片處理失敗：{e}")
-        return f"### ❌ 圖片處理失敗\n\n`{str(e)}`"
+    while True:
+        msg_type, payload = status_queue.get()
+        if msg_type == "done":
+            break
+        if msg_type == "status":
+            yield "⏳ 分析中...", format_agent_status(payload)
+
+    thread.join()
+
+    if "error" in result_container:
+        yield f"### ❌ 圖片處理失敗\n\n`{result_container['error']}`", ""
+        return
+
+    results = result_container["results"]
+    last_status = result_container.get("last_status", {})
+    final_status = {k: ("done" if v != "skip" else "skip") for k, v in last_status.items()}
+
+    yield process_results_md(results), format_agent_status(final_status)
 
 
 # ==============================
@@ -240,21 +299,17 @@ def analyze_image(files, progress=gr.Progress()):
 
 def compare_products(product1: str, product2: str, progress=gr.Progress()):
     empty = ("### 💡 請輸入兩個產品的成分進行比較", [], [], [], "")
-
     if not product1.strip() or not product2.strip():
         return empty
 
     try:
         progress(0.0, desc="分析產品A...")
         results1 = analyze_online(product1.strip())
-
         progress(0.5, desc="分析產品B...")
         results2 = analyze_online(product2.strip())
-
         progress(1.0, desc="比較分析...")
         summary, df_common, df_only1, df_only2, advice = build_compare_outputs(results1, results2)
         return summary, df_common, df_only1, df_only2, advice
-
     except Exception as e:
         print(f"[COMPARE] 比較失敗：{e}")
         return f"### ❌ 比較失敗\n\n`{str(e)}`", [], [], [], ""
@@ -266,7 +321,6 @@ def compare_products(product1: str, product2: str, progress=gr.Progress()):
 
 def compare_products_from_images(files1, files2, progress=gr.Progress()):
     empty = ("### 💡 請上傳兩個產品的成分表圖片", [], [], [], "")
-
     if not files1 or not files2:
         return empty
 
@@ -277,17 +331,17 @@ def compare_products_from_images(files1, files2, progress=gr.Progress()):
             img.save(buf, format="JPEG")
             return base64.b64encode(buf.getvalue()).decode()
 
-        progress(0.0,  desc="處理產品A圖片...")
+        progress(0.0, desc="處理產品A圖片...")
         b64_1 = load_b64(files1)
-        progress(0.2,  desc="OCR辨識產品A...")
+        progress(0.2, desc="OCR辨識產品A...")
         results1 = analyze_online("", image_b64=b64_1)
 
-        progress(0.4,  desc="處理產品B圖片...")
+        progress(0.4, desc="處理產品B圖片...")
         b64_2 = load_b64(files2)
-        progress(0.6,  desc="OCR辨識產品B...")
+        progress(0.6, desc="OCR辨識產品B...")
         results2 = analyze_online("", image_b64=b64_2)
 
-        progress(0.9,  desc="比較分析...")
+        progress(0.9, desc="比較分析...")
         summary, df_common, df_only1, df_only2, advice = build_compare_outputs(
             results1, results2, source_label="圖片辨識"
         )
@@ -305,11 +359,10 @@ def compare_products_from_images(files1, files2, progress=gr.Progress()):
 
 with gr.Blocks(
     title="Cosmetic Ingredient Analyzer",
-    theme=gr.themes.Soft()
 ) as demo:
 
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
-    gr.Markdown("CosIng + RAG 成分分析系統")
+    gr.Markdown("CosIng + RAG + LangGraph Multi-Agent 成分分析系統")
 
     with gr.Tabs():
 
@@ -329,6 +382,7 @@ with gr.Blocks(
                     )
 
                 with gr.Column(scale=2):
+                    text_agent_status = gr.Markdown(value="")      # ← 右欄頂部，初始為空
                     text_output = gr.Markdown(value="等待輸入...")
 
             gr.Examples(
@@ -353,6 +407,7 @@ with gr.Blocks(
                     image_btn = gr.Button("辨識並分析", variant="primary")
 
                 with gr.Column(scale=2):
+                    image_agent_status = gr.Markdown(value="")     # ← 右欄頂部，初始為空
                     image_output = gr.Markdown(value="請上傳圖片")
 
         # ── Tab 3：成分比較 ──────────────────────────────────
@@ -375,33 +430,26 @@ with gr.Blocks(
                             )
                             compare_text_btn = gr.Button("比較產品", variant="primary")
 
-                    # 比較結果區塊
                     compare_text_summary = gr.Markdown(value="輸入兩個產品的成分進行比較")
 
                     with gr.Row():
                         with gr.Column():
                             gr.Markdown("#### 🔄 相同成分")
                             compare_text_common = gr.Dataframe(
-                                headers=["成分"],
-                                datatype=["str"],
-                                interactive=False,
-                                wrap=True
+                                headers=["成分"], datatype=["str"],
+                                interactive=False, wrap=True
                             )
                         with gr.Column():
                             gr.Markdown("#### ➡️ 僅在產品 A")
                             compare_text_only1 = gr.Dataframe(
-                                headers=["成分"],
-                                datatype=["str"],
-                                interactive=False,
-                                wrap=True
+                                headers=["成分"], datatype=["str"],
+                                interactive=False, wrap=True
                             )
                         with gr.Column():
                             gr.Markdown("#### ⬅️ 僅在產品 B")
                             compare_text_only2 = gr.Dataframe(
-                                headers=["成分"],
-                                datatype=["str"],
-                                interactive=False,
-                                wrap=True
+                                headers=["成分"], datatype=["str"],
+                                interactive=False, wrap=True
                             )
 
                     compare_text_advice = gr.Markdown()
@@ -437,26 +485,20 @@ with gr.Blocks(
                         with gr.Column():
                             gr.Markdown("#### 🔄 相同成分")
                             compare_image_common = gr.Dataframe(
-                                headers=["成分"],
-                                datatype=["str"],
-                                interactive=False,
-                                wrap=True
+                                headers=["成分"], datatype=["str"],
+                                interactive=False, wrap=True
                             )
                         with gr.Column():
                             gr.Markdown("#### ➡️ 僅在產品 A")
                             compare_image_only1 = gr.Dataframe(
-                                headers=["成分"],
-                                datatype=["str"],
-                                interactive=False,
-                                wrap=True
+                                headers=["成分"], datatype=["str"],
+                                interactive=False, wrap=True
                             )
                         with gr.Column():
                             gr.Markdown("#### ⬅️ 僅在產品 B")
                             compare_image_only2 = gr.Dataframe(
-                                headers=["成分"],
-                                datatype=["str"],
-                                interactive=False,
-                                wrap=True
+                                headers=["成分"], datatype=["str"],
+                                interactive=False, wrap=True
                             )
 
                     compare_image_advice = gr.Markdown()
@@ -467,49 +509,44 @@ with gr.Blocks(
     text_btn.click(
         fn=analyze_text,
         inputs=text_input,
-        outputs=[text_output, download_btn]
+        outputs=[text_output, text_agent_status, download_btn]
     )
     text_input.submit(
         fn=analyze_text,
         inputs=text_input,
-        outputs=[text_output, download_btn]
+        outputs=[text_output, text_agent_status, download_btn]
     )
     image_btn.click(
         fn=analyze_image,
         inputs=image_input,
-        outputs=image_output
+        outputs=[image_output, image_agent_status]
     )
     compare_text_btn.click(
         fn=compare_products,
         inputs=[product1_text, product2_text],
         outputs=[
-            compare_text_summary,
-            compare_text_common,
-            compare_text_only1,
-            compare_text_only2,
-            compare_text_advice,
+            compare_text_summary, compare_text_common,
+            compare_text_only1, compare_text_only2, compare_text_advice,
         ]
     )
     compare_image_btn.click(
         fn=compare_products_from_images,
         inputs=[product1_image, product2_image],
         outputs=[
-            compare_image_summary,
-            compare_image_common,
-            compare_image_only1,
-            compare_image_only2,
-            compare_image_advice,
+            compare_image_summary, compare_image_common,
+            compare_image_only1, compare_image_only2, compare_image_advice,
         ]
     )
 
 
 if __name__ == "__main__":
-
     if not os.path.exists("faiss_index/index.faiss"):
         raise FileNotFoundError("找不到 FAISS 索引")
 
     is_hf = os.environ.get("SPACE_ID") is not None
 
+    demo.queue()          # ← 串流更新必要
     demo.launch(
-        server_name="0.0.0.0" if is_hf else "127.0.0.1"
-    )
+        server_name="0.0.0.0" if is_hf else "127.0.0.1",
+        theme=gr.themes.Soft()
+        )

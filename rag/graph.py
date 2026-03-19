@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 import json
 import time
-from typing import Optional
+from typing import Optional, Callable
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, END
 from langchain_community.vectorstores import FAISS as FAISSStore
@@ -15,27 +15,122 @@ from rag.updater import write_to_pending
 from rag.validator import validate_format
 from rag.ocr import extract_from_base64
 
+
 # ── State 定義 ────────────────────────────────────────────────────────
 class AnalysisState(TypedDict):
     input_text: str
-    input_image: Optional[str]   # base64 字串，無圖片時為 None
-    original_ingredients: list   # 新增：OCR 辨識的原始名稱
-    ingredients: list        # parser_node 拆出的成分列表
-    found: list              # query_node 找到的成分（來自 DB）
-    not_found: list          # query_node 找不到的成分名稱
-    enriched_data: list      # enrich_node 生成的 LLM fallback 資料
-    results: list            # response_node 整合後的最終結果
+    input_image: Optional[str]      # base64 字串，無圖片時為 None
+    original_ingredients: list      # OCR 辨識的原始名稱
+    ingredients: list               # parser_node 拆出的成分列表
+    found: list                     # query_node 找到的成分（來自 DB）
+    not_found: list                 # query_node 找不到的成分名稱
+    enriched_data: list             # enrich_node 生成的 LLM fallback 資料
+    results: list                   # response_node 整合後的最終結果
     error: Optional[str]
 
+    # ── Supervisor 新增欄位 ──────────────────────────────────────────
+    next_node: Optional[str]        # Supervisor 決定下一步要去哪個 node
+    agent_status: dict              # 各 Agent 的執行狀態，供 UI 顯示用
+    # agent_status 格式：
+    # {
+    #   "ocr":       "pending" | "running" | "done" | "skip",
+    #   "normalize": "pending" | "running" | "done" | "skip",
+    #   "parser":    "pending" | "running" | "done" | "skip",
+    #   "query":     "pending" | "running" | "done" | "skip",
+    #   "enrich":    "pending" | "running" | "done" | "skip",
+    #   "response":  "pending" | "running" | "done" | "skip",
+    # }
 
 
-# ── Nodes ─────────────────────────────────────────────────────────────
+# ── Supervisor Node ───────────────────────────────────────────────────
+# Supervisor 是整個 pipeline 的指揮中心。
+# 每個 node 執行完畢後都會回到 Supervisor，
+# 由 Supervisor 決定下一步要去哪個 node。
+# 這是 LangGraph Supervisor 模式的核心設計。
+
+PIPELINE_WITH_IMAGE    = ["ocr", "normalize", "parser", "query", "enrich", "response"]
+PIPELINE_WITHOUT_IMAGE = ["parser", "query", "enrich", "response"]
+
+def supervisor_node(state: AnalysisState) -> AnalysisState:
+    """
+    Supervisor：根據目前狀態決定下一個要執行的 node。
+
+    決策邏輯：
+    1. 有圖片 → 走 OCR pipeline
+    2. 無圖片 → 跳過 OCR/Normalize，直接走 Parser pipeline
+    3. 若發生 error → 直接跳到 response，避免繼續執行
+    4. 每個 node 執行完畢後更新 agent_status → done
+    """
+    status = dict(state.get("agent_status", {}))
+    has_image = bool(state.get("input_image"))
+    pipeline = PIPELINE_WITH_IMAGE if has_image else PIPELINE_WITHOUT_IMAGE
+
+    # 若有錯誤，直接跳到 response
+    if state.get("error"):
+        status["response"] = "running"
+        return {**state, "next_node": "response", "agent_status": status}
+
+    # 找出目前 pipeline 中第一個尚未執行（pending）的 node
+    for node in pipeline:
+        if status.get(node) == "pending":
+            # 跳過不在此 pipeline 的 node（例如無圖時跳過 ocr/normalize）
+            if node not in pipeline:
+                status[node] = "skip"
+                continue
+            status[node] = "running"
+            return {**state, "next_node": node, "agent_status": status}
+
+    # 所有 node 都完成了 → 結束
+    return {**state, "next_node": END, "agent_status": status}
+
+
+def route_from_supervisor(state: AnalysisState) -> str:
+    """LangGraph conditional edge：從 Supervisor 決定路由。"""
+    return state.get("next_node", END)
+
+
+# ── 初始化 agent_status ───────────────────────────────────────────────
+def init_status(has_image: bool) -> dict:
+    """根據是否有圖片，初始化各 Agent 的狀態。"""
+    if has_image:
+        return {
+            "ocr":       "pending",
+            "normalize": "pending",
+            "parser":    "pending",
+            "query":     "pending",
+            "enrich":    "pending",
+            "response":  "pending",
+        }
+    else:
+        return {
+            "ocr":       "skip",
+            "normalize": "skip",
+            "parser":    "pending",
+            "query":     "pending",
+            "enrich":    "pending",
+            "response":  "pending",
+        }
+
+
+# ── 包裝 Node：執行完畢後更新 status → done，再回 Supervisor ──────────
+def wrap_node(name: str, fn: Callable) -> Callable:
+    """
+    高階函式：包裝原本的 node function。
+    執行完畢後自動將 agent_status[name] 改為 "done"。
+    讓每個 node 不需要自己管理狀態，保持單一職責。
+    """
+    def wrapped(state: AnalysisState) -> AnalysisState:
+        result = fn(state)
+        status = dict(result.get("agent_status", state.get("agent_status", {})))
+        status[name] = "done"
+        return {**result, "agent_status": status}
+    return wrapped
+
+
+# ── Nodes（邏輯與原本完全相同，不做任何修改）─────────────────────────
 
 def ocr_node(state: AnalysisState) -> AnalysisState:
-    """
-    有圖片時執行 OCR，將辨識結果合併進 input_text。
-    若原本 input_text 也有內容，兩者合併後一起進入 parser_node。
-    """
+    """有圖片時執行 OCR，將辨識結果合併進 input_text。"""
     try:
         result = extract_from_base64(state["input_image"])
         ocr_ingredients = result.get("ingredients", [])
@@ -44,18 +139,15 @@ def ocr_node(state: AnalysisState) -> AnalysisState:
         return {
             **state,
             "input_text": combined,
-            "original_ingredients": ocr_ingredients  # 保存原始名稱
+            "original_ingredients": ocr_ingredients
         }
     except Exception as e:
         return {**state, "error": f"OCR 失敗：{str(e)}"}
-    
+
+
 def normalize_node(state: AnalysisState) -> AnalysisState:
-    """
-    將 OCR 辨識出的非英文成分名稱統一轉換為 INCI 英文名稱。
-    僅在有圖片輸入時執行，純文字輸入不需要此步驟。
-    """
+    """將 OCR 辨識出的非英文成分名稱統一轉換為 INCI 英文名稱。"""
     raw_text = state.get("input_text", "").strip()
-    
     if not raw_text:
         return state
 
@@ -83,34 +175,21 @@ def normalize_node(state: AnalysisState) -> AnalysisState:
     try:
         result = call_groq(prompt)
         normalized = result.get("normalized", [])
-        print(f"[NORMALIZE] 翻譯結果：{normalized}")
-
         if normalized:
             normalized_text = ", ".join(normalized)
             return {**state, "input_text": normalized_text}
-
     except Exception as e:
         print(f"[NORMALIZE] 失敗：{e}")
 
     return state
 
 
-def should_ocr(state: AnalysisState) -> str:
-    """條件入口：有圖片走 ocr，否則直接走 parser。"""
-    return "ocr" if state.get("input_image") else "parser"
-
-
 def parser_node(state: AnalysisState) -> AnalysisState:
-    """
-    把輸入文字拆成單一成分列表。
-    使用 chain.py 已有的 parse_ingredients()，保持邏輯一致。
-    """
+    """把輸入文字拆成單一成分列表。"""
     ingredients = parse_ingredients(state["input_text"])
     return {**state, "ingredients": ingredients}
 
 
-# 常見同義詞對照（查詢名稱 → DB 中的 ingredient 或 inci_name）
-# key 全部小寫，value 是 DB 裡存的名稱
 SYNONYMS = {
     "fragrance": "parfum",
     "aqua": "water",
@@ -124,20 +203,12 @@ SYNONYMS = {
 
 
 def query_node(state: AnalysisState) -> AnalysisState:
-    """
-    對每個成分查詢 FAISS 索引。
-    判斷邏輯（依序）：
-      1. 同義詞替換（Fragrance → Parfum 等）
-      2. 名稱完全吻合（大小寫不分）→ 直接視為找到，不管 score
-      3. score < 1.2 且名稱部分吻合 → 視為找到（考慮同義詞查詢可能距離較遠）
-      4. 其他 → not_found，交給 LLM enrich
-    """
+    """對每個成分查詢 FAISS 索引。"""
     found = []
     not_found = []
     vectorstore = get_vectorstore()
 
     for name in state["ingredients"]:
-        # Step 1：同義詞替換
         lookup_name = SYNONYMS.get(name.lower(), name)
         is_synonym_query = (lookup_name.lower() != name.lower())
 
@@ -153,11 +224,8 @@ def query_node(state: AnalysisState) -> AnalysisState:
 
             print(f"[DEBUG] {name} → lookup: {lookup_name}, score: {score}, matched: {matched_ingredient}")
 
-            # Step 2：名稱完全吻合
             exact_match = (lookup_lower == matched_lower or lookup_lower == inci_lower)
-            # Step 3：score 閾值（同義詞查詢允許更高的 score，因為語義距離可能較遠）
             score_threshold = 1.2 if is_synonym_query else 1.0
-            # Step 4：名稱部分吻合
             partial_match = (
                 lookup_lower in matched_lower or matched_lower in lookup_lower or
                 lookup_lower in inci_lower or inci_lower in lookup_lower
@@ -167,7 +235,6 @@ def query_node(state: AnalysisState) -> AnalysisState:
                 metadata = doc.metadata
                 source = metadata.get("source", [])
                 confidence = "medium" if source == ["LLM-generated"] else "high"
-                # _query_name 記錄原始查詢名稱（未替換的），供 response_node 對應用
                 found.append({**metadata, "confidence": confidence, "_query_name": name})
             else:
                 not_found.append(name)
@@ -176,13 +243,9 @@ def query_node(state: AnalysisState) -> AnalysisState:
 
     return {**state, "found": found, "not_found": not_found}
 
+
 def enrich_node(state: AnalysisState) -> AnalysisState:
-    """
-    對 not_found 的成分呼叫 LLM fallback。
-    生成資料通過格式驗證後：
-    - 回傳給用戶（confidence: medium）
-    - 背景寫入 pending_ingredients.json
-    """
+    """對 not_found 的成分呼叫 LLM fallback。"""
     enriched_data = []
     print(f"[ENRICH] not_found: {state['not_found']}")
 
@@ -207,7 +270,7 @@ def enrich_node(state: AnalysisState) -> AnalysisState:
                 pass
 
             enriched_data.append(data)
-            time.sleep(1)  # 避免 rate limit
+            time.sleep(1)
 
         except Exception as e:
             print(f"[ENRICH] {name} → 失敗：{e}")
@@ -221,7 +284,7 @@ def enrich_node(state: AnalysisState) -> AnalysisState:
 
 
 def response_node(state: AnalysisState) -> AnalysisState:
-    # 建立 found_map：ingredient、inci_name、_query_name 都當 key
+    """整合 found + enriched_data 成最終結果。"""
     found_map = {}
     for item in state["found"]:
         if item.get("ingredient"):
@@ -246,11 +309,9 @@ def response_node(state: AnalysisState) -> AnalysisState:
         original_name = original_ingredients[i] if i < len(original_ingredients) else name
 
         if key in found_map:
-            item = {**found_map[key], "_display_name": original_name}
-            results.append(item)
+            results.append({**found_map[key], "_display_name": original_name})
         elif key in enriched_map:
-            item = {**enriched_map[key], "_display_name": original_name}
-            results.append(item)
+            results.append({**enriched_map[key], "_display_name": original_name})
         else:
             matched = next(
                 (v for v in state["enriched_data"] if v.get("_original", "").lower() == key),
@@ -266,11 +327,6 @@ def response_node(state: AnalysisState) -> AnalysisState:
                     "error": "查詢失敗，請稍後再試"
                 })
 
-    print(f"[RESPONSE] ingredients: {state['ingredients']}")
-    print(f"[RESPONSE] original_ingredients: {state.get('original_ingredients', [])}")
-    print(f"[RESPONSE] found_map keys: {list(found_map.keys())}")
-    print(f"[RESPONSE] enriched_map keys: {list(enriched_map.keys())}")
-
     return {**state, "results": results}
 
 
@@ -278,49 +334,101 @@ def response_node(state: AnalysisState) -> AnalysisState:
 def build_graph():
     graph = StateGraph(AnalysisState)
 
-    graph.add_node("ocr", ocr_node)
-    graph.add_node("normalize", normalize_node)
-    graph.add_node("parser", parser_node)
-    graph.add_node("query", query_node)
-    graph.add_node("enrich", enrich_node)
-    graph.add_node("response", response_node)
+    # 註冊 Supervisor
+    graph.add_node("supervisor", supervisor_node)
 
-    graph.set_conditional_entry_point(
-        should_ocr,
-        {"ocr": "ocr", "parser": "parser"}
+    # 註冊各 Agent Node（用 wrap_node 包裝，執行完自動更新 status）
+    graph.add_node("ocr",       wrap_node("ocr",       ocr_node))
+    graph.add_node("normalize", wrap_node("normalize", normalize_node))
+    graph.add_node("parser",    wrap_node("parser",    parser_node))
+    graph.add_node("query",     wrap_node("query",     query_node))
+    graph.add_node("enrich",    wrap_node("enrich",    enrich_node))
+    graph.add_node("response",  wrap_node("response",  response_node))
+
+    # 起點是 Supervisor
+    graph.set_entry_point("supervisor")
+
+    # Supervisor → 條件路由到各 node
+    graph.add_conditional_edges(
+        "supervisor",
+        route_from_supervisor,
+        {
+            "ocr":       "ocr",
+            "normalize": "normalize",
+            "parser":    "parser",
+            "query":     "query",
+            "enrich":    "enrich",
+            "response":  "response",
+            END:         END,
+        }
     )
-    graph.add_edge("ocr", "normalize")    # ocr → normalize
-    graph.add_edge("normalize", "parser") # normalize → parser
-    graph.add_edge("parser", "query")
-    graph.add_edge("query", "enrich")
-    graph.add_edge("enrich", "response")
-    graph.add_edge("response", END)
+
+    # 每個 node 執行完畢後都回到 Supervisor
+    for node in ["ocr", "normalize", "parser", "query", "enrich", "response"]:
+        graph.add_edge(node, "supervisor")
 
     return graph.compile()
 
-online_graph = build_graph() 
 
-def analyze_online(text: str, image_b64: str = None) -> list:
+online_graph = build_graph()
+
+
+def analyze_online(
+    text: str,
+    image_b64: str = None,
+    status_callback: Callable[[dict], None] = None,
+) -> list:
+    """
+    執行完整分析 pipeline。
+
+    Args:
+        text:            用戶輸入的成分文字
+        image_b64:       圖片 base64（可選）
+        status_callback: 每次 Supervisor 更新 agent_status 時的回呼函式
+                         供 app.py 的 UI 即時更新 Agent 狀態列使用
+    """
+    has_image = bool(image_b64)
+
     initial_state: AnalysisState = {
-        "input_text": text,
-        "input_image": image_b64,
-        "original_ingredients": [],  # 新增
-        "ingredients": [],
-        "found": [],
-        "not_found": [],
-        "enriched_data": [],
-        "results": [],
-        "error": None,
+        "input_text":           text,
+        "input_image":          image_b64,
+        "original_ingredients": [],
+        "ingredients":          [],
+        "found":                [],
+        "not_found":            [],
+        "enriched_data":        [],
+        "results":              [],
+        "error":                None,
+        "next_node":            None,
+        "agent_status":         init_status(has_image),
     }
+
+    # 若有 callback，使用 stream 模式讓 UI 能即時更新
+    if status_callback:
+        final_state = initial_state
+        for chunk in online_graph.stream(initial_state):
+            for node_name, node_state in chunk.items():
+                if node_state.get("agent_status"):
+                    status_callback(node_state["agent_status"])
+                final_state = node_state
+        return final_state.get("results", [])
+
+    # 無 callback，直接 invoke（原本行為，向下相容）
     final_state = online_graph.invoke(initial_state)
     return final_state["results"]
 
 
-
-
 # ── 本地測試 ──────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    print("=== 測試 score 數值 ===")
-    results = analyze_online("グリセリン, AQUA/WATER/EAU, Glycerin, Water, Niacinamide, Bakuchiol")
+    def print_status(status: dict):
+        icons = {"pending": "⬜", "running": "⏳", "done": "✅", "skip": "—"}
+        parts = [f"{icons.get(v, '?')} {k}" for k, v in status.items()]
+        print(" → ".join(parts))
+
+    print("=== 測試 Supervisor Pipeline ===")
+    results = analyze_online(
+        "Glycerin, Niacinamide, Bakuchiol",
+        status_callback=print_status
+    )
     for r in results:
-        print(f"{r.get('_original') or r.get('ingredient')} → confidence: {r.get('confidence')}")
+        print(f"{r.get('_display_name') or r.get('ingredient')} → confidence: {r.get('confidence')}")

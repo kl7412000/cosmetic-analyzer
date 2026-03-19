@@ -3146,5 +3146,147 @@
     "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
     "_original": "Chlorphenesin",
     "_pending_at": "2026-03-18"
+  },
+  {
+    "ingredient": "Hyaluronic Acid",
+    "inci_name": "Hyaluronic Acid",
+    "cas_number": "9004-61-9",
+    "functions": [
+      "humectant",
+      "skin-identical ingredient",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "plumps skin",
+      "reduces fine lines",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "dry skin",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Hyaluronic Acid",
+    "_pending_at": "2026-03-19"
+  },
+  {
+    "ingredient": "Peptides",
+    "inci_name": "Peptides",
+    "cas_number": "N/A",
+    "functions": [
+      "skin-identical ingredient",
+      "cell-communicating ingredient",
+      "soothing"
+    ],
+    "benefits": [
+      "reduces fine lines",
+      "improves skin elasticity",
+      "hydrates skin",
+      "brightens skin tone"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Peptides",
+    "_pending_at": "2026-03-19"
+  },
+  {
+    "ingredient": "Lentil Fruit Extract",
+    "inci_name": "Lens Esculenta Fruit Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "reduces inflammation",
+      "improves skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "LENS ESCULENTA (LENTIL) FRUIT EXTRACT",
+    "_pending_at": "2026-03-19"
+  },
+  {
+    "ingredient": "St. Paul's Wort Extract",
+    "inci_name": "SIGESBECKIA ORIENTALIS EXTRACT",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "calms irritation",
+      "hydrates skin"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "SIGESBECKIA ORIENTALIS (ST. PAUL'S WORT) EXTRACT",
+    "_pending_at": "2026-03-19"
+  },
+  {
+    "ingredient": "Ammonium Acryloyldimethyltaurate/VP Copolymer",
+    "inci_name": "AMMONIUM ACRYLOYLDIMETHYLTMAURATE/VP COPOLYMER",
+    "cas_number": "N/A",
+    "functions": [
+      "film former",
+      "hair fixative",
+      "skin-conditioning agent"
+    ],
+    "benefits": [
+      "improves hair hold",
+      "enhances skin feel",
+      "provides long-lasting style",
+      "helps with skin elasticity"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "AMMONIUM ACRYLOYLDIMETHYLTMAURATE/VP COPOLYMER",
+    "_pending_at": "2026-03-19"
   }
 ]
