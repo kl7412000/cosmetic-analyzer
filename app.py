@@ -356,14 +356,34 @@ def compare_products_from_images(files1, files2, progress=gr.Progress()):
 # ==============================
 # UI
 # ==============================
+# 設定馬卡龍色系主題
+macaron_theme = gr.themes.Soft(
+    primary_hue="pink",       # 主色：馬卡龍粉
+    secondary_hue="sky",      # 輔助色：粉藍
+    neutral_hue="slate",      # 中性色：石板灰 (增加深色模式的通透感)
+).set(
+    # 微調：讓按鈕與文字在深淺模式下都更清晰
+    button_primary_text_color="*primary_600",
+    button_primary_background_fill="*primary_100",
+    button_primary_background_fill_dark="*primary_700",
+)
 
-with gr.Blocks(
-    title="Cosmetic Ingredient Analyzer",
-    theme=gr.themes.Soft()
-) as demo:
+with gr.Blocks(theme=macaron_theme) as demo:
 
     gr.Markdown("# 🧴 Cosmetic Ingredient Analyzer")
-    gr.Markdown("CosIng + RAG + LangGraph Multi-Agent 成分分析系統")
+    gr.Markdown("""
+        ### 🔍 功能說明
+
+        **① 成分解析**
+        輸入產品成分，快速了解每個成分的功能、功效與潛在風險。
+
+        **② 圖片辨識**
+        上傳產品成分表照片，自動辨識並進行分析。
+
+        **③ 成分比較**
+        比較兩個產品的成分差異，幫助你做出更適合的選擇。
+
+        """)
 
     with gr.Tabs():
 

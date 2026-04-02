@@ -3288,5 +3288,258 @@
     "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
     "_original": "AMMONIUM ACRYLOYLDIMETHYLTMAURATE/VP COPOLYMER",
     "_pending_at": "2026-03-19"
+  },
+  {
+    "ingredient": "Ascorbyl Glucoside",
+    "inci_name": "Ascorbyl Glucoside",
+    "cas_number": "129954-57-5",
+    "functions": [
+      "antioxidant",
+      "skin-identical ingredient"
+    ],
+    "benefits": [
+      "brightens skin tone",
+      "reduces fine lines",
+      "hydrates skin",
+      "fades age spots"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Ascorbyl Glucoside",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Morus Alba Root Extract",
+    "inci_name": "Morus Alba Root Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "antioxidant",
+      "soothing"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "protects skin from damage"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Morus Alba Root Extract",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Aloe Vera Extract",
+    "inci_name": "Aloe Barbadensis Extract",
+    "cas_number": "N/A",
+    "functions": [
+      "soothing",
+      "emollient",
+      "humectant"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "soothes irritation",
+      "calms redness",
+      "reduces inflammation"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Aloe Barbadensis Extract",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Dipotassium Glycyrrhizate",
+    "inci_name": "Dipotassium Glycyrrhizate",
+    "cas_number": "68797-35-3",
+    "functions": [
+      "soothing",
+      "anti-inflammatory",
+      "antimicrobial/antibacterial"
+    ],
+    "benefits": [
+      "soothes skin",
+      "reduces inflammation",
+      "calms irritation",
+      "improves skin elasticity"
+    ],
+    "risks": [
+      "may cause skin irritation in rare cases"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Dipotassium Glycyrrhizate",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Cyclomethicone",
+    "inci_name": "Cyclomethicone",
+    "cas_number": "541-02-6",
+    "functions": [
+      "emollient",
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "smooths skin texture",
+      "improves skin feel",
+      "reduces appearance of fine lines"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Cyclomethicone",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "PEG-60 Hydrogenated Castor Oil",
+    "inci_name": "PEG-60 Hydrogenated Castor Oil",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "surfactant/cleansing",
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture",
+      "enhances absorption"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types",
+      "sensitive skin"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "PEG-60 Hydrogenated Castor Oil",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Trioctanoin",
+    "inci_name": "Trioctanoin",
+    "cas_number": "N/A",
+    "functions": [
+      "emollient",
+      "solvent"
+    ],
+    "benefits": [
+      "hydrates skin",
+      "softens skin",
+      "improves texture"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Trioctanoin",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Sodium Myristoyl Glutamate",
+    "inci_name": "Sodium Myristoyl Glutamate",
+    "cas_number": "N/A",
+    "functions": [
+      "surfactant/cleansing",
+      "emollient"
+    ],
+    "benefits": [
+      "cleanses skin",
+      "hydrates skin",
+      "softens skin"
+    ],
+    "risks": [
+      "may cause irritation"
+    ],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Sodium Myristoyl Glutamate",
+    "_pending_at": "2026-04-02"
+  },
+  {
+    "ingredient": "Sodium Citrate",
+    "inci_name": "Sodium Citrate",
+    "cas_number": "68-04-2",
+    "functions": [
+      "preservative",
+      "buffering",
+      "stabilizer"
+    ],
+    "benefits": [
+      "stabilizes pH",
+      "preserves formula",
+      "enhances stability"
+    ],
+    "risks": [],
+    "skin_type": [
+      "all skin types"
+    ],
+    "eu_regulation": "No restrictions",
+    "source": [
+      "LLM-generated"
+    ],
+    "confidence": "medium",
+    "warning": "此資料由 AI 生成，建議參考 INCI Decoder 或 Paula's Choice 等專業來源自行查證",
+    "_original": "Sodium Citrate",
+    "_pending_at": "2026-04-02"
   }
 ]
