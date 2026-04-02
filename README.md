@@ -2,7 +2,7 @@
 title: Cosmetic Ingredient Analyzer
 emoji: 🧴
 colorFrom: pink
-colorTo: macaron
+colorTo: blue
 sdk: gradio
 sdk_version: "5.23.3"
 python_version: "3.10"
